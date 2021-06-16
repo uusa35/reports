@@ -1,0 +1,67 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Tajawal&display=swap');
+
+body, html, a, p, h1, h2, h3, h4, h5, h6, table, row, td, th, tr, td, thead, tfoot, span, .btn, ul, li, .container {
+    font-family: 'Tajawal', sans-serif !important;
+}
+
+.nav-item {
+    padding-top: var(--size-xxs);
+}
+.img-xxs {
+    width: var(--size-xxs);
+}
+
+.img-xs {
+    width: var(--size-xs);
+}
+
+.img-5 {
+    width: var(--size-xs);
+}
+
+.img-10 {
+    width: var(--size-1);
+}
+
+.img-20 {
+    width: var(--size-2);
+}
+
+.img-30 {
+    width: var(--size-3);
+}
+
+.img-40 {
+    width: var(--size-4);
+}
+
+.img-50 {
+    width: var(--size-5);
+}
+
+.img-60 {
+    width: var(--size-6);
+}
+
+:root {
+    --size-xxs: 2em;
+    --size-xs: 4em;
+    --size-1: 10em;
+    --size-2: 20em;
+    --size-3: 30em;
+    --size-4: 40em;
+    --size-5: 50em;
+    --size-6: 60em;
+    --percentaage-1: 10%;
+    --percentaage-2: 20%;
+    --percentaage-3: 30%;
+    --percentaage-4: 40%;
+    --percentaage-5: 50%;
+    --percentaage-6: 60%;
+    --percentaage-7: 70%;
+    --percentaage-8: 80%;
+    --percentaage-9: 90%;
+    --percentaage-10: 100%;
+}
