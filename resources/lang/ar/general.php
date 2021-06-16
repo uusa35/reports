@@ -1189,5 +1189,7 @@ return array (
     "if_exist" => "إن وجد",
     "profile" => 'الملف الشخصي',
     "vehicle_no_for_report" => "رقم المركبة المقدم ضدها البلاغ",
-    "hot_line" => "الخط الساخن"
+    "hot_line" => "الخط الساخن",
+    "report_types" => "أنواع البلاغات",
+    "activated" => "مفعل"
 );

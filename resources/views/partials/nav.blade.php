@@ -47,14 +47,21 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}">
-                                <img class="img-xxs" src="{{ auth()->user()->getImageThumbLinkAttribute('personal_image') }}"
+                                <img class="img-xxs"
+                                     src="{{ auth()->user()->getImageThumbLinkAttribute('personal_image') }}"
                                      alt="{{ auth()->user()->name }}"/>
-{{ trans('general.edit') }} {{ trans('general.profile') }}
+                                {{ trans('general.edit') }} {{ trans('general.profile') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('report.create') }}">
                                 <i class="fa fa-fw fa-plus-square"></i>
                                 {{ trans('general.create_new_report') }}
                             </a>
+                            @can('isAdmin')
+                                <a class="dropdown-item" href="{{ route('type.index') }}">
+                                    <i class="fa fa-fw fa-list-alt"></i>
+                                    {{ trans('general.report_types') }}
+                                </a>
+                            @endcan
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

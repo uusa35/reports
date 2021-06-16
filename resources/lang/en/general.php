@@ -984,5 +984,7 @@ return array (
     "if_exist" => "If exists",
     "profile" => 'profile',
     "vehicle_no_for_report" => "Report against Vehicle Plate No.",
-    "hot_line" => "Hot Line"
+    "hot_line" => "Hot Line",
+    "report_types" => "Report Types",
+    "activated" => "Activated"
 );
