@@ -19,11 +19,11 @@ class ReportController extends Controller
     {
         $auth = auth()->user();
         if ($auth->is_admin) {
-            $elements = Report::active()->with(['owner', 'officer.speciality'])->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->with(['owner', 'officer.speciality'])->orderBy('id','desc')->paginate(SELF::TAKE_MIN);
         } elseif ($auth->is_officer) {
-            $elements = Report::active()->where(['officer_id' => $auth->id])->with(['owner', 'officer.speciality'])->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->where(['officer_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id','desc')->paginate(SELF::TAKE_MIN);
         } else {
-            $elements = Report::active()->where(['user_id' => $auth->id])->with(['owner', 'officer.speciality'])->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->where(['user_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id','desc')->paginate(SELF::TAKE_MIN);
         }
         return view('modules.report.index', compact('elements'));
     }
@@ -50,8 +50,11 @@ class ReportController extends Controller
         $validate = validator(request()->all(), [
             'description' => 'required|max:1000',
             'mobile' => 'required|numeric',
-            'image' => 'required',
             'address' => 'required|min:3',
+            'image' => 'image',
+            'image_two' => 'image',
+            'injuries_no' => 'required_if:has_injuries,1|numeric',
+            'report_type_id' => 'required|exists:report_types,id'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
@@ -64,6 +67,7 @@ class ReportController extends Controller
         $element = Report::create($request->except(['_token', 'image']));
         if ($element) {
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
+            $request->hasFile('image_two') ? $this->saveMimes($element, $request, ['image_two'], ['1080', '1440'], true) : null;
             return redirect()->home()->with(['success' => trans('general.process_success')]);
         }
         return redirect()->back()->with(['error' => trans('general.process_failure')]);
@@ -90,8 +94,9 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
-        $element = Report::whereId($id)->with('type')->first();
-        return view('modules.report.edit', compact('element'));
+        $element = Report::whereId($id)->with(['officer.speciality','owner'])->first();
+        $types = ReportType::active()->get();
+        return view('modules.report.edit', compact('element', 'types'));
     }
 
     /**
@@ -106,21 +111,23 @@ class ReportController extends Controller
         $validate = validator(request()->all(), [
             'description' => 'required|max:1000',
             'mobile' => 'required|numeric',
-            'image' => 'required',
             'address' => 'required|min:3',
+            'image' => 'image',
+            'image_two' => 'image',
+            'injuries_no' => 'required_if:has_injuries,1|numeric',
+            'report_type_id' => 'required|exists:report_types,id'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
         }
         $request->request->add([
-            'reference_id' => rand(9999, 99999999),
-            'user_id' => auth()->user()->id,
-            'officer_id' => User::where('is_admin', true)->first()->id
+            'officer_id' => User::active()->where(['is_officer' => true , 'report_type_id' => $request->report_type_id])->get()->random()->id
         ]);
-        $element = Report::whereId($id)->first()->update($request->except(['_token', 'image']));
-        if ($element) {
+        $element = Report::whereId($id)->first();
+        if ($element->update($request->except(['_token', 'image']))) {
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
-            return redirect()->home()->with(['success' => trans('general.process_success')]);
+            $request->hasFile('image_two') ? $this->saveMimes($element, $request, ['image_two'], ['1080', '1440'], true) : null;
+            return redirect()->route('report.index')->with(['success' => trans('general.process_success')]);
         }
         return redirect()->back()->with(['error' => trans('general.process_failure')]);
     }

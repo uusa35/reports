@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ReportType;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Services\Traits\ImageHelpers;
@@ -52,10 +53,11 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'civil_id' => ['required', 'string', 'max:20'],
-            'mobile' => ['required', 'string', 'max:20'],
-            'image' => ['required'],
+            'civil_id_no' => ['required', 'numeric'],
+            'civil_id_image' => ['required', 'image'],
+            'personal_image' => ['required', 'image'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'mobile' => ['required', 'numeric'],
             'password' => ['required', 'string', 'min:3', 'confirmed'],
         ]);
     }
@@ -71,11 +73,14 @@ class RegisterController extends Controller
 
         $element = User::create([
             'name' => $data['name'],
-            'civil_id' => $data['civil_id'],
+            'civil_id_no' => $data['civil_id_no'],
             'email' => $data['email'],
+            'mobile' => $data['mobile'],
             'password' => Hash::make($data['password']),
+            'report_type_id' => ReportType::first()->id,
         ]);
-        request()->hasFile('image') ? $this->saveMimes($element, request(), ['image'], ['1000', '1000'], true) : null;
+        request()->hasFile('personal_image') ? $this->saveMimes($element, request(), ['personal_image'], ['1000', '1000'], true) : null;
+        request()->hasFile('civil_id_image') ? $this->saveMimes($element, request(), ['civil_id_image'], ['1000', '1000'], true) : null;
         return $element;
 
     }

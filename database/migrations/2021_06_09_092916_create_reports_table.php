@@ -18,8 +18,10 @@ class CreateReportsTable extends Migration
             $table->string('reference_id');
             $table->boolean('has_injuries')->default(0);
             $table->integer('injuries_no')->nullable();
+            $table->string('mobile')->nullable();
             $table->string('street')->nullable();
             $table->string('building_no')->nullable();
+            $table->string('block')->nullable();
             $table->string('area')->nullable();
             $table->string('address')->nullable();
             $table->string('image')->nullable();
@@ -30,6 +32,7 @@ class CreateReportsTable extends Migration
             $table->string('video_two')->nullable();
             $table->mediumText('notes')->nullable();
             $table->mediumText('description')->nullable();
+            $table->string('vehicle_no')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->foreignId('user_id')->constrained();

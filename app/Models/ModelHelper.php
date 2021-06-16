@@ -9,18 +9,18 @@ trait ModelHelper
         return $q->where('active', true);
     }
 
-    public function getImageLargeLinkAttribute()
+    public function getImageLargeLinkAttribute($element = 'image')
     {
-        return asset(env('LARGE') . $this->image);
+        return asset(env('LARGE') . $this->{$element});
     }
 
-    public function getImageMediumLinkAttribute()
+    public function getImageMediumLinkAttribute($element = 'image')
     {
-        return asset(env('MEDIUM') . $this->image);
+        return asset(env('MEDIUM') . $this->{$element});
     }
 
-    public function getImageThumbLinkAttribute()
+    public function getImageThumbLinkAttribute($element = 'image')
     {
-        return asset(env('THUMBNAIL') .$this->image);
+        return asset(env('THUMBNAIL') . $this->{$element});
     }
 }

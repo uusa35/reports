@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ReportType;
 use Illuminate\Http\Request;
 
 class ReportTypeController extends Controller
@@ -13,7 +14,8 @@ class ReportTypeController extends Controller
      */
     public function index()
     {
-        //
+        $elements = ReportType::paginate(SELF::TAKE_MIN);
+        return view('modules.report_type.index', compact('elements'));
     }
 
     /**

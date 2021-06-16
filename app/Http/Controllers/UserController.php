@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -69,7 +70,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate = validator(request()->all(), [
+            'mobile' => 'required|numeric',
+            'civil_id_no' => 'required|numeric',
+            'address' => 'required|min:3',
+            'civil_id_image' => 'image',
+            'personal_image' => 'image',
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->withErrors($validate->errors())->withInput();
+        }
+        $element = User::whereId($id)->first();
+        if ($element->update($request->request->all())) {
+            $request->hasFile('civil_id_image') ? $this->saveMimes($element, $request, ['civil_id_image'], ['1080', '1440'], true) : null;
+            $request->hasFile('personal_image') ? $this->saveMimes($element, $request, ['personal_image'], ['1080', '1440'], true) : null;
+            return redirect()->route('report.index')->with(['success' => trans('general.process_success')]);
+        }
+        return redirect()->home()->with(['error' => trans('general.process_failure')]);
     }
 
     /**

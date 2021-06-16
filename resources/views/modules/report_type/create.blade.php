@@ -6,12 +6,12 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"><h4
-                            class="display-6 text-center">{{ trans('general.edit') }} {{ __('general.report') }}</h4></div>
+                            class="display-6 text-center">{{ __('general.create_new_report') }}</h4></div>
 
                     <div class="card-body">
-                        <form method="post" action="{{ route('report.update', $element->id) }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('report.store') }}" enctype="multipart/form-data">
                             @csrf
-                            @method('put')
+                            <input type="hidden" name="report_type_id" value="{{ request()->report_type_id }}">
                             <div class="form-group row">
                                 <label for="name"
                                        class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.description') }}</label>
@@ -20,10 +20,10 @@
                                     <textarea id="description" type="text"
                                               class="form-control @error('description') is-invalid @enderror"
                                               name="description"
-                                              required autocomplete="description"
+                                               required autocomplete="description"
                                               autofocus
                                               rows="5"
-                                    >{{ $element->description }}</textarea>
+                                    >{{ old('description') }}</textarea>
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -40,7 +40,7 @@
                                 <div class="col-md-6">
                                     <input id="address" type="address"
                                            class="form-control @error('address') is-invalid @enderror" name="address"
-                                           value="{{ $element->address }}" autocomplete="address" required>
+                                           value="{{ auth()->user()->address }}" autocomplete="address" required>
 
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -57,7 +57,7 @@
                                 <div class="col-md-6">
                                     <input id="mobile" type="text"
                                            class="form-control @error('mobile') is-invalid @enderror" name="mobile"
-                                           value="{{ $element->mobile }}" required autocomplete="mobile"
+                                           value="{{ auth()->user()->mobile }}" required autocomplete="mobile"
                                            autofocus>
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
@@ -76,7 +76,7 @@
                                         <select id="inputState" class="form-control" name="report_type_id" required>
                                             <option selected>{{ trans('general.choose_report_type') }}</option>
                                             @foreach($types as $type)
-                                                <option value="{{ $type->id }}" {{ $element->report_type_id === $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -90,7 +90,7 @@
                                 <div class="col-md-6">
                                     <input id="vehicle_no" type="vehicle_no"
                                            class="form-control @error('vehicle_no') is-invalid @enderror" name="vehicle_no"
-                                           value="{{ $element->vehicle_no }}" autocomplete="vehicle_no">
+                                           value="{{ old('vehicle_no') }}" autocomplete="vehicle_no">
 
                                     @error('vehicle_no')
                                     <span class="invalid-feedback" role="alert">
@@ -107,7 +107,7 @@
                                 <div class="col-md-6">
                                     <input id="area" type="area"
                                            class="form-control @error('area') is-invalid @enderror" name="area"
-                                           value="{{ $element->area }}" autocomplete="area">
+                                           value="{{ auth()->user()->area }}" autocomplete="area">
 
                                     @error('area')
                                     <span class="invalid-feedback" role="alert">
@@ -124,7 +124,7 @@
                                 <div class="col-md-6">
                                     <input id="street" type="street"
                                            class="form-control @error('street') is-invalid @enderror" name="street"
-                                           value="{{ $element->street }}" autocomplete="street">
+                                           value="{{ auth()->user()->street }}" autocomplete="street">
 
                                     @error('street')
                                     <span class="invalid-feedback" role="alert">
@@ -141,7 +141,7 @@
                                 <div class="col-md-6">
                                     <input id="block" type="block"
                                            class="form-control @error('block') is-invalid @enderror" name="block"
-                                           value="{{ $element->block }}" autocomplete="block">
+                                           value="{{ auth()->user()->block }}" autocomplete="block">
 
                                     @error('block')
                                     <span class="invalid-feedback" role="alert">
@@ -158,7 +158,7 @@
                                 <div class="col-md-6">
                                     <input id="building_no" type="building_no"
                                            class="form-control @error('building_no') is-invalid @enderror" name="building_no"
-                                           value="{{ $element->building_no }}" autocomplete="building_no">
+                                           value="{{ auth()->user()->building_no }}" autocomplete="building_no">
 
                                     @error('building_no')
                                     <span class="invalid-feedback" role="alert">
@@ -229,7 +229,7 @@
                                     <input id="injuries_no" type="injuries_no"
                                            class="form-control @error('injuries_no') is-invalid @enderror"
                                            name="injuries_no"
-                                           value="{{ $element->injuries_no }}" autocomplete="injuries_no"
+                                           value="{{ auth()->user()->injuries_no }}" autocomplete="injuries_no"
                                            maxlength="2">
                                     @error('injuries_no')
                                     <span class="invalid-feedback" role="alert">
@@ -252,7 +252,7 @@
                                 <div class="row text-center">
                                     <div class="col offset-2">
                                         <button type="submit" class="btn btn-danger">
-                                            {{ __('general.save') }}
+                                            {{ __('general.register') }}
                                         </button>
                                     </div>
                                     <div class="col">

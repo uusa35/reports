@@ -73,7 +73,7 @@ return array (
   'money_back_after_return' => 'Refund after product recall',
   'send_within_2_weeks' => 'Connecting within two weeks',
   'online_shopping_in_gulf' => 'E-Shopping in the Gulf',
-  'address' => 'Title',
+  'address' => 'Address',
   'order_history' => 'Past Purchases',
   'list ' => ' Wish List ',
   'designed_by' => 'Designed by',
@@ -971,5 +971,18 @@ return array (
     "process_failure" => "Process Failure",
     "is_closed" => "Closed",
     "choose_report_type" => "Choose Report Type",
-    "report_owner" => "Report Owner"
+    "report_owner" => "Report Owner",
+    "responsible" => "Responsible",
+    "report_no" => "Report Reference No.",
+    "report_details" => "Report Details",
+    "report_open" => "Investigating & Searching on process",
+    "injuries_no" => "Injuries No.",
+    "civil_id_image" => "Civil Id Image (Both Sides)",
+    "personal_image" => "Personal Image",
+    "driving_license" => "Driving License",
+    "accident_image" => "Accedint Image",
+    "if_exist" => "If exists",
+    "profile" => 'profile',
+    "vehicle_no_for_report" => "Report against Vehicle Plate No.",
+    "hot_line" => "Hot Line"
 );

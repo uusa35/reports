@@ -47,9 +47,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}">
-                                <img class="img-xxs" src="{{ auth()->user()->imageThumbLink }}"
+                                <img class="img-xxs" src="{{ auth()->user()->getImageThumbLinkAttribute('personal_image') }}"
                                      alt="{{ auth()->user()->name }}"/>
-                                {{ Auth::user()->name }}
+{{ trans('general.edit') }} {{ trans('general.profile') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('report.create') }}">
                                 <i class="fa fa-fw fa-plus-square"></i>
@@ -58,6 +58,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                <i class="fa fa-fw fa-sign-out-alt"></i>
                                 {{ __('general.logout') }}
                             </a>
 

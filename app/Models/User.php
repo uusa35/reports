@@ -52,6 +52,11 @@ class User extends Authenticatable
     // Each Officer has ReportType Speciality (Murder .. Fire .. and so on)
     public function speciality()
     {
-        return $this->belongsTo(ReportType::class,'report_type_id');
+        return $this->belongsTo(ReportType::class, 'report_type_id');
+    }
+
+    public function getIsNormalUserAttribute()
+    {
+        return !$this->is_officer && !$this->is_admin;
     }
 }

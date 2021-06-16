@@ -73,37 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="civil_id" type="text"
-                                           class="form-control @error('civil_id') is-invalid @enderror" name="civil_id"
-                                           value="{{ old('civil_id') }}" required autocomplete="civil_id" autofocus>
-                                    @error('civil_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="civil_id" type="text"
-                                           class="form-control @error('civil_id') is-invalid @enderror" name="civil_id"
-                                           value="{{ old('civil_id') }}" required autocomplete="civil_id" autofocus>
-                                    @error('civil_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
 
                             <div class="form-group row">
                                 <label for="name"
@@ -123,21 +93,58 @@
 
                             <div class="form-group row">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.image_id') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="image" type="file"
-                                           class="form-control @error('image') is-invalid @enderror" name="image"
-                                           value="{{ old('image') }}" required autocomplete="image" autofocus>
-                                    @error('image')
+                                    <input id="civil_id_no" type="text"
+                                           class="form-control @error('civil_id_no') is-invalid @enderror" name="civil_id_no"
+                                           value="{{ old('civil_id_no') }}" required autocomplete="civil_id_no" autofocus>
+                                    @error('civil_id_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="civil_id_image"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id_image') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="civil_id_image" type="file"
+                                           class="form-control @error('civil_id_image') is-invalid @enderror"
+                                           name="civil_id_image"
+                                           value="{{ old('civil_id_image') }}" required autocomplete="civil_id_image"
+                                           autofocus>
+                                    @error('civil_id_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
 
-                                        <div class="alert alert-danger mt-2">
-                                            <strong>{{ __('general.image_id_instruction') }}</strong>
-                                        </div>
+                                    <div class="alert alert-danger mt-2">
+                                        <strong>{{ __('general.image_id_instruction') }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="personal_image"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.personal_image') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="personal_image" type="file"
+                                           class="form-control @error('personal_image') is-invalid @enderror"
+                                           name="personal_image"
+                                           value="{{ old('personal_image') }}" required autocomplete="personal_image"
+                                           autofocus>
+                                    @error('personal_image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 

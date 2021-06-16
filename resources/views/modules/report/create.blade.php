@@ -20,12 +20,79 @@
                                     <textarea id="description" type="text"
                                               class="form-control @error('description') is-invalid @enderror"
                                               name="description"
-                                              value="{{ old('description') }}" required autocomplete="description"
+                                               required autocomplete="description"
                                               autofocus
                                               rows="5"
-                                    ></textarea>
+                                    >{{ old('description') }}</textarea>
 
                                     @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="email"
+                                       class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.address') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="address" type="address"
+                                           class="form-control @error('address') is-invalid @enderror" name="address"
+                                           value="{{ auth()->user()->address }}" autocomplete="address" required>
+
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="name"
+                                       class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.mobile') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="mobile" type="text"
+                                           class="form-control @error('mobile') is-invalid @enderror" name="mobile"
+                                           value="{{ auth()->user()->mobile }}" required autocomplete="mobile"
+                                           autofocus>
+                                    @error('mobile')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            @if(!request()->has('report_type_id'))
+                                <div class="form-group row">
+                                    <label for="name"
+                                           class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.report_type') }}</label>
+
+                                    <div class="col-md-6">
+                                        <select id="inputState" class="form-control" name="report_type_id" required>
+                                            <option selected>{{ trans('general.choose_report_type') }}</option>
+                                            @foreach($types as $type)
+                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            @endif
+
+                            <div class="form-group row">
+                                <label for="email"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="vehicle_no" type="vehicle_no"
+                                           class="form-control @error('vehicle_no') is-invalid @enderror" name="vehicle_no"
+                                           value="{{ old('vehicle_no') }}" autocomplete="vehicle_no">
+
+                                    @error('vehicle_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -86,14 +153,14 @@
 
                             <div class="form-group row">
                                 <label for="email"
-                                       class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.address') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.building_no') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="address" type="address"
-                                           class="form-control @error('address') is-invalid @enderror" name="address"
-                                           value="{{ auth()->user()->address }}" autocomplete="address" required>
+                                    <input id="building_no" type="building_no"
+                                           class="form-control @error('building_no') is-invalid @enderror" name="building_no"
+                                           value="{{ auth()->user()->building_no }}" autocomplete="building_no">
 
-                                    @error('address')
+                                    @error('building_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -103,29 +170,12 @@
 
                             <div class="form-group row">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.mobile') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="mobile" type="text"
-                                           class="form-control @error('mobile') is-invalid @enderror" name="mobile"
-                                           value="{{ auth()->user()->mobile }}" required autocomplete="mobile"
-                                           autofocus>
-                                    @error('mobile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="name"
-                                       class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.image') }}</label>
+                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.accident_image') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="image" type="file"
                                            class="form-control @error('image') is-invalid @enderror" name="image"
-                                           value="" required autocomplete="image" autofocus>
+                                           value=""  autocomplete="image" autofocus>
                                     @error('image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -134,42 +184,58 @@
                                 </div>
                             </div>
 
-                            @if(!request()->has('report_type_id'))
-                                <div class="form-group row">
-                                    <label for="name"
-                                           class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.report_type') }}</label>
+                            <div class="form-group row">
+                                <label for="name"
+                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.driving_license') }} ({{ trans('general.if_exist') }})</label>
 
-                                    <div class="col-md-6">
-                                        <select id="inputState" class="form-control" name="report_type_id" required>
-                                            <option selected>{{ trans('general.choose_report_type') }}</option>
-                                            @foreach($types as $type)
-                                                <option value="{{ $type->id }}">{{ $type->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <div class="col-md-6">
+                                    <input id="image_two" type="file"
+                                           class="form-control @error('image_two') is-invalid @enderror"
+                                           name="image_two"
+                                           value=""   autocomplete="image_two" autofocus>
+                                    @error('image_two')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
-                            @endif
+                            </div>
 
                             <div class="form-group row">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-right text-danger">{{ __('general.has_injuries') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.has_injuries') }}</label>
                                 <div class="col-6 ">
-                                    <div class="col">
+                                    <div class="col pt-2">
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="has_injuries"
                                                    id="inlineRadio1" value="1">
                                             <label class="form-check-label"
                                                    for="inlineRadio1">{{ trans('general.yes') }}</label>
                                         </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline ml-5">
                                             <input class="form-check-input" type="radio" name="has_injuries"
-                                                   id="inlineRadio2" value="0" checked>
+                                                   id="inlineRadio1" value="0" checked>
                                             <label class="form-check-label"
-                                                   for="inlineRadio2">{{ trans('general.no') }}</label>
+                                                   for="inlineRadio1">{{ trans('general.no') }}</label>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injuries_no') }} ({{ trans('general.if_exist') }})</label>
+
+                                <div class="col-md-6">
+                                    <input id="injuries_no" type="injuries_no"
+                                           class="form-control @error('injuries_no') is-invalid @enderror"
+                                           name="injuries_no"
+                                           value="{{ auth()->user()->injuries_no }}" autocomplete="injuries_no"
+                                           maxlength="2">
+                                    @error('injuries_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             {{--                            <div class="form-group">--}}

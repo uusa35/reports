@@ -16,16 +16,10 @@
                     <thead>
                     <tr>
                         <th scope="col">{{ __('general.id') }}</th>
-                        <th scope="col"><small>{{ __('general.reference_id') }}</small></th>
-                        <th scope="col">{{ __('general.has_injuries') }}</th>
-                        <th scope="col">{{ __('general.is_closed') }}</th>
                         <th scope="col">{{ __('general.image') }}</th>
-                        <th scope="col">{{ __('general.area') }}</th>
-                        <th scope="col">{{ __('general.address') }}</th>
-                        <th scope="col">{{ __('general.report_owner') }}</th>
-                        <th scope="col">{{ __('general.officer') }}</th>
-                        <th scope="col">{{ __('general.report_type') }}</th>
-                        <th scope="col">{{ __('general.action') }}</th>
+                        <th scope="col">{{ __('general.hot_line') }}</th>
+                        <th scope="col">{{ __('general.notes') }}</th>
+                        <th scope="col">{{ __('general.description') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,20 +27,11 @@
                         @foreach($elements as $element)
                             <tr>
                                 <th scope="row">{{ $element->id }}</th>
-                                <td>{{ $element->reference_id }}</td>
-                                <td><span
-                                        class="alert alert-{{ $element->has_injuries ? 'danger' : 'info' }}"><small>{{ $element->has_injuries ? __('general.has_injuries') : __('general.n_a') }}</small></span>
-                                </td>
-                                <td><span
-                                        class="alert alert-{{ $element->is_closed ? 'success' : 'secondary' }}"><small>{{ $element->is_closed ? __('general.is_closed') : __('general.n_a') }}</small></span>
-                                </td>
                                 <td><img class="img-xxs" src="{{ $element->getImageThumbLinkAttribute() }}"
                                          alt="{{ str_limit($element->notes,5) }}"></td>
-                                <td>{{ $element->area ? $element->area : trans('general.n_a') }}</td>
-                                <td>{{ str_limit($element->address,10) }}</td>
-                                <td>{{ $element->owner->name }}</td>
-                                <td>{{ str_limit($element->officer->name,5) }} - {{ $element->officer->speciality->name }}</td>
-                                <td>{{ $element->type->name }}</td>
+                                <td>{{ $element->hot_line }}</td>
+                                <td>{{ str_limit($element->notes,10) }}</td>
+                                <td>{{ str_limit($element->description,10) }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-default btn-outline-dark btn-sm dropdown-toggle" type="button"
@@ -57,10 +42,10 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                             <a class="dropdown-item"
-                                               href="{{ route('report.show', $element->id) }}">{{ trans('general.view') .' '. trans('general.report')}}</a>
-                                            @can('isAdminOrOfficer')
+                                               href="{{ route('type.show', $element->id) }}">{{ trans('general.view') .' '. trans('general.report')}}</a>
+                                            @can('isAdmin')
                                                 <a class="dropdown-item"
-                                                   href="{{ route('report.edit', $element->id) }}">{{ trans('general.edit') }}</a>
+                                                   href="{{ route('type.edit', $element->id) }}">{{ trans('general.edit') }}</a>
                                             @endif
                                         </div>
                                     </div>

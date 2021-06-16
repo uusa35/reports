@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', UserController::class);
     Route::resource('report', ReportController::class);
-    Route::resource('types', ReportTypeController::class);
+    Route::resource('type', ReportTypeController::class);
     Route::resource('vehicle', VehicleController::class);
 });
 Auth::routes();

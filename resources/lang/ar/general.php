@@ -1176,5 +1176,18 @@ return array (
     'report' => 'بلاغ',
     "is_closed" => "مغلق",
     "choose_report_type" => "أختر نوع البلاغ",
-    "report_owner" => "مقدم البلاغ"
+    "report_owner" => "مقدم البلاغ",
+    "responsible" => "المسئول",
+    "report_no" => "رقم مرجع البلاغ",
+    "report_details" => "تفاصيل البلاغ",
+    "report_open" => "جاري التحقيق والمتابعة",
+    "injuries_no" => "عدد المصابين",
+    "civil_id_image" => "صورة البطاقة المدنية",
+    "personal_image" => "الصورة الشخصية",
+    "driving_license" => "رخصة القيادة",
+    "accident_image" => "صورة الحادث",
+    "if_exist" => "إن وجد",
+    "profile" => 'الملف الشخصي',
+    "vehicle_no_for_report" => "رقم المركبة المقدم ضدها البلاغ",
+    "hot_line" => "الخط الساخن"
 );
