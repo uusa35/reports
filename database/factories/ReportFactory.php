@@ -6,6 +6,7 @@ use App\Models\Governate;
 use App\Models\Report;
 use App\Models\ReportType;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ReportFactory extends Factory
@@ -42,7 +43,8 @@ class ReportFactory extends Factory
             'video_two' => $this->faker->url,
             'notes' => $this->faker->paragraph,
             'description' => $this->faker->paragraph,
-            'vehicle_no' => $this->faker->randomDigit,
+            'vehicle_no_1' => Vehicle::all()->random()->plate_no,
+            'vehicle_no_2' => Vehicle::all()->random()->plate_no,
             'latitude' => $this->faker->latitude,
             'longitude' => $this->faker->longitude,
             'traffic_offences' => $this->faker->randomElement(['No Parking', 'Honking', 'Dangerous Overtaking', 'Handicapped Parking', 'Documents & License Plates', 'Others']),
