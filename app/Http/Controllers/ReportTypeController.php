@@ -73,6 +73,7 @@ class ReportTypeController extends Controller
     {
         $element = ReportType::whereId($id)->first()->update($request->request->all());
         if ($element) {
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
             return redirect()->route('type.index')->with(['success' => trans('general.process_success')]);
         }
         return redirect()->back()->with(['failure' => trans('general.process_failure')])->withInput();
