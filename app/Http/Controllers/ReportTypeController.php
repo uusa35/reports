@@ -71,8 +71,8 @@ class ReportTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $element = ReportType::whereId($id)->first()->update($request->request->all());
-        if ($element) {
+        $element = ReportType::whereId($id)->first();
+        if ($element->update($request->request->all())) {
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
             return redirect()->route('type.index')->with(['success' => trans('general.process_success')]);
         }
