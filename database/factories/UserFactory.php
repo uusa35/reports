@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Governate;
 use App\Models\ReportType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -30,14 +31,17 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'mobile' => $this->faker->phoneNumber,
-            'civil_id_no' => $this->faker->randomNumber(),
+            'civil_id_no' => $this->faker->numberBetween(1111111111, 9999999999),
+            'passport_no' => $this->faker->numberBetween(1111111111, 9999999999),
+            'police_no' => $this->faker->numberBetween(1111111111, 9999999999),
             'civil_id_image' => 'default.svg',
             'personal_image' => 'default.svg',
             'address' => $this->faker->address,
             'description' => $this->faker->paragraph,
             'is_officer' => $this->faker->boolean,
             'is_admin' => $this->faker->boolean(false),
-            'report_type_id' => ReportType::all()->random()->id
+            'report_type_id' => ReportType::all()->random()->id,
+            'governate_id' => Governate::all()->random()->id
         ];
     }
 

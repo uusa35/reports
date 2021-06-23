@@ -20,6 +20,9 @@ class CreateReportTypesTable extends Migration
             $table->string('hot_line')->nullable();
             $table->string('notes')->nullable();
             $table->string('description')->nullable();
+            $table->boolean('injuries')->default(1);
+            $table->boolean('is_traffic')->default(0);
+            $table->boolean('is_fire')->default(0);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

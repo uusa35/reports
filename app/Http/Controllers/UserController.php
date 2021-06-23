@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Governate;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $elements = User::where('is_officer' , request()->is_officer)->with('governate','reports.type')->paginate(SELF::TAKE_MAX);
+        return view('modules.user.index', compact('elements'));
     }
 
     /**
@@ -58,7 +60,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $element = auth()->user();
-        return view('modules.user.edit', compact('element'));
+        $governates = Governate::active()->get();
+        return view('modules.user.edit', compact('element','governates'));
     }
 
     /**
@@ -73,6 +76,8 @@ class UserController extends Controller
         $validate = validator(request()->all(), [
             'mobile' => 'required|numeric',
             'civil_id_no' => 'required|numeric',
+            'passport_no' => 'required_if:is_officer,0',
+            'police_no' => 'required_if:is_officer,1',
             'address' => 'required|min:3',
             'civil_id_image' => 'image',
             'personal_image' => 'image',

@@ -11,7 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, ModelHelper;
 
-    protected $guarded = [''];
+    protected $guarded = ['is_admin'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -58,5 +58,14 @@ class User extends Authenticatable
     public function getIsNormalUserAttribute()
     {
         return !$this->is_officer && !$this->is_admin;
+    }
+
+    public function governate()
+    {
+        return $this->belongsTo(Governate::class);
+    }
+
+    public function getUserTypeAttribute() {
+        return $this->is_admin ? trans('general.admin') : ($this->is_officer ? trans('general.officer') : trans('general.user'));
     }
 }

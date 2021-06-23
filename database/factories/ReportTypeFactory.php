@@ -22,11 +22,13 @@ class ReportTypeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->randomElement(['Accident', 'Fire', 'Fight', 'Theft', 'Murder', 'Harassment']),
+            'name' => $this->faker->randomElement(['Minor Accident', 'Minor Accident','Fire']),
             'image' => 'default.svg',
             'hot_line' => $this->faker->phoneNumber,
             'notes' => $this->faker->paragraph,
             'description' => $this->faker->paragraph(2),
+            'is_traffic' => $this->faker->boolean,
+            'is_fire' => $this->faker->boolean,
         ];
     }
 }

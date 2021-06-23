@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Governate;
 use App\Models\Report;
 use App\Models\ReportType;
 use App\Models\User;
@@ -44,11 +45,16 @@ class ReportFactory extends Factory
             'vehicle_no' => $this->faker->randomDigit,
             'latitude' => $this->faker->latitude,
             'longitude' => $this->faker->longitude,
+            'traffic_offences' => $this->faker->randomElement(['No Parking', 'Honking', 'Dangerous Overtaking', 'Handicapped Parking', 'Documents & License Plates', 'Others']),
+            'primary_contributory' => $this->faker->randomElement(['Driver/Rider Error', 'Bad weather', 'Fault of passenger', 'Overloading', 'Cause Not Known', 'Defect in road condition', 'AlcoholLDrugs', 'Poor light condition', 'Infrastructure Problem', 'Mechanical Defect of Vehicle']),
+            'hit_and_run' => $this->faker->boolean,
+            'weather' => $this->faker->randomElement(['wind', 'mist/fog', 'cloudy', 'light rain', 'heavy rain', 'smoke', 'strong wind']),
             'user_id' => User::where(['is_officer' => false])->get()->random()->id,
             'report_type_id' => ReportType::all()->random()->id,
             'officer_id' => function ($array) {
                 return User::where(['report_type_id' => $array['report_type_id'], 'is_officer' => true])->get()->random()->id;
             },
+            'governate_id' => Governate::all()->random()->id
         ];
     }
 }

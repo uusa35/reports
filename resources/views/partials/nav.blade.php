@@ -27,13 +27,8 @@
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('general.login') }}</a>
-                        </li>
-                    @endif
-
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('general.register') }}</a>
+                            <a class="nav-link"
+                               href="{{ route('check.civil', ['is_officer' => false]) }}">{{ __('general.login') }}</a>
                         </li>
                     @endif
                 @else
@@ -52,20 +47,30 @@
                                      alt="{{ auth()->user()->name }}"/>
                                 {{ trans('general.edit') }} {{ trans('general.profile') }}
                             </a>
-                            <a class="dropdown-item" href="{{ route('report.create') }}">
-                                <i class="fa fa-fw fa-plus-square"></i>
-                                {{ trans('general.create_new_report') }}
+                            <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}">
+                                <img class="img-xxs"
+                                     src="{{ auth()->user()->getImageThumbLinkAttribute('personal_image') }}"
+                                     alt="{{ auth()->user()->name }}"/>
+                                {{ trans("general.account_type") }} : {{ auth()->user()->userType }}
                             </a>
                             @can('isAdmin')
                                 <a class="dropdown-item" href="{{ route('type.index') }}">
-                                    <i class="fa fa-fw fa-list-alt"></i>
+                                    <i class="fa fa-fw fa-list-alt ml-1"></i>
                                     {{ trans('general.report_types') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.index',['is_officer' => 0]) }}">
+                                    <i class="fa fa-fw fa-users ml-1"></i>
+                                     {{ trans('general.users') }} {{ trans("general.regular") }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('user.index',['is_officer' => 1 ]) }}">
+                                    <i class="fa fa-fw fa-users ml-1"></i>
+                                    {{ trans('general.officers') }}
                                 </a>
                             @endcan
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                <i class="fa fa-fw fa-sign-out-alt"></i>
+                                <i class="fa fa-fw fa-1x fa-sign-out-alt ml-1"></i>
                                 {{ __('general.logout') }}
                             </a>
 

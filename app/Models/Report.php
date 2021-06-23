@@ -28,4 +28,8 @@ class Report extends Model
     public function vehicles() {
         return $this->belongsToMany(Vehicle::class);
     }
+
+    public function governate() {
+        return $this->belongsTo(Governate::class);
+    }
 }

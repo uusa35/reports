@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Governate;
 use App\Models\Report;
 use App\Models\ReportType;
 use App\Models\User;
@@ -35,8 +36,16 @@ class ReportController extends Controller
      */
     public function create()
     {
+        $validate = validator(request()->all(), [
+            'report_type_id' => 'required|exists:report_types,id'
+        ]);
+        if ($validate->fails()) {
+            return redirect()->home()->withErrors($validate->errors())->withInput();
+        }
         $types = ReportType::active()->get();
-        return view('modules.report.create', compact('types'));
+        $currentType = ReportType::whereId(request()->report_type_id)->first();
+        $governates = Governate::active()->get();
+        return view('modules.report.create', compact('types','governates','currentType'));
     }
 
     /**

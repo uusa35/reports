@@ -7,12 +7,12 @@
                 @csrf
 
                 <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('general.email') }}</label>
+                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id_no') }}</label>
 
                     <div class="col-md-6">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                        <input id="civil_id_no" type="civil_id_no" class="form-control @error('civil_id_no') is-invalid @enderror" name="civil_id_no" value="{{ old('civil_id_no') }}" required autocomplete="civil_id_no" autofocus>
 
-                        @error('email')
+                        @error('civil_id_no')
                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

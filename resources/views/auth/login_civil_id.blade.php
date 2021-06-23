@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card" style="margin-top: 25%">
-                    <div class="card-header">{{ __('general.login') }}</div>
+                    <div class="card-header">{{ request()->is_officer ? __('general.officer_login') : trans('general.user_login') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('check.civil') }}">
@@ -78,8 +78,8 @@
                                 </div>
                             @endif
                             <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="col-md-10 text-md-right">
+                                    <button type="submit" class="btn btn-danger ">
                                         {{ request()->is_officer ? __('general.officer_login') : trans('general.user_login')}}
                                     </button>
                                 </div>

@@ -3,12 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><h4 class="display-6 text-center">{{ __('general.edit') }}</h4></div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('user.update', $element->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('user.update', $element->id) }}"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('put')
 
@@ -52,8 +53,10 @@
 
                                 <div class="col-md-6">
                                     <input id="civil_id_no" type="text"
-                                           class="form-control @error('civil_id_no') is-invalid @enderror" name="civil_id_no"
-                                           value="{{ $element->civil_id_no }}" required autocomplete="civil_id_no" autofocus>
+                                           class="form-control @error('civil_id_no') is-invalid @enderror"
+                                           name="civil_id_no"
+                                           value="{{ $element->civil_id_no }}" required autocomplete="civil_id_no"
+                                           autofocus>
                                     @error('civil_id_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,6 +64,44 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.passport_no') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="passport_no" type="text"
+                                           class="form-control @error('passport_no') is-invalid @enderror"
+                                           name="passport_no"
+                                           value="{{ $element->passport_no }}" required autocomplete="passport_no"
+                                           autofocus>
+                                    @error('passport_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            @if($element->is_officer)
+                                <div class="form-group row">
+                                    <label for="name"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.police_no') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="police_no" type="text"
+                                               class="form-control @error('police_no') is-invalid @enderror"
+                                               name="police_no"
+                                               value="{{ $element->police_no }}" required autocomplete="police_no"
+                                               autofocus>
+                                        @error('police_no')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
 
                             <div class="form-group row">
                                 <label for="name"
@@ -95,6 +136,24 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="exampleFormControlSelect1" class="col-md-4 col-form-label text-md-right">
+                                    {{ trans("general.governate") }}</label>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="exampleFormControlSelect1" name="governate_id">
+                                        @foreach($governates as $governate)
+                                            <option
+                                                value="{{ $governate->id }}" {{ $element->governate_id === $governate->id ? 'selected' : null }}>{{ $governate->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('governate_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="civil_id_image"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id_image') }}</label>
 
@@ -113,7 +172,9 @@
                                     <div class="alert alert-danger mt-2">
                                         <strong>{{ __('general.image_id_instruction') }}</strong>
                                     </div>
-                                    <img class="img-xs img-thumbnail" src="{{ $element->getImageThumbLinkAttribute('civil_id_image') }}" alt="{{ $element->name }}">
+                                    <img class="img-10 img-thumbnail"
+                                         src="{{ $element->getImageThumbLinkAttribute('civil_id_image') }}"
+                                         alt="{{ $element->name }}">
                                 </div>
                             </div>
 
@@ -132,15 +193,22 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                    <img class="img-xs img-thumbnail mt-3" src="{{ $element->getImageThumbLinkAttribute('personal_image') }}" alt="{{ $element->name }}">
+                                    <img class="img-10 img-thumbnail mt-3"
+                                         src="{{ $element->getImageThumbLinkAttribute('personal_image') }}"
+                                         alt="{{ $element->name }}">
                                 </div>
                             </div>
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-6 text-md-right">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('general.save') }}
                                     </button>
+                                </div>
+                                <div class="col-md-6 text-md-left">
+                                    <a href="{{ route('home') }}" class="btn btn-outline-dark">
+                                        {{ __('general.cancel') }}
+                                    </a>
                                 </div>
                             </div>
                         </form>

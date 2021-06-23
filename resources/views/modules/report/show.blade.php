@@ -79,6 +79,13 @@
                                     <h5 class="card-title">{{ trans('general.injuries_no') }}
                                         : {{ $element->injuries_no }}</h5>
                                 @endif
+                                <h5 class="card-title">{{ trans('general.vehicle_no_for_report')}} : {{ $element->vehicle_no_1 }}</h5>
+                                <h5 class="card-title">{{ trans('general.vehicle_no_for_report')}} : {{ $element->vehicle_no_2 }}</h5>
+                                <h5 class="card-title">{{ trans('general.weather')}} : {{ $element->weather }}</h5>
+                                <h5 class="card-title">{{ trans('general.primary_contributory')}} : {{ $element->primary_contributory }}</h5>
+                                <h5 class="card-title">{{ trans('general.traffic_offences')}} : {{ $element->traffic_offences }}</h5>
+                                <h5 class="card-title">{{ trans('general.hit_and_run')}}
+                                    : {{ $element->hit_and_run ? trans('general.yes') : trans('general.no') }}</h5>
                             </div>
                         </div>
                     </div>

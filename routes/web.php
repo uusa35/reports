@@ -28,4 +28,6 @@ Route::group(['middleware' => ['auth']], function () {
 Auth::routes();
 Route::get('/', [HomeController::class,'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/check/civil', [HomeController::class, 'getCheckCivilId'])->name('check.civil');
+Route::post('/check/civil', [HomeController::class, 'postCheckCivilId'])->name('check.civil');
 Route::get('language/{locale}', [HomeController::class,'changeLanguage'])->name('language.change');

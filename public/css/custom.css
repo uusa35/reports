@@ -6,6 +6,15 @@ body, html, a, p, h1, h2, h3, h4, h5, h6, table, row, td, th, tr, td, thead, tfo
     font-family: 'Tajawal', sans-serif !important;
 }
 
+/*body {*/
+/*    background-image: url("https://img.freepik.com/free-photo/kuwait-flag-against-city-blurred-background-sunrise-backlight_1379-1559.jpg?size=626&ext=jpg") !important;*/
+/*    !*background-color: #cccccc;*!*/
+/*    width: 100%;*/
+/*    background-position: center;*/
+/*    background-repeat: no-repeat;*/
+/*}*/
+
+
 .nav-item {
     padding-top: var(--size-xxs);
 }
