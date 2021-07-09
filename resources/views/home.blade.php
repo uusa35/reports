@@ -15,17 +15,17 @@
                         @auth
                             @foreach($elements as $element)
                                 <div class="col-lg-4 mb-3">
-                                    <div class="card" style="width: 18rem;">
-                                        <img class="card-img-top" src="{{ $element->getImageThumbLinkAttribute() }}"
+                                    <div class="card" style="max-width: 18rem;">
+                                        <img class="card-img-top img-fluid" src="{{ $element->getImageThumbLinkAttribute() }}"
                                              alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title text-center"><a href="{{ route('report.create') }}">
                                                     {{ $element->name }}
                                                 </a></h5>
-                                            <h5 class="card-title">
+                                            <h6 class="card-title text-sm">
                                                 {{ trans('general.hot_line') }} : {{ $element->hot_line }}
-                                            </h5>
-                                            <p class="card-text" style="height: 8em;">{{ $element->description }}</p>
+                                            </h6>
+                                            <p class="card-text" style="height: 8em;">{{ Str::limit($element->description,60) }}</p>
                                             <div class="text-md-right">
                                                 <a href="{{ route('report.create', ['report_type_id' => $element->id]) }}"
                                                    class="btn btn-danger text-md-right">{{ trans('general.process_report') }}</a>
