@@ -962,7 +962,7 @@ return array (
     "no_elements" => "No Elements for display",
     "process_report" => "New Report",
     "register_for_first_time" => "Register for the first time",
-    "create_new_report" => "Add New Report",
+    "create_new_report" => "Create New Report",
     "images" => "Images",
     "has_injuries" => "has injuries (Call Ambulance)",
     "report_type" => "Report Type",

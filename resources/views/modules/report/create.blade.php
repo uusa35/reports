@@ -7,7 +7,6 @@
                 <div class="card">
                     <div class="card-header"><h4
                             class="display-6 text-center">{{ __('general.create_new_report') }}</h4></div>
-
                     <div class="card-body">
                         <form method="post" action="{{ route('report.store') }}" enctype="multipart/form-data">
                             @csrf
