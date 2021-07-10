@@ -2,7 +2,7 @@
 
 return array(
     'date' => 'التاريخ',
-    'order_number' => 'رقم الطلب',
+    'order_number'=> 'رقم الحادث'
     'gentlemen' => 'السادة الأفاضل',
     'address' => 'العنوان',
     'area' => 'المنطقة',
