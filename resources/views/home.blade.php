@@ -83,8 +83,6 @@
                                         <p class="card-text">{{ trans('general.officer_username') }} : 2222</p>
                                         <p class="card-text">{{ trans('general.officer_police_no') }} : 2222</p>
                                         <p class="card-text">{{ trans('general.password_is') }}</p>
-                                        <p class="card-text text-danger">
-                                            * {{ trans('general.admin_login_instruction') }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -95,6 +93,8 @@
                                         <p class="card-text">{{ trans('general.officer_username') }} : 3333</p>
                                         <p class="card-text">{{ trans('general.user_passport_no') }} : 3333</p>
                                         <p class="card-text">{{ trans('general.password_is') }}</p>
+                                        <p class="card-text text-danger">
+                                            * {{ trans('general.admin_login_instruction') }}</p>
                                     </div>
                                 </div>
                             </div>
