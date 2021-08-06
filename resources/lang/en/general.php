@@ -145,5 +145,6 @@ return array(
     "users" => "Users",
     "logout" => "Logout",
     "edit" => "edit",
-    "login" => "Login"
+    "login" => "Login",
+    "save" => "Save"
 );
