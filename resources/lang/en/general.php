@@ -144,5 +144,6 @@ return array(
     "reports" => "Reports",
     "users" => "Users",
     "logout" => "Logout",
-    "edit" => "edit"
+    "edit" => "edit",
+    "login" => "Login"
 );

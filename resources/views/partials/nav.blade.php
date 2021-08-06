@@ -31,7 +31,6 @@
                                href="{{ route('check.civil', ['is_officer' => false]) }}">{{ __('general.login') }}</a>
                         </li>
                     @endif
-<<<<<<< HEAD
                     <li class="nav-item">
                         <a class="nav-link"
                            href="{{ route('register', ['is_officer' => false]) }}">@lang('general.public_register')</a>
@@ -40,12 +39,6 @@
                         <a class="nav-link"
                            href="{{ route('register', ['is_officer' => true]) }}">@lang('general.officer_register')</a>
                     </li>
-=======
-                        <li class="nav-item">
-                            <a class="nav-link"
-                               href="{{ route('register') }}">{{ __('general.register') }}</a>
-                        </li>
->>>>>>> 61c3889ebb7d3bc862e58d97b3cbf11840670fb5
                 @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('report.index') }}">{{ __('general.reports') }}</a>
