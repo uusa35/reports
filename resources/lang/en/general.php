@@ -132,7 +132,7 @@ return array(
     "nationality" => "nationality",
     "accident_reporting" => "accident reports",
     "welcome_message" => "Welcome to the website for reporting and managing accidents and traffic violations reports",
-    "officer_login" => "Login for officers of the Ministry of Interior",
+    "officer_login" => "Login officers Ministry of Interior",
     "civil_user" => "civilian entry",
     "video" => "video",
     "description" => "details or description",
