@@ -44,7 +44,7 @@ class HomeController extends Controller
         $validate = validator($request->all(), [
             'civil_id_no' => 'required|exists:users,civil_id_no',
             'passport_no' => 'required_if:is_officer,0|exists:users,passport_no',
-            'police_no' => 'required_if:is_officer,1|exists:users,police_no',
+            'file_no' => 'required_if:is_officer,1|exists:users,file_no',
             'password' => ['required', 'string', 'min:3'],
         ]);
         if ($validate->fails()) {

@@ -31,6 +31,14 @@
                                href="{{ route('check.civil', ['is_officer' => false]) }}">{{ __('general.login') }}</a>
                         </li>
                     @endif
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ route('register', ['is_officer' => false]) }}">@lang('general.public_register')</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{{ route('register', ['is_officer' => true]) }}">@lang('general.officer_register')</a>
+                    </li>
                 @else
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('report.index') }}">{{ __('general.reports') }}</a>
@@ -42,15 +50,11 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}">
-                                <img class="img-xxs"
-                                     src="{{ auth()->user()->getImageThumbLinkAttribute('personal_image') }}"
-                                     alt="{{ auth()->user()->name }}"/>
+                                <i class="fa fa-fw fa-1x fa-user-edit ml-1"></i>
                                 {{ trans('general.edit') }} {{ trans('general.profile') }}
                             </a>
                             <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}">
-                                <img class="img-xxs"
-                                     src="{{ auth()->user()->getImageThumbLinkAttribute('personal_image') }}"
-                                     alt="{{ auth()->user()->name }}"/>
+                                <i class="fa fa-fw fa-1x fa-edit ml-1"></i>
                                 {{ trans("general.account_type") }} : {{ auth()->user()->userType }}
                             </a>
                             @can('isAdmin')
@@ -60,13 +64,17 @@
                                 </a>
                                 <a class="dropdown-item" href="{{ route('user.index',['is_officer' => 0]) }}">
                                     <i class="fa fa-fw fa-users ml-1"></i>
-                                     {{ trans('general.users') }} {{ trans("general.regular") }}
+                                    {{ trans('general.users') }} {{ trans("general.regular") }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('user.index',['is_officer' => 1 ]) }}">
                                     <i class="fa fa-fw fa-users ml-1"></i>
                                     {{ trans('general.officers') }}
                                 </a>
                             @endcan
+                            <a class="dropdown-item" href="{{ route('password.request') }}">
+                                <i class="fa fa-fw fa-1x fa-passport ml-1"></i>
+                                {{ __('general.reset_password') }}
+                            </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

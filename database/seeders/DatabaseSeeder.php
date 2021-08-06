@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             if ($u->id === 1) {
                 $u->update(['is_admin' => true, 'email' => 'admin@admin.com', 'active' => true, 'civil_id_no' => 1111, 'passport_no' => 1111]);
             } else if ($u->id === 2) {
-                $u->update(['is_admin' => false, 'email' => 'officer@officer.com', 'is_officer' => true, 'active' => true, 'civil_id_no' => 2222, 'police_no' => 2222]);
+                $u->update(['is_admin' => false, 'email' => 'officer@officer.com', 'is_officer' => true, 'active' => true, 'civil_id_no' => 2222, 'file_no' => 2222]);
             } else if ($u->id === 3) {
                 $u->update(['is_admin' => false, 'email' => 'user@user.com', 'is_officer' => false, 'active' => true, 'civil_id_no' => 3333, 'passport_no' => 3333]);
             }

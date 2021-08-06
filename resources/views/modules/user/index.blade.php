@@ -19,7 +19,7 @@
                             <th scope="col"><small>{{ __('general.name') }}</small></th>
                             <th scope="col">{{ __('general.civil_id_no') }}</th>
                             <th scope="col">{{ __('general.passport_no') }}</th>
-                            <th scope="col">{{ __('general.police_no') }}</th>
+                            <th scope="col">{{ __('general.file_no') }}</th>
                             <th scope="col">{{ __('general.mobile') }}</th>
                             <th scope="col">{{ __('general.personal_image') }}</th>
                             <th scope="col">{{ __('general.address') }}</th>
@@ -36,7 +36,7 @@
                                     <td>{{ $element->name }}</td>
                                     <td>{{ $element->civil_id_no }}</td>
                                     <td>{{ $element->passport_no }}</td>
-                                    <td>{{ $element->police_no }}</td>
+                                    <td>{{ $element->file_no }}</td>
                                     <td>{{ $element->mobile }}</td>
                                     <td><img class="img-xxs" src="{{ $element->getImageThumbLinkAttribute('personal_image') }}"
                                              alt="{{ str_limit($element->description,5) }}"></td>

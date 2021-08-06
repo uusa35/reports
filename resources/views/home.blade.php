@@ -6,11 +6,16 @@
             <div class="card">
                 <div class="card-header">
                     <h5>
-                        {{ !auth()->id() ?  __('general.login') : trans('general.report_types')}}
+                        {{ !auth()->id() ?  __('general.accident_reporting') : trans('general.report_types')}}
                     </h5>
                 </div>
 
                 <div class="card-body">
+                    <div class="row justify-content-center align-items-center">
+                        <p class="my-5">
+                        <h1>@lang('general.welcome_message')</h1>
+                        </p>
+                    </div>
                     <div class="row">
                         @auth
                             @foreach($elements as $element)
@@ -43,19 +48,28 @@
                                         <div class="text-md-right">
                                             <a href="{{ route('check.civil', ['is_officer' => true]) }}"
                                                class="btn btn-outline-dark">{{ trans('general.officer_login') }}</a>
+                                            <a href="{{ route('password.request') }}"
+                                               class="btn btn-outline-danger">{{ trans('general.forget_password') }}</a>
+                                            <a href="{{ route('register', ['is_officer' => false]) }}"
+                                               class="btn btn-outline-dark">@lang('general.register')</a>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ trans('general.user') }}</h5>
+                                        <h5 class="card-title">{{ trans('general.civil_user') }}</h5>
                                         <p class="card-text">{{ trans('general.user_login') }}</p>
                                         <div class="text-md-right">
                                             <a href="{{ route('check.civil', ['is_officer' => false ]) }}"
                                                class="btn btn-outline-primary">{{ trans('general.user_login') }}
                                             </a>
+                                            <a href="{{ route('password.request') }}"
+                                               class="btn btn-outline-danger">{{ trans('general.forget_password') }}</a>
+                                            <a href="{{ route('register', ['is_officer' => false]) }}"
+                                               class="btn btn-outline-dark">@lang('general.register')</a>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +95,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title text-danger">{{ trans('general.officer_login') }}</h5>
                                         <p class="card-text">{{ trans('general.officer_username') }} : 2222</p>
-                                        <p class="card-text">{{ trans('general.officer_police_no') }} : 2222</p>
+                                        <p class="card-text">{{ trans('general.file_no') }} : 2222</p>
                                         <p class="card-text">{{ trans('general.password_is') }}</p>
                                         <p class="card-text text-danger">
                                             * {{ trans('general.admin_login_instruction') }}</p>

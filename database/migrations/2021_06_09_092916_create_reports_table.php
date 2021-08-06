@@ -33,7 +33,11 @@ class CreateReportsTable extends Migration
             $table->mediumText('notes')->nullable();
             $table->mediumText('description')->nullable();
             $table->string('vehicle_no_1')->nullable();
+            $table->string('driving_license_vehicle_no_1')->nullable();
             $table->string('vehicle_no_2')->nullable();
+            $table->string('driving_license_vehicle_no_2')->nullable();
+            $table->string('vehicle_no_3')->nullable();
+            $table->string('driving_license_vehicle_no_3')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
             $table->enum('weather',['wind','mist/fog','cloudy','light rain','heavy rain','smoke','strong wind'])->nullable();

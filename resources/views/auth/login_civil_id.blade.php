@@ -43,16 +43,16 @@
                             </div>
                             @if(request()->is_officer)
                                 <div class="form-group row">
-                                    <label for="police_no"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.police_no') }}</label>
+                                    <label for="file_no"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.file_no') }}</label>
                                     <div class="col-md-6">
-                                        <input id="police_no" type="police_no"
-                                               class="form-control @error('police_no') is-invalid @enderror"
-                                               name="police_no" value="{{ old('police_no') }}" required
-                                               autocomplete="police_no"
+                                        <input id="file_no" type="text"
+                                               class="form-control @error('file_no') is-invalid @enderror"
+                                               name="file_no" value="{{ old('file_no') }}" required
+                                               autocomplete="file_no"
                                                autofocus/>
 
-                                        @error('police_no')
+                                        @error('file_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -85,6 +85,11 @@
                                 </div>
                             </div>
                         </form>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <a href="{{ route("password.request") }}">@lang('general.forget_password')</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

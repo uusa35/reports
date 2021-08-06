@@ -1,5 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app-rtl.css": "/css/app-rtl.css",
-    "/css/app.css": "/css/app.css"
+    "/js/app.js": "/js/app.js?id=be00e86c55867b536242",
+    "/css/app-rtl.css": "/css/app-rtl.css?id=641159bd7b1cfe0c7602",
+    "/css/app.css": "/css/app.css?id=9f7b03552504081df97c",
+    "/js/jquery.js": "/js/jquery.js?id=99b0a83cf1b0b1e2cb16"
 }

@@ -77,6 +77,7 @@ class ReportController extends Controller
         if ($element) {
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
             $request->hasFile('image_two') ? $this->saveMimes($element, $request, ['image_two'], ['1080', '1440'], true) : null;
+            $request->hasFile('video_one') ? $this->savePath($request, $element) : null;
             return redirect()->home()->with(['success' => trans('general.process_success')]);
         }
         return redirect()->back()->with(['error' => trans('general.process_failure')]);

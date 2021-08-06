@@ -77,8 +77,7 @@ class UserController extends Controller
             'mobile' => 'required|numeric',
             'civil_id_no' => 'required|numeric',
             'passport_no' => 'required_if:is_officer,0',
-            'police_no' => 'required_if:is_officer,1',
-            'address' => 'required|min:3',
+            'file_no' => 'required_if:is_officer,1',
             'civil_id_image' => 'image',
             'personal_image' => 'image',
         ]);

@@ -16,7 +16,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="civil_id_no" type="civil_id_no"
+                                    <input id="civil_id_no" type="text"
                                            class="form-control @error('civil_id_no') is-invalid @enderror"
                                            name="civil_id_no" value="{{ old('civil_id_no') }}" required
                                            autocomplete="civil_id_no" autofocus>
@@ -43,16 +43,16 @@
                             </div>
                             @if(request()->is_officer)
                                 <div class="form-group row">
-                                    <label for="police_no"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.police_no') }}</label>
+                                    <label for="file_no"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.file_no') }}</label>
                                     <div class="col-md-6">
-                                        <input id="police_no" type="police_no"
-                                               class="form-control @error('police_no') is-invalid @enderror"
-                                               name="police_no" value="{{ old('police_no') }}" required
-                                               autocomplete="police_no"
+                                        <input id="file_no" type="text"
+                                               class="form-control @error('file_no') is-invalid @enderror"
+                                               name="file_no" value="{{ old('file_no') }}" required
+                                               autocomplete="file_no"
                                                autofocus/>
 
-                                        @error('police_no')
+                                        @error('file_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -64,7 +64,7 @@
                                     <label for="civil_id"
                                            class="col-md-4 col-form-label text-md-right">{{ __('general.passport_no') }}</label>
                                     <div class="col-md-6">
-                                        <input id="passport_no" type="passport_no"
+                                        <input id="passport_no" type="text"
                                                class="form-control @error('passport_no') is-invalid @enderror"
                                                name="passport_no" value="{{ old('passport_no') }}" required
                                                autocomplete="passport_no"
@@ -85,6 +85,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
