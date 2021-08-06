@@ -11,10 +11,9 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="row justify-content-center align-items-center">
-                        <p class="my-5">
-                        <h1>@lang('general.welcome_message')</h1>
-                        </p>
+                    <div class="row justify-content-center align-items-center my-5">
+
+                        <h1 class="text-center">@lang('general.welcome_message')</h1>
                     </div>
                     <div class="row">
                         @auth
