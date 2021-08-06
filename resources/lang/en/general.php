@@ -77,7 +77,7 @@ return array(
     "accident_image" => "accident image",
     "if_exist" => "if any",
     "profile" => 'profile',
-    "vehicle_no_for_report" => "the number of the vehicle against which the report is submitted",
+    "vehicle_no_for_report" => "Vehicle No",
     "hot_line" => "hotline",
     "report_types" => "report types",
     "activated" => "activated",
