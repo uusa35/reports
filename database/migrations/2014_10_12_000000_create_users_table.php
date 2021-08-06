@@ -42,7 +42,7 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('report_type_id')->references('id')->on('report_types');
-            $table->foreignId('governate_id')->references('id')->on('governates');
+            $table->foreignId('governate_id')->nullable()->constrained();
             $table->mediumText('description')->nullable();
 
             $table->boolean('has_driving_license')->default(1);
