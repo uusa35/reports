@@ -138,5 +138,11 @@ return array(
     "description" => "details or description",
     "address" => "address",
     "home_number" => "phone number",
-    "building_no" => "building number"
+    "building_no" => "building number",
+
+    "home" => "Home",
+    "reports" => "Reports",
+    "users" => "Users",
+    "logout" => "Logout",
+    "edit" => "edit"
 );

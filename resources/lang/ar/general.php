@@ -138,5 +138,11 @@ return array(
     "description" => "التفاصيل او الوصف",
     "address" => "العنوان",
     "home_number" => "رقم الهاتف",
-    "building_no" => "رقم المبنى"
+    "building_no" => "رقم المبنى",
+
+    "home" => "الرئيسية",
+    "reports" => "ٌتقارير",
+    "users" => "المستخدمين",
+    "logout" => "الخروج",
+    "edit" => "تعديل"
 );
