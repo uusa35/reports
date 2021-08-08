@@ -63,7 +63,8 @@ class ReportController extends Controller
             'image' => 'image',
             'image_two' => 'image',
             'injuries_no' => 'required_if:has_injuries,1|numeric',
-            'report_type_id' => 'required|exists:report_types,id'
+            'report_type_id' => 'required|exists:report_types,id',
+            'vehicles' => 'array|required_if:is_traffic,1'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();

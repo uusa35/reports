@@ -502,6 +502,22 @@
         src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize"
         async defer></script>
     <script>
+{{--         inputs --}}
+function addFields(){
+    var number = document.getElementById("member").value;
+    var container = document.getElementById("container");
+    while (container.hasChildNodes()) {
+        container.removeChild(container.lastChild);
+    }
+    for (i=0;i<number;i++){
+        container.appendChild(document.createTextNode("vehicles[" + (i+1)) +"]");
+        var input = document.createElement("input");
+        input.type = "text";
+        container.appendChild(input);
+        container.appendChild(document.createElement("br"));
+    }
+}
+
         function initialize() {
 
             $('form').on('keyup keypress', function(e) {
