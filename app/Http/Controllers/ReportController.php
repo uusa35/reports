@@ -6,8 +6,10 @@ use App\Models\Governate;
 use App\Models\Report;
 use App\Models\ReportType;
 use App\Models\User;
+use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -20,11 +22,11 @@ class ReportController extends Controller
     {
         $auth = auth()->user();
         if ($auth->is_admin) {
-            $elements = Report::active()->with(['owner', 'officer.speciality'])->orderBy('id','desc')->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
         } elseif ($auth->is_officer) {
-            $elements = Report::active()->where(['officer_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id','desc')->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->where(['officer_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
         } else {
-            $elements = Report::active()->where(['user_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id','desc')->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->where(['user_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
         }
         return view('modules.report.index', compact('elements'));
     }
@@ -45,7 +47,7 @@ class ReportController extends Controller
         $types = ReportType::active()->get();
         $currentType = ReportType::whereId(request()->report_type_id)->first();
         $governates = Governate::active()->get();
-        return view('modules.report.create', compact('types','governates','currentType'));
+        return view('modules.report.create', compact('types', 'governates', 'currentType'));
     }
 
     /**
@@ -57,14 +59,13 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $validate = validator(request()->all(), [
-            'description' => 'required|max:1000',
-            'mobile' => 'required|numeric',
-            'address' => 'required|min:3',
+//            'description' => 'required|max:1000',
+//            'mobile' => 'required|numeric',
+//            'address' => 'required|min:3',
             'image' => 'image',
-            'image_two' => 'image',
-            'injuries_no' => 'required_if:has_injuries,1|numeric',
-            'report_type_id' => 'required|exists:report_types,id',
-            'vehicles' => 'array|required_if:is_traffic,1'
+//            'injuries_no' => 'required_if:has_injuries,1|numeric',
+//            'report_type_id' => 'required|exists:report_types,id',
+//            'vehicles' => 'array|required_if:is_traffic,1'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
@@ -76,9 +77,12 @@ class ReportController extends Controller
         ]);
         $element = Report::create($request->except(['_token', 'image']));
         if ($element) {
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
-            $request->hasFile('image_two') ? $this->saveMimes($element, $request, ['image_two'], ['1080', '1440'], true) : null;
-            $request->hasFile('video_one') ? $this->savePath($request, $element) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
+            $request->hasFile('path') ? $this->savePath($request, $element) : null;
+            if ($request->number_of_vehicles > 1) {
+                return redirect()->route('add.vehicle', ['id' => $element->id])->with(['success' => trans('general.process_success')]);
+            }
             return redirect()->home()->with(['success' => trans('general.process_success')]);
         }
         return redirect()->back()->with(['error' => trans('general.process_failure')]);
@@ -105,7 +109,7 @@ class ReportController extends Controller
      */
     public function edit($id)
     {
-        $element = Report::whereId($id)->with(['officer.speciality','owner'])->first();
+        $element = Report::whereId($id)->with(['officer.speciality', 'owner'])->first();
         $types = ReportType::active()->get();
         return view('modules.report.edit', compact('element', 'types'));
     }
@@ -120,24 +124,24 @@ class ReportController extends Controller
     public function update(Request $request, $id)
     {
         $validate = validator(request()->all(), [
-            'description' => 'required|max:1000',
-            'mobile' => 'required|numeric',
-            'address' => 'required|min:3',
+//            'description' => 'required|max:1000',
+//            'mobile' => 'required|numeric',
+//            'address' => 'required|min:3',
             'image' => 'image',
-            'image_two' => 'image',
-            'injuries_no' => 'required_if:has_injuries,1|numeric',
-            'report_type_id' => 'required|exists:report_types,id'
+//            'injuries_no' => 'required_if:has_injuries,1|numeric',
+//            'report_type_id' => 'required|exists:report_types,id'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
         }
         $request->request->add([
-            'officer_id' => User::active()->where(['is_officer' => true , 'report_type_id' => $request->report_type_id])->get()->random()->id
+            'officer_id' => User::active()->where(['is_officer' => true])->get()->random()->id
         ]);
         $element = Report::whereId($id)->first();
         if ($element->update($request->except(['_token', 'image']))) {
-            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], true) : null;
-            $request->hasFile('image_two') ? $this->saveMimes($element, $request, ['image_two'], ['1080', '1440'], true) : null;
+            $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
+            $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
+            $request->hasFile('path') ? $this->savePath($request, $element) : null;
             return redirect()->route('report.index')->with(['success' => trans('general.process_success')]);
         }
         return redirect()->back()->with(['error' => trans('general.process_failure')]);
@@ -152,5 +156,32 @@ class ReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAddVehicle(Request $request)
+    {
+        $element = Report::whereId($request->id)->with('owner.vehicles')->first();
+        return view('modules.report.add_vehicle', compact('element'));
+    }
+
+    public function postAddVehicle(Request $request)
+    {
+        $validate = validator($request->all(), [
+            'plate_no' => 'required',
+            'driver_license' => 'required',
+            'report_id' => 'required'
+        ]);
+        if ($validate->fails()) {
+            return redirect()->back()->with('error', $validate->errors()->first());
+        }
+        $report = Report::whereId($request->report_id)->with('owner.vehicles')->first();
+        $vehicle = Vehicle::where(['plate_no' => $request->plate_no])->first();
+        DB::table('report_vehicle')->insert([
+            'vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id,
+            'report_id' => $report->id
+        ]);
+        $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
+        $request->hasFile('path') ? $this->savePath($request, $element) : null;
+        return redirect()->back()->with('success', trans('general.process_success'));
     }
 }

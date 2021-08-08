@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('first_name')->nullable();
             $table->string('father_name')->nullable();
             $table->string('sur_name')->nullable();
@@ -41,11 +40,13 @@ class CreateUsersTable extends Migration
             $table->boolean('is_admin')->default(0);
             $table->boolean('active')->default(0);
             $table->timestamp('email_verified_at')->nullable();
-            $table->foreignId('report_type_id')->references('id')->on('report_types');
+
             $table->foreignId('governate_id')->nullable()->constrained();
+            $table->foreignId('department_id')->nullable()->constrained();
             $table->mediumText('description')->nullable();
 
             $table->boolean('has_driving_license')->default(1);
+            $table->string('driving_license_no')->nullable();
             $table->date('driving_license_issuance')->nullable();
             $table->date('driving_license_expiry')->nullable();
             $table->rememberToken();

@@ -17,7 +17,7 @@
                     <tr>
                         <th scope="col">{{ __('general.id') }}</th>
                         <th scope="col">{{ __('general.image') }}</th>
-                        <th scope="col">{{ __('general.hot_line') }}</th>
+                        <th scope="col">{{ __('general.name') }}</th>
                         <th scope="col">{{ __('general.notes') }}</th>
                         <th scope="col">{{ __('general.description') }}</th>
                         <th scope="col">{{ __('general.active') }}</th>
@@ -31,7 +31,7 @@
                                 <th scope="row">{{ $element->id }}</th>
                                 <td><img class="img-xxs" src="{{ $element->getImageThumbLinkAttribute() }}"
                                          alt="{{ str_limit($element->notes,5) }}"></td>
-                                <td>{{ $element->hot_line }}</td>
+                                <td>{{ $element->name }}</td>
                                 <td>{{ str_limit($element->notes,20) }}</td>
                                 <td>{{ str_limit($element->description,20) }}</td>
                                 <td><span

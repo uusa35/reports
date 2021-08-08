@@ -11,6 +11,151 @@
                         <form method="post" action="{{ route('report.store') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="report_type_id" value="{{ request()->report_type_id }}">
+                            {{-- date and time --}}
+                            <div class="form-group row">
+                                <label for="created_at"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.date_and_time') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="created_at" type="datetime-local"
+                                           class="form-control @error('created_at') is-invalid @enderror"
+                                           name="created_at"
+                                           value="{{ old('created_at') }}" autocomplete="created_at"
+                                           maxlength="2">
+                                    @error('created_at')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{--                             location --}}
+                            <div class="form-group row ">
+                                <label for="created_at"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.location') }}</label>
+                                <div class="col-md-6">
+                                    <input type="text" id="address-input" name="address_address"
+                                           class="form-control map-input" value="Kuwait">
+                                    <input type="hidden" name="latitude" id="address-latitude" value="29.3187128"/>
+                                    <input type="hidden" name="longitude" id="address-longitude" value="47.9971457"/>
+                                    <div id="address-map-container" style="width:100%;height:300px; ">
+                                        <div style="width: 100%; height: 100%" id="address-map"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{--                             pole no --}}
+                            <div class="form-group row">
+                                <label for="electricity_pole_no"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.electricity_pole_no') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="electricity_pole_no" type="string"
+                                           class="form-control @error('electricity_pole_no') is-invalid @enderror"
+                                           name="electricity_pole_no"
+                                           value="{{ old('electricity_pole_no') }}"
+                                           autocomplete="electricity_pole_no"
+                                    >
+                                    @error('electricity_pole_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{--                             speed limit --}}
+
+                            <div class="form-group row">
+                                <label for="speed_limit"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.speed_limit') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="speed_limit" type="string"
+                                           class="form-control @error('speed_limit') is-invalid @enderror"
+                                           name="speed_limit"
+                                           value="{{ old('speed_limit') }}"
+                                           value="" autocomplete="speed_limit"
+                                    >
+                                    @error('speed_limit')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{--                             address city --}}
+
+                            <div class="form-group row">
+                                <label for="area"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.area') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="area" type="text"
+                                           class="form-control @error('area') is-invalid @enderror" name="area"
+                                           value="{{ old('area') }}" autocomplete="area">
+
+                                    @error('area')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="street"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.street') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="street" type="text"
+                                           class="form-control @error('street') is-invalid @enderror" name="street"
+                                           value="{{ old('street') }}" autocomplete="street">
+
+                                    @error('street')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="block"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.block') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="block" type="text"
+                                           class="form-control @error('block') is-invalid @enderror" name="block"
+                                           value="{{ old('block') }}" autocomplete="block">
+
+                                    @error('block')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="building_no"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.building_no') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="building_no" type="text"
+                                           class="form-control @error('building_no') is-invalid @enderror"
+                                           name="building_no"
+                                           value="{{ old('building_no') }}" autocomplete="building_no">
+
+                                    @error('building_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
 
                             <div class="form-group row">
                                 <label for="exampleFormControlSelect1" class="col-md-4 col-form-label text-md-right">
@@ -29,6 +174,27 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="injuries_no"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injuries_no') }}
+                                    ({{ trans('general.if_exist') }})</label>
+
+                                <div class="col-md-6">
+                                    <input id="injuries_no" type="number"
+                                           class="form-control @error('injuries_no') is-invalid @enderror"
+                                           name="injuries_no"
+                                           value="{{ old('injuries_no') }}" autocomplete="injuries_no"
+                                           maxlength="2">
+                                    @error('injuries_no')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{--                            @if($currentType->is_ambulance)--}}
                             <div class="form-group row">
                                 <label for="name"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.has_injuries') }} -
@@ -55,18 +221,24 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injuries_no') }}
-                                    ({{ trans('general.if_exist') }}) - (8)</label>
+                            {{--                            @endif--}}
+                            {{--                            @if($currentType->is_traffic)--}}
 
+                            <div class="form-group row">
+                                <label for="exampleFormControlSelect1"
+                                       class="col-md-4 col-form-label text-md-right">
+                                    {{ trans("general.weather") }} - (29) </label>
                                 <div class="col-md-6">
-                                    <input id="injuries_no" type="text"
-                                           class="form-control @error('injuries_no') is-invalid @enderror"
-                                           name="injuries_no"
-                                           value="{{ auth()->user()->injuries_no }}" autocomplete="injuries_no"
-                                           maxlength="2">
-                                    @error('injuries_no')
+                                    <select class="form-control" id="exampleFormControlSelect1" name="weather">
+                                        <option value="wind">{{ trans("general.wind") }}</option>
+                                        <option value="mist/fog">{{ trans("general.mist/fog") }}</option>
+                                        <option value="cloudy">{{ trans("general.cloudy") }}</option>
+                                        <option value="light rain">{{ trans("general.light rain") }}</option>
+                                        <option value="heavy rain">{{ trans("general.heavy rain") }}</option>
+                                        <option value="smoke">{{ trans("general.smoke") }}</option>
+                                        <option value="strong wind">{{ trans("general.strong wind") }}</option>
+                                    </select>
+                                    @error('weather')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -74,284 +246,90 @@
                                 </div>
                             </div>
 
-                            @if($currentType->is_traffic)
-
-                                <div class="form-group row">
-                                    <label for="email"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicles_number') }}
-                                        ({{ trans('general.if_exist') }})</label>
-
-                                    <div class="col-md-6">
-                                        <input type="text" id="vehicles_number" name="member" require value="">
-                                        <div id="vehiclesDiv"
-                                             class="form-control @error('injuries_no') is-invalid @enderror"
-                                        >
-                                        </div>
-                                        @error('injuries_no')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                    <a href="#" id="filldetails" onclick="addFields()">Add Vehicles</a>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="exampleFormControlSelect1"
-                                           class="col-md-4 col-form-label text-md-right">
-                                        {{ trans("general.weather") }} - (29) </label>
-                                    <div class="col-md-6">
-                                        <select class="form-control" id="exampleFormControlSelect1" name="weather">
-                                            <option value="wind">{{ trans("general.wind") }}</option>
-                                            <option value="mist/fog">{{ trans("general.mist/fog") }}</option>
-                                            <option value="cloudy">{{ trans("general.cloudy") }}</option>
-                                            <option value="light rain">{{ trans("general.light rain") }}</option>
-                                            <option value="heavy rain">{{ trans("general.heavy rain") }}</option>
-                                            <option value="smoke">{{ trans("general.smoke") }}</option>
-                                            <option value="strong wind">{{ trans("general.strong wind") }}</option>
-                                        </select>
-                                        @error('weather')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="exampleFormControlSelect1"
-                                           class="col-md-4 col-form-label text-md-right">
-                                        {{ trans("general.traffic_offences") }} - (34) </label>
-                                    <div class="col-md-6">
-                                        <select class="form-control" id="exampleFormControlSelect1"
-                                                name="traffic_offences">
-                                            <option value="No Parking">{{ trans("general.No Parking") }}</option>
-                                            <option
-                                                value="Handicapped Parking">{{ trans("general.Handicapped Parking") }}</option>
-                                            <option value="Honking">{{ trans("general.Honking") }}</option>
-                                            <option
-                                                value="Documents & License Plates">{{ trans("general.Documents & License Plates") }}</option>
-                                            <option
-                                                value="Dangerous Overtaking">{{ trans("general.Dangerous Overtaking") }}</option>
-                                            <option value="Others">{{ trans("general.Others") }}</option>
-                                        </select>
-                                        @error('weather')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="exampleFormControlSelect1"
-                                           class="col-md-4 col-form-label text-md-right">
-                                        {{ trans("general.primary_contributory") }} - (35) </label>
-                                    <div class="col-md-6">
-                                        <select class="form-control" id="exampleFormControlSelect1"
-                                                name="primary_contributory">
-                                            <option
-                                                value="Driver / Rider Error">{{ trans("general.Driver / Rider Error") }}</option>
-                                            <option
-                                                value="Driver / Rider impairment">{{ trans("general.Driver / Rider impairment") }}</option>
-                                            <option value="Bad weather">{{ trans("general.Bad weather") }}</option>
-                                            <option
-                                                value="Defect in road condition">{{ trans("general.Defect in road condition") }}</option>
-                                            <option value="Alcohol/Drugs">{{ trans("general.Alcohol/Drugs") }}</option>
-                                            <option
-                                                value="Fault of pedestrian">{{ trans("general.Fault of pedestrian") }}</option>
-                                            <option
-                                                value="Poor light condition">{{ trans("general.Poor light condition") }}</option>
-                                            <option
-                                                value="falling of boulders">{{ trans("general.falling of boulders") }}</option>
-                                        </select>
-                                        @error('primary_contributory')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="vehicle_no_1"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }}
-                                        (1)</label>
-
-                                    <div class="col-md-6">
-                                        <input id="vehicle_no_1" type="text"
-                                               class="form-control @error('vehicle_no') is-invalid @enderror"
-                                               name="vehicle_no_1"
-                                               value="{{ old('vehicle_no_1') }}" autocomplete="vehicle_no_1">
-
-                                        @error('vehicle_no_1')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="driving_license_vehicle_no_1"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }}
-                                        (1)</label>
-
-                                    <div class="col-md-6">
-                                        <input id="driving_license_vehicle_no_1" type="text"
-                                               class="form-control @error('vehicle_no') is-invalid @enderror"
-                                               name="driving_license_vehicle_no_1"
-                                               value="{{ old('driving_license_vehicle_no_1') }}"
-                                               autocomplete="driving_license_vehicle_no_1">
-
-                                        @error('driving_license_vehicle_no_1')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="vehicle_no_2"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }}
-                                        (2) </label>
-
-                                    <div class="col-md-6">
-                                        <input id="vehicle_no_2" type="text"
-                                               class="form-control @error('vehicle_no') is-invalid @enderror"
-                                               name="vehicle_no_2"
-                                               value="{{ old('vehicle_no_2') }}" autocomplete="vehicle_no_2">
-
-                                        @error('vehicle_no_2')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="driving_license_vehicle_no_2"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }}
-                                        (2)</label>
-
-                                    <div class="col-md-6">
-                                        <input id="driving_license_vehicle_no_2" type="text"
-                                               class="form-control @error('vehicle_no') is-invalid @enderror"
-                                               name="driving_license_vehicle_no_2"
-                                               value="{{ old('driving_license_vehicle_no_2') }}"
-                                               autocomplete="driving_license_vehicle_no_2">
-
-                                        @error('driving_license_vehicle_no_2')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="vehicle_no_3"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }}
-                                        (3) </label>
-
-                                    <div class="col-md-6">
-                                        <input id="vehicle_no_3" type="text"
-                                               class="form-control @error('vehicle_no') is-invalid @enderror"
-                                               name="vehicle_no_3"
-                                               value="{{ old('vehicle_no_3') }}" autocomplete="vehicle_no_3">
-
-                                        @error('vehicle_no_3')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="driving_license_vehicle_no_3"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }}
-                                        (3)</label>
-
-                                    <div class="col-md-6">
-                                        <input id="driving_license_vehicle_no_3" type="text"
-                                               class="form-control @error('vehicle_no') is-invalid @enderror"
-                                               name="driving_license_vehicle_no_3"
-                                               value="{{ old('driving_license_vehicle_no_3') }}"
-                                               autocomplete="driving_license_vehicle_no_3">
-
-                                        @error('driving_license_vehicle_no_3')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="accident_image"
-                                           class="col-md-4 col-form-label text-md-right ">{{ __('general.accident_image') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="image" type="file"
-                                               multiple
-                                               class="form-control @error('image') is-invalid @enderror" name="image"
-                                               value="" autocomplete="image" autofocus>
-                                        @error('image')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="driving_license"
-                                           class="col-md-4 col-form-label text-md-right ">{{ __('general.driving_license') }}
-                                        ({{ trans('general.if_exist') }})</label>
-
-                                    <div class="col-md-6">
-                                        <input id="image_two" type="file"
-                                               class="form-control @error('image_two') is-invalid @enderror"
-                                               name="image_two"
-                                               value="" autocomplete="image_two" autofocus>
-                                        @error('image_two')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="video_one"
-                                           class="col-md-4 col-form-label text-md-right ">{{ __('general.video') }}
-                                        ({{ trans('general.if_exist') }})</label>
-
-                                    <div class="col-md-6">
-                                        <input id="video_one" type="file"
-                                               class="form-control @error('video_one') is-invalid @enderror"
-                                               name="video_one"
-                                               value="" autocomplete="video_one" autofocus>
-                                        @error('video_one')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            @endif
                             <div class="form-group row">
-                                <label for="name"
+                                <label for="exampleFormControlSelect1"
+                                       class="col-md-4 col-form-label text-md-right">
+                                    {{ trans("general.traffic_offences") }} - (34) </label>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="exampleFormControlSelect1"
+                                            name="traffic_offences">
+                                        <option value="No Parking">{{ trans("general.No Parking") }}</option>
+                                        <option
+                                            value="Handicapped Parking">{{ trans("general.Handicapped Parking") }}</option>
+                                        <option value="Honking">{{ trans("general.Honking") }}</option>
+                                        <option
+                                            value="Documents & License Plates">{{ trans("general.Documents & License Plates") }}</option>
+                                        <option
+                                            value="Dangerous Overtaking">{{ trans("general.Dangerous Overtaking") }}</option>
+                                        <option value="Others">{{ trans("general.Others") }}</option>
+                                    </select>
+                                    @error('weather')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="exampleFormControlSelect1"
+                                       class="col-md-4 col-form-label text-md-right">
+                                    {{ trans("general.primary_contributory") }} - (35) </label>
+                                <div class="col-md-6">
+                                    <select class="form-control" id="exampleFormControlSelect1"
+                                            name="primary_contributory">
+                                        <option
+                                            value="Driver / Rider Error">{{ trans("general.Driver / Rider Error") }}</option>
+                                        <option
+                                            value="Driver / Rider impairment">{{ trans("general.Driver / Rider impairment") }}</option>
+                                        <option value="Bad weather">{{ trans("general.Bad weather") }}</option>
+                                        <option
+                                            value="Defect in road condition">{{ trans("general.Defect in road condition") }}</option>
+                                        <option value="Alcohol/Drugs">{{ trans("general.Alcohol/Drugs") }}</option>
+                                        <option
+                                            value="Fault of pedestrian">{{ trans("general.Fault of pedestrian") }}</option>
+                                        <option
+                                            value="Poor light condition">{{ trans("general.Poor light condition") }}</option>
+                                        <option
+                                            value="falling of boulders">{{ trans("general.falling of boulders") }}</option>
+                                    </select>
+                                    @error('primary_contributory')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="vehicle_no_2"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.number_of_vehicles_in_accident') }}</label>
+                                <div class="col-md-6">
+                                    <input id="number_of_vehicles" type="number"
+                                           max="4"
+                                           class="form-control @error('number_of_vehicles') is-invalid @enderror"
+                                           name="number_of_vehicles"
+                                           value="{{ old('number_of_vehicles') }}" autocomplete="number_of_vehicles">
+
+                                    @error('number_of_vehicles')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            {{--                            @endif--}}
+{{--                             descirption --}}
+                            <div class="form-group row">
+                                <label for="description"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.description') }}</label>
 
                                 <div class="col-md-6">
                                     <textarea id="description" type="text"
                                               class="form-control @error('description') is-invalid @enderror"
                                               name="description"
-                                              required autocomplete="description"
+                                              autocomplete="description"
                                               autofocus
                                               rows="5"
                                     >{{ old('description') }}</textarea>
@@ -363,17 +341,21 @@
                                     @enderror
                                 </div>
                             </div>
-
+{{--                             notes --}}
                             <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.address') }}</label>
+                                <label for="notes"
+                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.notes') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="address" type="text"
-                                           class="form-control @error('address') is-invalid @enderror" name="address"
-                                           value="{{ auth()->user()->address }}" autocomplete="address" required>
+                                    <textarea id="notes" type="text"
+                                              class="form-control @error('notes') is-invalid @enderror"
+                                              name="notes"
+                                              autocomplete="notes"
+                                              autofocus
+                                              rows="5"
+                                    >{{ old('notes') }}</textarea>
 
-                                    @error('address')
+                                    @error('notes')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -381,14 +363,16 @@
                                 </div>
                             </div>
 
+
+                            {{--                             mobile --}}
                             <div class="form-group row">
-                                <label for="name"
+                                <label for="mobile"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.mobile') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="mobile" type="number"
                                            class="form-control @error('mobile') is-invalid @enderror" name="mobile"
-                                           value="{{ auth()->user()->mobile }}" required autocomplete="mobile"
+                                           value="{{ old('mobile') }}" autocomplete="mobile"
                                            autofocus>
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
@@ -398,90 +382,47 @@
                                 </div>
                             </div>
 
-
+                            {{--                             video --}}
                             <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.area') }}</label>
-
+                                <label for="file"
+                                       class="col-md-4 col-form-label text-md-right ">{{ trans('general.image') }}</label>
                                 <div class="col-md-6">
-                                    <input id="area" type="text"
-                                           class="form-control @error('area') is-invalid @enderror" name="area"
-                                           value="{{ auth()->user()->area }}" autocomplete="area">
-
-                                    @error('area')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input class="form-control tooltips" data-container="body"
+                                           data-placement="top"
+                                           name="image" placeholder="images" type="file"
+                                           />
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.street') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="street" type="text"
-                                           class="form-control @error('street') is-invalid @enderror" name="street"
-                                           value="{{ auth()->user()->street }}" autocomplete="street">
-
-                                    @error('street')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+                            {{--                             video  --}}
 
                             <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.block') }}</label>
-
+                                <label for="file"
+                                       class="col-md-4 col-form-label text-md-right ">{{ trans('general.video') }}</label>
                                 <div class="col-md-6">
-                                    <input id="block" type="text"
-                                           class="form-control @error('block') is-invalid @enderror" name="block"
-                                           value="{{ auth()->user()->block }}" autocomplete="block">
-
-                                    @error('block')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input class="form-control tooltips" data-container="body"
+                                           data-placement="top"
+                                           name="path" placeholder="images" type="file"
+                                           />
                                 </div>
                             </div>
+                            {{--                             images --}}
                             <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.building_no') }}</label>
-
+                                <label for="file"
+                                       class="col-md-4 col-form-label text-md-right ">{{ trans('general.images') }}</label>
                                 <div class="col-md-6">
-                                    <input id="building_no" type="text"
-                                           class="form-control @error('building_no') is-invalid @enderror"
-                                           name="building_no"
-                                           value="{{ auth()->user()->building_no }}" autocomplete="building_no">
-
-                                    @error('building_no')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input class="form-control tooltips" data-container="body"
+                                           data-placement="top"
+                                           name="images[]" placeholder="images" type="file"
+                                           multiple/>
                                 </div>
                             </div>
-
-                            {{--                            <div class="form-group">--}}
-                            {{--                                <label for="address_address">Address</label>--}}
-                            {{--                                <input type="text" id="address-input" name="address_address" class="form-control map-input">--}}
-                            {{--                                <input type="hidden" name="address_latitude" id="address-latitude" value="0" />--}}
-                            {{--                                <input type="hidden" name="address_longitude" id="address-longitude" value="0" />--}}
-                            {{--                            </div>--}}
-                            {{--                            <div id="address-map-container" style="width:100%;height:400px; ">--}}
-                            {{--                                <div style="width: 100%; height: 100%" id="address-map"></div>--}}
-                            {{--                            </div>--}}
 
                             <div class="container">
                                 <div class="row text-center">
                                     <div class="col offset-2">
                                         <button type="submit" class="btn btn-danger">
-                                            {{ __('general.register') }}
+                                            {{ __('general.save') }}
                                         </button>
                                     </div>
                                     <div class="col">
@@ -505,34 +446,6 @@
         src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize"
         async defer></script>
     <script>
-        {{--         inputs --}}
-        function addFields() {
-            // Number of inputs to create
-            var number = document.getElementById("vehicles_number").value;
-            // Container <div> where dynamic content will be placed
-            var container = document.getElementById("vehiclesDiv");
-            // Clear previous contents of the container
-            while (container.hasChildNodes()) {
-                container.removeChild(container.lastChild);
-            }
-            for (i = 0; i < number; i++) {
-                // Append a node with a random text
-                container.appendChild(document.createTextNode("Vehicle " + (i + 1)));
-                // Create an <input> element, set its type and name attributes
-                var input = document.createElement("input");
-                input.type = "text";
-                input.name = "vehicles[" + i + "]";
-
-                var input = document.createElement("input");
-                input.type = "text";
-                input.name = "vehicles[" + i + "]";
-
-                container.appendChild(input);
-                // Append a line break
-                container.appendChild(document.createElement("br"));
-            }
-        }
-
         function initialize() {
 
             $('form').on('keyup keypress', function(e) {
@@ -552,8 +465,8 @@
                 const fieldKey = input.id.replace("-input", "");
                 const isEdit = document.getElementById(fieldKey + "-latitude").value != '' && document.getElementById(fieldKey + "-longitude").value != '';
 
-                const latitude = parseFloat(document.getElementById(fieldKey + "-latitude").value) || -33.8688;
-                const longitude = parseFloat(document.getElementById(fieldKey + "-longitude").value) || 151.2195;
+                const latitude = parseFloat(document.getElementById(fieldKey + "-latitude").value) || 29.3187128;
+                const longitude = parseFloat(document.getElementById(fieldKey + "-longitude").value) || 47.9971457;
 
                 const map = new google.maps.Map(document.getElementById(fieldKey + '-map'), {
                     center: {lat: latitude, lng: longitude},

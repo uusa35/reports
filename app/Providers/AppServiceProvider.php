@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Department;
 use App\Models\Governate;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
 //        View::share('governates', Governate::all());
+//        View::share('departments', Department::all());
     }
 }

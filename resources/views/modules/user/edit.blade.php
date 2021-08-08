@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header"><h4 class="display-6 text-center">{{ __('general.edit') }}</h4></div>
+                    <div class="card-header"><h4 class="display-6 text-center">{{ __('general.edit') }} @lang('general.profile') </h4></div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('user.update', $element->id) }}"
@@ -90,7 +90,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="civil_id_no" type="number"
+                                    <input id="civil_id_no" type="text"
                                            class="form-control @error('civil_id_no') is-invalid @enderror"
                                            name="civil_id_no"
                                            value="{{ $element->civil_id_no }}" required autocomplete="civil_id_no"
@@ -126,16 +126,17 @@
 
                                 {{-- department--}}
                                 <div class="form-group row">
-                                    <label for="department"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.department') }}</label>
-
+                                    <label for="exampleFormControlSelect1"
+                                           class="col-md-4 col-form-label text-md-right">
+                                        {{ trans("general.department") }}</label>
                                     <div class="col-md-6">
-                                        <input id="department" type="text"
-                                               class="form-control @error('department') is-invalid @enderror"
-                                               name="department"
-                                               value="{{ $element->department }}" required autocomplete="department"
-                                               autofocus>
-                                        @error('department')
+                                        <select class="form-control" id="exampleFormControlSelect1" name="department_id">
+                                            @foreach($departments as $department)
+                                                <option
+                                                    value="{{ $department->id }}" {{ $element->department_id === $department->id ? 'selected' : null }}>{{ $department->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('department_id')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -144,6 +145,72 @@
                                 </div>
 
                             @else
+
+                                <div class="form-group row">
+                                    <label for="name"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.has_driving_license') }}</label>
+
+                                    <div class="col-md-6 ml-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="1" name="has_driving_license" id="flexCheckDefault"
+                                                {{ $element->has_driving_license ? 'checked' : '' }}
+                                            >
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                @lang('general.yes')
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="0" name="has_driving_license" id="flexCheckChecked"
+                                                   {{ !$element->has_driving_license ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                @lang('general.no')
+                                            </label>
+                                        </div>
+                                        @error('passport_no')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="driving_license_issuance"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license_issuance') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="driving_license_issuance" type="date"
+                                               class="form-control @error('driving_license_issuance') is-invalid @enderror"
+                                               name="driving_license_issuance"
+                                               value="{{ $element->driving_license_issuance }}" required autocomplete="driving_license_issuance"
+                                               autofocus>
+                                        @error('driving_license_issuance')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="driving_license_expiry"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license_expiry') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="driving_license_expiry" type="date"
+                                               class="form-control @error('driving_license_expiry') is-invalid @enderror"
+                                               name="driving_license_expiry"
+                                               value="{{ $element->driving_license_expiry }}" required autocomplete="driving_license_expiry"
+                                               autofocus>
+                                        @error('driving_license_expiry')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
                                 {{--                                 passport --}}
                                 <div class="form-group row">
                                     <label for="name"
@@ -206,7 +273,6 @@
                             <div class="form-group row">
                                 <label for="age"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.age') }}</label>
-
                                 <div class="col-md-6">
                                     <input id="age" type="text"
                                            class="form-control @error('age') is-invalid @enderror"
@@ -270,6 +336,7 @@
                                     @enderror
                                 </div>
                             </div>
+
 
                             {{--                             address  city --}}
 

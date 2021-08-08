@@ -366,8 +366,8 @@ trait ImageHelpers
     public function savePath(Request $request, $element)
     {
         try {
-            if ($request->hasFile('video_one')) {
-                $path = $request->file('video_one')->store('public/uploads/files');
+            if ($request->hasFile('path')) {
+                $path = $request->file('path')->store('public/uploads/files');
                 $path = str_replace('public/uploads/files/', '', $path);
                 if (env('FILESYSTEM_CLOUD') === 'do') {
                     try {

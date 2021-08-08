@@ -17,6 +17,10 @@ class CreateReportVehicleTable extends Migration
             $table->id();
             $table->foreignId('vehicle_id')->constrained();
             $table->foreignId('report_id')->constrained();
+            $table->string('image')->nullable()->default('default.svg');
+            $table->string('path')->nullable();
+            $table->string('driver_license')->nullable()->default('default.svg');
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

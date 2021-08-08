@@ -65,7 +65,28 @@ class User extends Authenticatable
         return $this->belongsTo(Governate::class);
     }
 
-    public function getUserTypeAttribute() {
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    public function getUserTypeAttribute()
+    {
         return $this->is_admin ? trans('general.admin') : ($this->is_officer ? trans('general.officer') : trans('general.user'));
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->father_name;
+    }
+
+    public function scopeOfficers()
+    {
+        return $this->where(['is_officer' => true]);
+    }
+
+    public function scopeCivilians()
+    {
+        return $this->where(['is_officer' => false]);
     }
 }

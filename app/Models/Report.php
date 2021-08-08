@@ -9,27 +9,36 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     use HasFactory, ModelHelper;
+
     public $guarded = [''];
 
     public function owner()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function officer()
     {
-        return $this->belongsTo(User::class,'officer_id');
+        return $this->belongsTo(User::class, 'officer_id');
     }
 
-    public function type() {
-        return $this->belongsTo(ReportType::class,'report_type_id');
+    public function type()
+    {
+        return $this->belongsTo(ReportType::class, 'report_type_id');
     }
 
-    public function vehicles() {
-        return $this->belongsToMany(Vehicle::class);
+    public function vehicles()
+    {
+        return $this->belongsToMany(Vehicle::class,'report_vehicle');
     }
 
-    public function governate() {
+    public function governate()
+    {
         return $this->belongsTo(Governate::class);
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imagable');
     }
 }

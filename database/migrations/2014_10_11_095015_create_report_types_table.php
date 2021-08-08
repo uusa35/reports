@@ -22,7 +22,9 @@ class CreateReportTypesTable extends Migration
             $table->string('description')->nullable();
             $table->boolean('injuries')->default(1);
             $table->boolean('is_traffic')->default(0);
+            $table->boolean('is_ambulance')->default(0);
             $table->boolean('is_fire')->default(0);
+            $table->boolean('is_damage')->default(0);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

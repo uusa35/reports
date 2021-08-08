@@ -74,10 +74,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $validate = validator(request()->all(), [
-            'mobile' => 'required|numeric',
-            'civil_id_no' => 'required|numeric',
-            'passport_no' => 'required_if:is_officer,0',
-            'file_no' => 'required_if:is_officer,1',
+//            'mobile' => 'required|numeric',
+//            'civil_id_no' => 'required|numeric',
+//            'passport_no' => 'required_if:is_officer,0',
+//            'file_no' => 'required_if:is_officer,1',
             'civil_id_image' => 'image',
             'personal_image' => 'image',
         ]);
@@ -88,7 +88,7 @@ class UserController extends Controller
         if ($element->update($request->request->all())) {
             $request->hasFile('civil_id_image') ? $this->saveMimes($element, $request, ['civil_id_image'], ['1080', '1440'], true) : null;
             $request->hasFile('personal_image') ? $this->saveMimes($element, $request, ['personal_image'], ['1080', '1440'], true) : null;
-            return redirect()->route('report.index')->with(['success' => trans('general.process_success')]);
+            return redirect()->back()->with(['success' => trans('general.process_success')]);
         }
         return redirect()->home()->with(['error' => trans('general.process_failure')]);
     }

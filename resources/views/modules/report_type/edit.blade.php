@@ -94,6 +94,32 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="is_ambulance"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.is_ambulance') }} </label>
+                                <div class="col-6 ">
+                                    <div class="col pt-2">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="is_ambulance"
+                                                   id="inlineRadio1" value="1" {{ $element->is_ambulance ? 'checked' : null }}>
+                                            <label class="form-check-label"
+                                                   for="inlineRadio1">{{ trans('general.yes') }}</label>
+                                        </div>
+                                        <div class="form-check form-check-inline ml-5">
+                                            <input class="form-check-input" type="radio" name="is_ambulance"
+                                                   id="inlineRadio1" value="0" {{ !$element->is_ambulance ? 'checked' : null }}>
+                                            <label class="form-check-label"
+                                                   for="inlineRadio1">{{ trans('general.no') }}</label>
+                                        </div>
+                                    </div>
+                                    @error('is_ambulance')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="name"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.image') }}</label>
 

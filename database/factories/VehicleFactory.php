@@ -24,7 +24,7 @@ class VehicleFactory extends Factory
     public function definition()
     {
         return [
-            'plate_no' => $this->faker->name,
+            'plate_no' => $this->faker->numberBetween(1111,9999),
             'model' => $this->faker->randomElement(['Nissan','Toyota','BMW','Volvo','GMC']),
             'color' => $this->faker->colorName,
             'model_year' => $this->faker->year,

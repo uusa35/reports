@@ -41,10 +41,10 @@ class HomeController extends Controller
     public function postCheckCivilId(Request $request)
     {
         $validate = validator($request->all(), [
-            'is_officer' => 'required|numeric',
+//            'is_officer' => 'required|numeric',
             'civil_id_no' => 'required|exists:users,civil_id_no',
-            'passport_no' => 'required_if:is_officer,0|exists:users,passport_no',
-            'file_no' => 'required_if:is_officer,1|exists:users,file_no',
+//            'passport_no' => 'required_if:is_officer,0|exists:users,passport_no',
+//            'file_no' => 'required_if:is_officer,1|exists:users,file_no',
             'password' => ['required', 'string', 'min:3'],
         ]);
         if ($validate->fails()) {

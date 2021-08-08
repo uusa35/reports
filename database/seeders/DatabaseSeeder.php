@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Department;
 use App\Models\Governate;
+use App\Models\Image;
 use App\Models\Report;
 use App\Models\ReportType;
 use App\Models\User;
@@ -19,67 +21,125 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        $governates = json_decode(file_get_contents('https://api.mirsalapp.com/rest/areas?lang=en'), true);
         $governates = [
             [
-                name_ar => 'محافظة العاصمة',
-                name_en => 'Al Asima Governate',
+                "name_ar" => 'محافظة العاصمة',
+                "name_en" => 'Al Asima Governate',
             ],
             [
-                name_ar => 'محافظة الأحمدي',
-                name_en => 'Al Ahmadi Governate',
+                "name_ar" => 'محافظة الأحمدي',
+                "name_en" => 'Al Ahmadi Governate',
             ],
             [
-                name_ar => 'محافظة الفروانية',
-                name_en => 'Al Farwaniya Governate',
+                "name_ar" => 'محافظة الفروانية',
+                "name_en" => 'Al Farwaniya Governate',
             ],
             [
-                name_ar => 'محافظة حولي',
-                name_en => 'Al Hawali Governate',
+                "name_ar" => 'محافظة حولي',
+                "name_en" => 'Al Hawali Governate',
             ],
             [
-                name_ar => 'محافظة الجهراء',
-                name_en => 'Al Jahra Governate',
+                "name_ar" => 'محافظة الجهراء',
+                "name_en" => 'Al Jahra Governate',
             ],
             [
-                name_ar => 'محافظة مبارك الكبير',
-                name_en => 'Al Mubarak Al kabeer Governate',
+                "name_ar" => 'محافظة مبارك الكبير',
+                "name_en" => 'Al Mubarak Al kabeer Governate',
             ],
         ];
         $departments = [
             [
-                name_ar => 'مرور العاصمة',
-                name_en => 'Al-Asima Traffic Department',
+                "name_ar" => 'مرور العاصمة',
+                "name_en" => 'Al-Asima Traffic Department',
             ],
             [
-                name_ar => 'مرور الأحمدي',
-                name_en => 'Al Ahmadi Traffic Department',
+                "name_ar" => 'مرور الأحمدي',
+                "name_en" => 'Al Ahmadi Traffic Department',
             ],
             [
-                name_ar => 'مرور الفروانية',
-                name_en => 'Al Farwaniya Traffic Department',
+                "name_ar" => 'مرور الفروانية',
+                "name_en" => 'Al Farwaniya Traffic Department',
             ],
             [
-                name_ar => 'مرور حولي',
-                name_en => 'Al Hawali Traffic Department',
+                "name_ar" => 'مرور حولي',
+                "name_en" => 'Al Hawali Traffic Department',
             ],
             [
-                name_ar => 'مرور الجهراء',
-                name_en => 'Al Jahra Traffic Department',
+                "name_ar" => 'مرور الجهراء',
+                "name_en" => 'Al Jahra Traffic Department',
             ],
             [
-                name_ar => 'مرور مبارك الكبير',
-                name_en => 'Al Mubarak Al kabeer Traffic Department',
+                "name_ar" => 'مرور مبارك الكبير',
+                "name_en" => 'Al Mubarak Al kabeer Traffic Department',
             ],
         ];
-        foreach ($governates as $gov) {
-            dd($gov);
+        $reportTypes = [
+            [
+                'name' => 'Minor Accident',
+                'is_traffic' => true,
+                'is_ambulance' => false,
+                'is_fire' => false,
+                'is_damage' => false,
+            ],
+            [
+                'name' => 'Minor Accident with Injury',
+                'is_traffic' => true,
+                'is_ambulance' => true,
+                'is_fire' => false,
+                'is_damage' => false,
+            ],
+            [
+                'name' => 'Calling Ambulance',
+                'is_traffic' => false,
+                'is_ambulance' => true,
+                'is_fire' => false,
+                'is_damage' => false,
+            ],
+            [
+                'name' => 'Fire Accident',
+                'is_traffic' => true,
+                'is_ambulance' => true,
+                'is_fire' => false,
+                'is_damage' => false,
+            ],
+            [
+                'name' => 'Property Damage',
+                'is_traffic' => false,
+                'is_ambulance' => false,
+                'is_damage' => true,
+                'is_fire' => false
+            ],
+            [
+                'name' => 'Traffic Violation',
+                'is_traffic' => true,
+                'is_ambulance' => false,
+                'is_fire' => false,
+                'is_damage' => false,
+            ],
+        ];
+        foreach ($governates as $element) {
             Governate::create([
-                'name_ar' => $gov['name_ar'],
-                'name_en' => $gov['name_en']
+                'name_ar' => $element['name_ar'],
+                'name_en' => $element['name_en']
             ]);
         }
-        ReportType::factory(3)->create();
+        foreach ($departments as $element) {
+            Department::create([
+                'name_ar' => $element['name_ar'],
+                'name_en' => $element['name_en']
+            ]);
+        }
+        foreach ($reportTypes as $element) {
+            ReportType::factory(1)->create([
+                'name' => $element['name'],
+                'description' => $element['name'],
+                'notes' => $element['name'],
+                'is_traffic' => $element['is_traffic'],
+                'is_ambulance' => $element['is_ambulance'],
+                'is_fire' => $element['is_fire'],
+                'is_damage' => $element['is_damage'],
+            ]);
+        }
         User::factory(100)->create()->each(function ($u) {
             if ($u->id === 1) {
                 $u->update(['is_admin' => true, 'email' => 'admin@admin.com', 'active' => true, 'civil_id_no' => 1111, 'passport_no' => 1111]);
@@ -92,6 +152,7 @@ class DatabaseSeeder extends Seeder
         });
         Report::factory(50)->create()->each(function ($q) {
             return $q->vehicles()->saveMany(Vehicle::factory(2));
+            return $q->images()->saveMany(Image::factory(2));
         });
     }
 }

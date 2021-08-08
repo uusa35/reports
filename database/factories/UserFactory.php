@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
 use App\Models\Governate;
 use App\Models\ReportType;
 use App\Models\User;
@@ -27,7 +28,6 @@ class UserFactory extends Factory
     {
         $fakerAr = \Faker\Factory::create('ar_JO');
         return [
-            'name' => $this->faker->name(),
             'first_name' => $this->faker->firstName,
             'father_name' => $this->faker->firstName,
             'sur_name' => $this->faker->firstName,
@@ -46,8 +46,8 @@ class UserFactory extends Factory
             'description' => $this->faker->paragraph,
             'is_officer' => $this->faker->boolean,
             'is_admin' => $this->faker->boolean(false),
-            'report_type_id' => ReportType::all()->random()->id,
             'governate_id' => Governate::all()->random()->id,
+            'department_id' => Department::all()->random()->id,
             'city' => $this->faker->city,
             'nationality' => $this->faker->country,
             'department' => $this->faker->jobTitle,
@@ -57,7 +57,8 @@ class UserFactory extends Factory
             'house_no' => $this->faker->numberBetween(1, 99),
             'has_driving_license' => $this->faker->boolean,
             'driving_license_issuance' => Carbon::now()->subMonths($this->faker->numberBetween(3, 10)),
-            'driving_license_expiry' => Carbon::now()->addMonths($this->faker->numberBetween(1, 5))
+            'driving_license_expiry' => Carbon::now()->addMonths($this->faker->numberBetween(1, 5)),
+            'driving_license_no' => $this->faker->numberBetween(11111,99999)
         ];
     }
 

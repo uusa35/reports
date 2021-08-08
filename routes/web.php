@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', UserController::class);
     Route::resource('report', ReportController::class);
+    Route::get('add/vehicle', [ReportController::class,'getAddVehicle'])->name('add.vehicle');
+    Route::post('add/vehicle', [ReportController::class,'postAddVehicle'])->name('add.vehicle');
     Route::resource('type', ReportTypeController::class);
     Route::resource('vehicle', VehicleController::class);
 });

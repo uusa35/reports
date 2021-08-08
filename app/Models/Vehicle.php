@@ -16,6 +16,6 @@ class Vehicle extends Model
     }
 
     public function reports() {
-        return $this->belongsToMany(Report::class);
+        return $this->belongsToMany(Report::class,'report_vehicle');
     }
 }
