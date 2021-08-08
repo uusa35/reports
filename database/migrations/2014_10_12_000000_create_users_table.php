@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('block')->nullable();
             $table->string('street')->nullable();
             $table->string('house_no')->nullable();
-            $table->string('nationality')->nullable();
+            $table->string('nationality')->nullable()->default('Kuwaiti');
             $table->string('department')->nullable();
             $table->string('section')->nullable();
             $table->string('age')->nullable();

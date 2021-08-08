@@ -145,5 +145,9 @@ return array(
     "users" => "المستخدمين",
     "logout" => "الخروج",
     "edit" => "تعديل",
-    "login" => "دخول"
+    "login" => "دخول",
+    "vehicles_number" => "عدد المركبات",
+    "submit" => "تسجيل الدخول",
+    "password_instruction" => "يجب ألا تقل عن ٨ حروف وارقام",
+    "department" => "الإدارة"
 );

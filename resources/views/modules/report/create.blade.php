@@ -75,31 +75,25 @@
                             </div>
 
                             @if($currentType->is_traffic)
+
                                 <div class="form-group row">
-                                    <label for="name"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.hit_and_run') }}
-                                        - (25)</label>
-                                    <div class="col-6 ">
-                                        <div class="col pt-2">
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="hit_and_run"
-                                                       id="inlineRadio1" value="1">
-                                                <label class="form-check-label"
-                                                       for="inlineRadio1">{{ trans('general.yes') }}</label>
-                                            </div>
-                                            <div class="form-check form-check-inline ml-5">
-                                                <input class="form-check-input" type="radio" name="hit_and_run"
-                                                       id="inlineRadio1" value="0" checked>
-                                                <label class="form-check-label"
-                                                       for="inlineRadio1">{{ trans('general.no') }}</label>
-                                            </div>
+                                    <label for="email"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicles_number') }}
+                                        ({{ trans('general.if_exist') }})</label>
+
+                                    <div class="col-md-6">
+                                        <input type="text" id="vehicles_number" name="member" require value="">
+                                        <div id="vehiclesDiv"
+                                             class="form-control @error('injuries_no') is-invalid @enderror"
+                                        >
                                         </div>
-                                        @error('hit_and_run')
+                                        @error('injuries_no')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                         @enderror
                                     </div>
+                                    <a href="#" id="filldetails" onclick="addFields()">Add Vehicles</a>
                                 </div>
 
                                 <div class="form-group row">
@@ -181,7 +175,8 @@
 
                                 <div class="form-group row">
                                     <label for="vehicle_no_1"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }} (1)</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }}
+                                        (1)</label>
 
                                     <div class="col-md-6">
                                         <input id="vehicle_no_1" type="text"
@@ -199,13 +194,15 @@
 
                                 <div class="form-group row">
                                     <label for="driving_license_vehicle_no_1"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }} (1)</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }}
+                                        (1)</label>
 
                                     <div class="col-md-6">
                                         <input id="driving_license_vehicle_no_1" type="text"
                                                class="form-control @error('vehicle_no') is-invalid @enderror"
                                                name="driving_license_vehicle_no_1"
-                                               value="{{ old('driving_license_vehicle_no_1') }}" autocomplete="driving_license_vehicle_no_1">
+                                               value="{{ old('driving_license_vehicle_no_1') }}"
+                                               autocomplete="driving_license_vehicle_no_1">
 
                                         @error('driving_license_vehicle_no_1')
                                         <span class="invalid-feedback" role="alert">
@@ -217,7 +214,8 @@
 
                                 <div class="form-group row">
                                     <label for="vehicle_no_2"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }} (2) </label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }}
+                                        (2) </label>
 
                                     <div class="col-md-6">
                                         <input id="vehicle_no_2" type="text"
@@ -235,13 +233,15 @@
 
                                 <div class="form-group row">
                                     <label for="driving_license_vehicle_no_2"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }} (2)</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }}
+                                        (2)</label>
 
                                     <div class="col-md-6">
                                         <input id="driving_license_vehicle_no_2" type="text"
                                                class="form-control @error('vehicle_no') is-invalid @enderror"
                                                name="driving_license_vehicle_no_2"
-                                               value="{{ old('driving_license_vehicle_no_2') }}" autocomplete="driving_license_vehicle_no_2">
+                                               value="{{ old('driving_license_vehicle_no_2') }}"
+                                               autocomplete="driving_license_vehicle_no_2">
 
                                         @error('driving_license_vehicle_no_2')
                                         <span class="invalid-feedback" role="alert">
@@ -253,7 +253,8 @@
 
                                 <div class="form-group row">
                                     <label for="vehicle_no_3"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }} (3) </label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_no_for_report') }}
+                                        (3) </label>
 
                                     <div class="col-md-6">
                                         <input id="vehicle_no_3" type="text"
@@ -271,13 +272,15 @@
 
                                 <div class="form-group row">
                                     <label for="driving_license_vehicle_no_3"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }} (3)</label>
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.driving_license') }}
+                                        (3)</label>
 
                                     <div class="col-md-6">
                                         <input id="driving_license_vehicle_no_3" type="text"
                                                class="form-control @error('vehicle_no') is-invalid @enderror"
                                                name="driving_license_vehicle_no_3"
-                                               value="{{ old('driving_license_vehicle_no_3') }}" autocomplete="driving_license_vehicle_no_3">
+                                               value="{{ old('driving_license_vehicle_no_3') }}"
+                                               autocomplete="driving_license_vehicle_no_3">
 
                                         @error('driving_license_vehicle_no_3')
                                         <span class="invalid-feedback" role="alert">
@@ -293,6 +296,7 @@
 
                                     <div class="col-md-6">
                                         <input id="image" type="file"
+                                               multiple
                                                class="form-control @error('image') is-invalid @enderror" name="image"
                                                value="" autocomplete="image" autofocus>
                                         @error('image')
@@ -445,7 +449,6 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="form-group row">
                                 <label for="email"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.building_no') }}</label>
@@ -502,21 +505,33 @@
         src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize"
         async defer></script>
     <script>
-{{--         inputs --}}
-function addFields(){
-    var number = document.getElementById("member").value;
-    var container = document.getElementById("container");
-    while (container.hasChildNodes()) {
-        container.removeChild(container.lastChild);
-    }
-    for (i=0;i<number;i++){
-        container.appendChild(document.createTextNode("vehicles[" + (i+1)) +"]");
-        var input = document.createElement("input");
-        input.type = "text";
-        container.appendChild(input);
-        container.appendChild(document.createElement("br"));
-    }
-}
+        {{--         inputs --}}
+        function addFields() {
+            // Number of inputs to create
+            var number = document.getElementById("vehicles_number").value;
+            // Container <div> where dynamic content will be placed
+            var container = document.getElementById("vehiclesDiv");
+            // Clear previous contents of the container
+            while (container.hasChildNodes()) {
+                container.removeChild(container.lastChild);
+            }
+            for (i = 0; i < number; i++) {
+                // Append a node with a random text
+                container.appendChild(document.createTextNode("Vehicle " + (i + 1)));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "vehicles[" + i + "]";
+
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "vehicles[" + i + "]";
+
+                container.appendChild(input);
+                // Append a line break
+                container.appendChild(document.createElement("br"));
+            }
+        }
 
         function initialize() {
 

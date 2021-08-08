@@ -105,7 +105,7 @@
 
                             {{--                             is oiffcer --}}
                             @if($element->is_officer)
-{{--                                 file no --}}
+                                {{--                                 file no --}}
                                 <div class="form-group row">
                                     <label for="file_no"
                                            class="col-md-4 col-form-label text-md-right">{{ __('general.file_no') }}</label>
@@ -123,7 +123,26 @@
                                         @enderror
                                     </div>
                                 </div>
-{{-- nationality --}}
+
+                                {{-- department--}}
+                                <div class="form-group row">
+                                    <label for="department"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.department') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="department" type="text"
+                                               class="form-control @error('department') is-invalid @enderror"
+                                               name="department"
+                                               value="{{ $element->department }}" required autocomplete="department"
+                                               autofocus>
+                                        @error('department')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                             @else
                                 {{--                                 passport --}}
                                 <div class="form-group row">
@@ -252,7 +271,7 @@
                                 </div>
                             </div>
 
-{{--                             address  city --}}
+                            {{--                             address  city --}}
 
                             <div class="form-group row">
                                 <label for="city"

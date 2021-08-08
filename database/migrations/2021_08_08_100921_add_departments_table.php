@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGovernatesTable extends Migration
+class CreateDepartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateGovernatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('governates', function (Blueprint $table) {
+        Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
@@ -29,6 +29,6 @@ class CreateGovernatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('governates');
+        Schema::dropIfExists('departments');
     }
 }

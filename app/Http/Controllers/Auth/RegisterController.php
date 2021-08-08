@@ -53,9 +53,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
-            'civil_id_no' => ['required', 'string', 'min:9'],
-            'reference_no' => ['string', 'min:9'],
-            'civil_id_image' => ['image'],
+            'civil_id_no' => ['required', 'numeric', 'min:12'],
+            'reference_no' => ['numeric', 'min:9'],
             'personal_image' => ['image'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'mobile' => ['required', 'numeric'],
@@ -87,7 +86,7 @@ class RegisterController extends Controller
             'is_officer' => isset($data['is_officer']) ? $data['is_officer'] : false,
             'email' => isset($data['email']) ? $data['email'] : null,
             'mobile' => isset($data['mobile']) ? $data['mobile'] : null,
-            'nationality' => isset($data['nationality']) ? $data['nationality'] : null,
+            'nationality' => isset($data['nationality']) ? request()->is_officer ? 'Kuwaiti' : $data['nationality'] : array_rand(),
             'department' => isset($data['department']) ? $data['department'] : null,
             'section' => isset($data['section']) ? $data['section'] : null,
             'age' => isset($data['age']) ? $data['age'] : null,

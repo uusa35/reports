@@ -19,11 +19,64 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $governates = json_decode(file_get_contents('https://api.mirsalapp.com/rest/areas?lang=en'), true);
-        $govs = collect($governates['data']);
-        foreach ($govs->pluck('name') as $key => $val) {
+//        $governates = json_decode(file_get_contents('https://api.mirsalapp.com/rest/areas?lang=en'), true);
+        $governates = [
+            [
+                name_ar => 'محافظة العاصمة',
+                name_en => 'Al Asima Governate',
+            ],
+            [
+                name_ar => 'محافظة الأحمدي',
+                name_en => 'Al Ahmadi Governate',
+            ],
+            [
+                name_ar => 'محافظة الفروانية',
+                name_en => 'Al Farwaniya Governate',
+            ],
+            [
+                name_ar => 'محافظة حولي',
+                name_en => 'Al Hawali Governate',
+            ],
+            [
+                name_ar => 'محافظة الجهراء',
+                name_en => 'Al Jahra Governate',
+            ],
+            [
+                name_ar => 'محافظة مبارك الكبير',
+                name_en => 'Al Mubarak Al kabeer Governate',
+            ],
+        ];
+        $departments = [
+            [
+                name_ar => 'مرور العاصمة',
+                name_en => 'Al-Asima Traffic Department',
+            ],
+            [
+                name_ar => 'مرور الأحمدي',
+                name_en => 'Al Ahmadi Traffic Department',
+            ],
+            [
+                name_ar => 'مرور الفروانية',
+                name_en => 'Al Farwaniya Traffic Department',
+            ],
+            [
+                name_ar => 'مرور حولي',
+                name_en => 'Al Hawali Traffic Department',
+            ],
+            [
+                name_ar => 'مرور الجهراء',
+                name_en => 'Al Jahra Traffic Department',
+            ],
+            [
+                name_ar => 'مرور مبارك الكبير',
+                name_en => 'Al Mubarak Al kabeer Traffic Department',
+            ],
+        ];
+        foreach ($governates as $gov) {
+            dd($gov);
             Governate::create([
-                'name' => $val
+                'name_ar' => $gov['name_ar'],
+                'name_en' => $gov['name_en']
             ]);
         }
         ReportType::factory(3)->create();
