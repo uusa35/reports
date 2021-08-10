@@ -175,5 +175,17 @@ return array(
     "no" => "No",
     "location" => "Location",
     "vehicle_does_not_exist" => "vehicle does not exist",
-    "add_vehicles" => "add vehicles"
+    "add_vehicles" => "add vehicles",
+    "created_at" => "created  at",
+    "plate_no" => "plate number",
+    "model" => "Model",
+    "model_year" => "Model Year",
+    "vehicles" => "Vehicles",
+    "status" => "Status",
+    "owner" => "Owner",
+    "driving_license_no" => "driving license Number",
+    "injuries" => "Injuries",
+    "injured" => "Injured",
+    "vehicle" => "Vehicle"
+
 );

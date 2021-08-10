@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
-    use HasFactory, LocaleTrait;
+    use HasFactory, LocaleTrait, ModelHelper;
     protected $guarded = [''];
     protected $localeStrings = ['caption','name'];
 

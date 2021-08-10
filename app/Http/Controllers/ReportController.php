@@ -97,7 +97,7 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        $element = Report::whereId($id)->with('type')->first();
+        $element = Report::whereId($id)->with('type','vehicles.user')->first();
         return view('modules.report.show', compact('element'));
     }
 
