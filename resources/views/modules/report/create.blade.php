@@ -180,7 +180,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             @if($currentType->is_fire)
                                 {{--                             pole no --}}
                                 <div class="form-group row">
