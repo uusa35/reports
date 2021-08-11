@@ -16,6 +16,6 @@ class Vehicle extends Model
     }
 
     public function reports() {
-        return $this->belongsToMany(Report::class,'report_vehicle');
+        return $this->belongsToMany(Report::class,'report_vehicle')->withPivot('image','path','injured','driver_license','notes');
     }
 }

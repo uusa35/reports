@@ -190,7 +190,8 @@ return array(
     "driving_license_no" => "رقم رخصة القيادة",
     "injuries" => "إصابات",
     "injured" => "مصاب",
-    "vehicle" => "مركبة"
+    "vehicle" => "مركبة",
+    "driver_license_no" => "رخصة قيادة السائق"
 
 
 );

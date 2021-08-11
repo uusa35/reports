@@ -29,7 +29,7 @@ class Report extends Model
 
     public function vehicles()
     {
-        return $this->belongsToMany(Vehicle::class,'report_vehicle');
+        return $this->belongsToMany(Vehicle::class,'report_vehicle')->withPivot('image','path','injured','driver_license','notes');
     }
 
     public function governate()

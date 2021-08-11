@@ -197,6 +197,7 @@ return array(
     "driving_license_no" => "driving license Number",
     "injuries" => "Injuries",
     "injured" => "Injured",
-    "vehicle" => "Vehicle"
+    "vehicle" => "Vehicle",
+    "driver_license_no" => "Driver License Number."
 
 );

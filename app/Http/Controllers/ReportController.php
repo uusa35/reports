@@ -176,9 +176,11 @@ class ReportController extends Controller
         }
         $report = Report::whereId($request->report_id)->with('owner.vehicles')->first();
         $vehicle = Vehicle::where(['plate_no' => $request->plate_no])->first();
-        DB::table('report_vehicle')->insert([
+        $element = DB::table('report_vehicle')->insert([
             'vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id,
-            'report_id' => $report->id
+            'report_id' => $report->id,
+            'injured' => request()->injured,
+            "driver_license" => request()->driver_license
         ]);
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
         $request->hasFile('path') ? $this->savePath($request, $element) : null;

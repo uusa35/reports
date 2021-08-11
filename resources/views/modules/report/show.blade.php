@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-10 offset-1">
+                <div class="col-12">
                     <div class="justify-content-center">
                         <div class="card">
                             <div class="card-header">
@@ -126,10 +126,12 @@
                                                             : {{ $v->user->driving_license_issuance }}</li>
                                                         <li>@lang('general.driving_license_expiry')
                                                             : {{ $v->user->driving_license_expiry }}</li>
+                                                        <li>@lang('general.driver_license_no')
+                                                            : {{ $v->pivot->driver_license }}</li>
                                                     </ul>
                                                 </td>
                                                 <td><label
-                                                        class="label {{ $v->injured ? 'label-danger' : 'label-default' }}">{{ $v->injured  ? 'Yes' : 'No'}}</label>
+                                                        class="label {{ $v->pivot->injured ? 'label-danger' : 'label-default' }}">{{ $v->pivot->injured  ? 'Yes' : 'No'}}</label>
                                                 </td>
                                             </tr>
                                         @endforeach
