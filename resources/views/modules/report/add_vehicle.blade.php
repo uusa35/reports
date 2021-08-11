@@ -23,7 +23,7 @@
                                            class="form-control @error('vehicle') is-invalid @enderror"
                                            name="plate_no"
                                            value=""
-                                           placeholder="{{ $element->owner->vehicles ? $element->owner->vehicles->random()->plate_no : '76890' }}"
+                                           placeholder="{{ $element->owner->vehicles->isNotEmpty() ? $element->owner->vehicles->random()->plate_no : rand(1111,9999) }}"
                                            autocomplete="vehicle"
                                     >
                                     @error('vehicle')
