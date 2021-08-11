@@ -41,42 +41,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            @if(request()->is_officer)
-                                <div class="form-group row">
-                                    <label for="file_no"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.file_no') }}</label>
-                                    <div class="col-md-6">
-                                        <input id="file_no" type="text"
-                                               class="form-control @error('file_no') is-invalid @enderror"
-                                               name="file_no" value="{{ old('file_no') }}" required
-                                               autocomplete="file_no"
-                                               autofocus/>
-
-                                        @error('file_no')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            @else
-                                <div class="form-group row">
-                                    <label for="civil_id"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.passport_no') }}</label>
-                                    <div class="col-md-6">
-                                        <input id="passport_no" type="text"
-                                               class="form-control @error('passport_no') is-invalid @enderror"
-                                               name="passport_no" value="{{ old('passport_no') }}" required
-                                               autocomplete="passport_no"
-                                               autofocus/>
-                                        @error('passport_no')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            @endif
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
