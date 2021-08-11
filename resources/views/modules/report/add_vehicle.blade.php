@@ -15,8 +15,8 @@
 
                             {{--                             pole no --}}
                             <div class="form-group row">
-                                <label for="vehicle"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle') }}</label>
+                                <label for="plate_no"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle') }} @lang('general.if_exist')</label>
 
                                 <div class="col-md-6">
                                     <input id="vehicle" type="string"
@@ -33,10 +33,50 @@
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="injury_name"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_name') }} @lang('general.if_exist')</label>
+
+                                <div class="col-md-6">
+                                    <input id="vehicle" type="string"
+                                           class="form-control @error('vehicle') is-invalid @enderror"
+                                           name="injury_name"
+                                           value=""
+                                           placeholder="@lang('general.injury_name')"
+                                           autocomplete="vehicle"
+                                    >
+                                    @error('injury_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="vehicle"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_civil_id') }} @lang('general.if_exist')</label>
+
+                                <div class="col-md-6">
+                                    <input id="injury_civil_id" type="string"
+                                           class="form-control @error('vehicle') is-invalid @enderror"
+                                           name="injury_civil_id"
+                                           value=""
+                                           placeholder="@lang('general.injury_civil_id')"
+                                           autocomplete="vehicle"
+                                    >
+                                    @error('injury_civil_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
 {{-- iinjuired --}}
                             <div class="form-group row">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.has_injuries') }} -
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_sever') }} -
                                     </label>
                                 <div class="col-6 ">
                                     <div class="col pt-2">

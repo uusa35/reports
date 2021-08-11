@@ -75,7 +75,7 @@ return array(
     "personal_image" => "personal image",
     "driving_license" => "driving license",
     "accident_image" => "accident image",
-    "if_exist" => "if any",
+    "if_exist" => "(if exist)",
     "profile" => 'profile',
     "vehicle_no_for_report" => "Vehicle No",
     "hot_line" => "hotline",
@@ -186,7 +186,7 @@ return array(
     "no" => "No",
     "location" => "Location",
     "vehicle_does_not_exist" => "vehicle does not exist",
-    "add_vehicles" => "add vehicles",
+    "add_vehicles" => "add vehicle/Injury",
     "created_at" => "created  at",
     "plate_no" => "plate number",
     "model" => "Model",
@@ -198,6 +198,9 @@ return array(
     "injuries" => "Injuries",
     "injured" => "Injured",
     "vehicle" => "Vehicle",
-    "driver_license_no" => "Driver License Number."
+    "driver_license_no" => "Driver License Number.",
+    "injury_name" => "Injury Name",
+    "injury_sever" => "injury sever",
+    "injury_civil_id" => "injury civil id"
 
 );

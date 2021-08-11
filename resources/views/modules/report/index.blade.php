@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        {{ __('general.reports') }}
+                        @lang('general.reports')
                     </h4>
                 </div>
 
@@ -15,17 +15,17 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">{{ __('general.id') }}</th>
-                            <th scope="col"><small>{{ __('general.reference_id') }}</small></th>
-                            <th scope="col">{{ __('general.has_injuries') }}</th>
-                            <th scope="col">{{ __('general.is_closed') }}</th>
-                            <th scope="col">{{ __('general.image') }}</th>
-                            <th scope="col">{{ __('general.area') }}</th>
-                            <th scope="col">{{ __('general.address') }}</th>
-                            <th scope="col">{{ __('general.report_owner') }}</th>
-                            <th scope="col">{{ __('general.officer') }}</th>
-                            <th scope="col">{{ __('general.report_type') }}</th>
-                            <th scope="col">{{ __('general.action') }}</th>
+                            <th scope="col">@lang('general.id') </th>
+                            <th scope="col"><small>@lang('general.reference_id') </small></th>
+                            <th scope="col">@lang('general.has_injuries') </th>
+                            <th scope="col">@lang('general.is_closed') </th>
+                            <th scope="col">@lang('general.image') </th>
+                            <th scope="col">@lang('general.area') </th>
+                            <th scope="col">@lang('general.address') </th>
+                            <th scope="col">@lang('general.report_owner') </th>
+                            <th scope="col">@lang('general.officer') </th>
+                            <th scope="col">@lang('general.report_type') </th>
+                            <th scope="col">@lang('general.action') </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -61,7 +61,9 @@
                                                    href="{{ route('report.show', $element->id) }}">{{ trans('general.view') .' '. trans('general.report')}}</a>
                                                 @can('isAdminOrOfficer')
                                                     <a class="dropdown-item"
-                                                       href="{{ route('report.edit', $element->id) }}">{{ trans('general.edit') }}</a>
+                                                       href="{{ route('report.edit', $element->id) }}">@lang('general.edit')</a>
+                                                    <a class="dropdown-item"
+                                                       href="{{ route('add.vehicle', ['id' => $element->id]) }}">@lang('general.add_vehicles')</a>
                                                 @endif
                                             </div>
                                         </div>
@@ -70,7 +72,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <div class="alert alert-info">{{ __('general.no_elements') }}</div>
+                                <div class="alert alert-info">@lang('general.no_elements')</div>
                             </tr>
                         @endif
                         </tbody>

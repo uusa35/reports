@@ -6,7 +6,8 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><h4
-                            class="display-6 text-center">{{ __('general.create_new_report') }}</h4></div>
+                            class="display-6 text-center">{{ __('general.create_new_report') }}
+                            - {{ $currentType->name }}</h4></div>
                     <div class="card-body">
                         <form method="post" action="{{ route('report.store') }}" enctype="multipart/form-data">
                             @csrf
@@ -42,47 +43,6 @@
                                     <div id="address-map-container" style="width:100%;height:300px; ">
                                         <div style="width: 100%; height: 100%" id="address-map"></div>
                                     </div>
-                                </div>
-                            </div>
-
-                            {{--                             pole no --}}
-                            <div class="form-group row">
-                                <label for="electricity_pole_no"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.electricity_pole_no') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="electricity_pole_no" type="string"
-                                           class="form-control @error('electricity_pole_no') is-invalid @enderror"
-                                           name="electricity_pole_no"
-                                           value="{{ old('electricity_pole_no') }}"
-                                           autocomplete="electricity_pole_no"
-                                    >
-                                    @error('electricity_pole_no')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            {{--                             speed limit --}}
-
-                            <div class="form-group row">
-                                <label for="speed_limit"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.speed_limit') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="speed_limit" type="string"
-                                           class="form-control @error('speed_limit') is-invalid @enderror"
-                                           name="speed_limit"
-                                           value="{{ old('speed_limit') }}"
-                                           value="" autocomplete="speed_limit"
-                                    >
-                                    @error('speed_limit')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
                             </div>
 
@@ -159,7 +119,7 @@
 
                             <div class="form-group row">
                                 <label for="exampleFormControlSelect1" class="col-md-4 col-form-label text-md-right">
-                                    {{ trans("general.governate") }} - (2) </label>
+                                    {{ trans("general.governate") }}</label>
                                 <div class="col-md-6">
                                     <select class="form-control" id="exampleFormControlSelect1" name="governate_id">
                                         @foreach($governates as $governate)
@@ -178,7 +138,7 @@
                             <div class="form-group row">
                                 <label for="injuries_no"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.injuries_no') }}
-                                    ({{ trans('general.if_exist') }})</label>
+                                    {{ trans('general.if_exist') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="injuries_no" type="number"
@@ -197,8 +157,7 @@
                             {{--                            @if($currentType->is_ambulance)--}}
                             <div class="form-group row">
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.has_injuries') }} -
-                                    (6)</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.has_injuries') }}</label>
                                 <div class="col-6 ">
                                     <div class="col pt-2">
                                         <div class="form-check form-check-inline">
@@ -221,106 +180,150 @@
                                     @enderror
                                 </div>
                             </div>
+                            
+                            @if($currentType->is_fire)
+                                {{--                             pole no --}}
+                                <div class="form-group row">
+                                    <label for="electricity_pole_no"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.electricity_pole_no') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="electricity_pole_no" type="string"
+                                               class="form-control @error('electricity_pole_no') is-invalid @enderror"
+                                               name="electricity_pole_no"
+                                               value="{{ old('electricity_pole_no') }}"
+                                               autocomplete="electricity_pole_no"
+                                        >
+                                        @error('electricity_pole_no')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            @endif
                             {{--                            @endif--}}
-                            {{--                            @if($currentType->is_traffic)--}}
+                            @if($currentType->is_traffic)
 
-                            <div class="form-group row">
-                                <label for="exampleFormControlSelect1"
-                                       class="col-md-4 col-form-label text-md-right">
-                                    {{ trans("general.weather") }} - (29) </label>
-                                <div class="col-md-6">
-                                    <select class="form-control" id="exampleFormControlSelect1" name="weather">
-                                        <option value="wind">{{ trans("general.wind") }}</option>
-                                        <option value="mist/fog">{{ trans("general.mist/fog") }}</option>
-                                        <option value="cloudy">{{ trans("general.cloudy") }}</option>
-                                        <option value="light rain">{{ trans("general.light rain") }}</option>
-                                        <option value="heavy rain">{{ trans("general.heavy rain") }}</option>
-                                        <option value="smoke">{{ trans("general.smoke") }}</option>
-                                        <option value="strong wind">{{ trans("general.strong wind") }}</option>
-                                    </select>
-                                    @error('weather')
-                                    <span class="invalid-feedback" role="alert">
+                                {{--                             speed limit --}}
+
+                                <div class="form-group row">
+                                    <label for="speed_limit"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.speed_limit') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="speed_limit" type="string"
+                                               class="form-control @error('speed_limit') is-invalid @enderror"
+                                               name="speed_limit"
+                                               value="{{ old('speed_limit') }}"
+                                               value="" autocomplete="speed_limit"
+                                        >
+                                        @error('speed_limit')
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="form-group row">
-                                <label for="exampleFormControlSelect1"
-                                       class="col-md-4 col-form-label text-md-right">
-                                    {{ trans("general.traffic_offences") }} - (34) </label>
-                                <div class="col-md-6">
-                                    <select class="form-control" id="exampleFormControlSelect1"
-                                            name="traffic_offences">
-                                        <option value="No Parking">{{ trans("general.No Parking") }}</option>
-                                        <option
-                                            value="Handicapped Parking">{{ trans("general.Handicapped Parking") }}</option>
-                                        <option value="Honking">{{ trans("general.Honking") }}</option>
-                                        <option
-                                            value="Documents & License Plates">{{ trans("general.Documents & License Plates") }}</option>
-                                        <option
-                                            value="Dangerous Overtaking">{{ trans("general.Dangerous Overtaking") }}</option>
-                                        <option value="Others">{{ trans("general.Others") }}</option>
-                                    </select>
-                                    @error('weather')
-                                    <span class="invalid-feedback" role="alert">
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1"
+                                           class="col-md-4 col-form-label text-md-right">
+                                        {{ trans("general.weather") }} </label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="weather">
+                                            <option value="wind">{{ trans("general.wind") }}</option>
+                                            <option value="mist/fog">{{ trans("general.mist/fog") }}</option>
+                                            <option value="cloudy">{{ trans("general.cloudy") }}</option>
+                                            <option value="light rain">{{ trans("general.light rain") }}</option>
+                                            <option value="heavy rain">{{ trans("general.heavy rain") }}</option>
+                                            <option value="smoke">{{ trans("general.smoke") }}</option>
+                                            <option value="strong wind">{{ trans("general.strong wind") }}</option>
+                                        </select>
+                                        @error('weather')
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="exampleFormControlSelect1"
-                                       class="col-md-4 col-form-label text-md-right">
-                                    {{ trans("general.primary_contributory") }} - (35) </label>
-                                <div class="col-md-6">
-                                    <select class="form-control" id="exampleFormControlSelect1"
-                                            name="primary_contributory">
-                                        <option
-                                            value="Driver / Rider Error">{{ trans("general.Driver / Rider Error") }}</option>
-                                        <option
-                                            value="Driver / Rider impairment">{{ trans("general.Driver / Rider impairment") }}</option>
-                                        <option value="Bad weather">{{ trans("general.Bad weather") }}</option>
-                                        <option
-                                            value="Defect in road condition">{{ trans("general.Defect in road condition") }}</option>
-                                        <option value="Alcohol/Drugs">{{ trans("general.Alcohol/Drugs") }}</option>
-                                        <option
-                                            value="Fault of pedestrian">{{ trans("general.Fault of pedestrian") }}</option>
-                                        <option
-                                            value="Poor light condition">{{ trans("general.Poor light condition") }}</option>
-                                        <option
-                                            value="falling of boulders">{{ trans("general.falling of boulders") }}</option>
-                                    </select>
-                                    @error('primary_contributory')
-                                    <span class="invalid-feedback" role="alert">
+
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1"
+                                           class="col-md-4 col-form-label text-md-right">
+                                        {{ trans("general.traffic_offences") }} </label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="exampleFormControlSelect1"
+                                                name="traffic_offences">
+                                            <option value="No Parking">{{ trans("general.No Parking") }}</option>
+                                            <option
+                                                value="Handicapped Parking">{{ trans("general.Handicapped Parking") }}</option>
+                                            <option value="Honking">{{ trans("general.Honking") }}</option>
+                                            <option
+                                                value="Documents & License Plates">{{ trans("general.Documents & License Plates") }}</option>
+                                            <option
+                                                value="Dangerous Overtaking">{{ trans("general.Dangerous Overtaking") }}</option>
+                                            <option value="Others">{{ trans("general.Others") }}</option>
+                                        </select>
+                                        @error('weather')
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-
-
-                            <div class="form-group row">
-                                <label for="vehicle_no_2"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.number_of_vehicles_in_accident') }}</label>
-                                <div class="col-md-6">
-                                    <input id="number_of_vehicles" type="number"
-                                           max="4"
-                                           class="form-control @error('number_of_vehicles') is-invalid @enderror"
-                                           name="number_of_vehicles"
-                                           value="{{ old('number_of_vehicles') }}" autocomplete="number_of_vehicles">
-
-                                    @error('number_of_vehicles')
-                                    <span class="invalid-feedback" role="alert">
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1"
+                                           class="col-md-4 col-form-label text-md-right">
+                                        {{ trans("general.primary_contributory") }} </label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="exampleFormControlSelect1"
+                                                name="primary_contributory">
+                                            <option
+                                                value="Driver / Rider Error">{{ trans("general.Driver / Rider Error") }}</option>
+                                            <option
+                                                value="Driver / Rider impairment">{{ trans("general.Driver / Rider impairment") }}</option>
+                                            <option value="Bad weather">{{ trans("general.Bad weather") }}</option>
+                                            <option
+                                                value="Defect in road condition">{{ trans("general.Defect in road condition") }}</option>
+                                            <option value="Alcohol/Drugs">{{ trans("general.Alcohol/Drugs") }}</option>
+                                            <option
+                                                value="Fault of pedestrian">{{ trans("general.Fault of pedestrian") }}</option>
+                                            <option
+                                                value="Poor light condition">{{ trans("general.Poor light condition") }}</option>
+                                            <option
+                                                value="falling of boulders">{{ trans("general.falling of boulders") }}</option>
+                                        </select>
+                                        @error('primary_contributory')
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
 
-                            {{--                            @endif--}}
-{{--                             descirption --}}
+
+                                <div class="form-group row">
+                                    <label for="vehicle_no_2"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.number_of_vehicles_in_accident') }}</label>
+                                    <div class="col-md-6">
+                                        <input id="number_of_vehicles" type="number"
+                                               max="4"
+                                               class="form-control @error('number_of_vehicles') is-invalid @enderror"
+                                               name="number_of_vehicles"
+                                               value="{{ old('number_of_vehicles') }}"
+                                               autocomplete="number_of_vehicles">
+
+                                        @error('number_of_vehicles')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            @endif
+                            {{--                             descirption --}}
                             <div class="form-group row">
                                 <label for="description"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.description') }}</label>
@@ -341,7 +344,7 @@
                                     @enderror
                                 </div>
                             </div>
-{{--                             notes --}}
+                            {{--                             notes --}}
                             <div class="form-group row">
                                 <label for="notes"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.notes') }}</label>
@@ -390,7 +393,7 @@
                                     <input class="form-control tooltips" data-container="body"
                                            data-placement="top"
                                            name="image" placeholder="images" type="file"
-                                           />
+                                    />
                                 </div>
                             </div>
 
@@ -403,7 +406,7 @@
                                     <input class="form-control tooltips" data-container="body"
                                            data-placement="top"
                                            name="path" placeholder="images" type="file"
-                                           />
+                                    />
                                 </div>
                             </div>
                             {{--                             images --}}

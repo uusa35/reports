@@ -179,7 +179,7 @@ return array(
     "no" => "لا",
     "location" => "الموقع",
     "vehicle_does_not_exist" => "لا توجد مركبة",
-    "add_vehicles" => "إضافة مركبة للحادث",
+    "add_vehicles" => "إضافة مركبة / مصاب ",
     "created_at" => "تاريخ الإنشاء",
     "plate_no" => "رقم اللوحة",
     "model" => "الموديل",
@@ -191,7 +191,8 @@ return array(
     "injuries" => "إصابات",
     "injured" => "مصاب",
     "vehicle" => "مركبة",
-    "driver_license_no" => "رخصة قيادة السائق"
+    "driver_license_no" => "رخصة قيادة السائق",
+    "age" => "العمر"
 
 
 );

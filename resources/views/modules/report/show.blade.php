@@ -128,6 +128,10 @@
                                                             : {{ $v->user->driving_license_expiry }}</li>
                                                         <li>@lang('general.driver_license_no')
                                                             : {{ $v->pivot->driver_license }}</li>
+                                                        <li>@lang('general.injury_name')
+                                                            : {{ $v->pivot->injury_name }}</li>
+                                                        <li>@lang('general.injury_civil_id')
+                                                            : {{ $v->pivot->injury_civil_id }}</li>
                                                     </ul>
                                                 </td>
                                                 <td><label

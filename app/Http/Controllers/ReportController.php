@@ -180,7 +180,9 @@ class ReportController extends Controller
             'vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id,
             'report_id' => $report->id,
             'injured' => request()->injured,
-            "driver_license" => request()->driver_license
+            "driver_license" => request()->driver_license,
+            "injury_name" => request()->injury_name,
+            "injury_civil_id" => request()->injury_civil_id
         ]);
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
         $request->hasFile('path') ? $this->savePath($request, $element) : null;
