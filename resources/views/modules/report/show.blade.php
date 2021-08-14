@@ -23,31 +23,32 @@
                                 </div>
                             </div>
                         @endcan
-                        <div class="card col-6">
-                            <img class="card-img-top  align-content-center img-fluid"
-                                 src="{{ $element->owner->getImageThumbLinkAttribute('personal_image') }}"
-                                 alt="Card image cap">
-                            <div class="card-body">
-                                <h5 class="card-title font-weight-bold  text-center">{{ trans('general.report_owner') }}</h5>
-                                <h5 class="card-title font-weight-bold ">{{ $element->owner->name }}</h5>
-                                <p class="card-text">{{ trans('general.mobile') }}
-                                    : {{ str_limit($element->owner->mobile, 80) }}</p>
-                                <p class="card-text">{{ trans('general.email') }}
-                                    : {{ str_limit($element->owner->email, 80) }}</p>
-                                <p class="card-text">{{ trans('general.civil_id') }}
-                                    : {{ str_limit($element->owner->civil_id_no, 80) }}</p>
-                                <p class="card-text">{{ str_limit($element->owner->description, 80) }}</p>
-                                </p>
+                        @can('isAdmin')
+                            <div class="card col-6">
+                                <img class="card-img-top  align-content-center img-fluid"
+                                     src="{{ $element->owner->getImageThumbLinkAttribute('personal_image') }}"
+                                     alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title font-weight-bold  text-center">{{ trans('general.report_owner') }}</h5>
+                                    <h5 class="card-title font-weight-bold ">{{ $element->owner->name }}</h5>
+                                    <p class="card-text">{{ trans('general.mobile') }}
+                                        : {{ str_limit($element->owner->mobile, 80) }}</p>
+                                    <p class="card-text">{{ trans('general.email') }}
+                                        : {{ str_limit($element->owner->email, 80) }}</p>
+                                    <p class="card-text">{{ trans('general.civil_id') }}
+                                        : {{ str_limit($element->owner->civil_id_no, 80) }}</p>
+                                    <p class="card-text">{{ str_limit($element->owner->description, 80) }}</p>
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="justify-content-center">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="text-center">{{ trans('general.report_details') }}
-                                    : {{ $element->reference_id }}</h4>
+                                <h4 class="text-center">{{ trans('general.report_details') }}</h4>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold ">{{ trans('general.report_type')}}
@@ -66,30 +67,37 @@
                                 <h5 class="card-title font-weight-bold ">@lang('general.city') : {{ $element->city }}
                                     - @lang('general.area') : {{ $element->area }} - @lang('general.street')
                                     : {{ $element->street }}</h5>
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.mobile') .' '. trans('general.report_owner') }}
-                                    : {{ $element->owner->mobile}}</h5>
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.report_owner')}}
-                                    : {{ $element->owner->name}}</h5>
+                                @can('isAdmin')
+                                    <h5 class="card-title font-weight-bold ">{{ trans('general.mobile') .' '. trans('general.report_owner') }}
+                                        : {{ $element->owner->mobile}}</h5>
+                                    <h5 class="card-title font-weight-bold ">{{ trans('general.report_owner')}}
+                                        : {{ $element->owner->name}}</h5>
+                                @endif
                                 <h5 class="card-title font-weight-bold ">{{ trans('general.created_at')}}
                                     : {{ $element->created_at->format('d/m/Y')}}</h5>
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.status')}}
-                                    : {{ !$element->is_closed ? trans('general.report_open') : trans('general.closed') }}</h5>
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.has_injuries')}}
-                                    : {{ $element->has_injuries ? trans('general.yes') : trans('general.no') }}</h5>
                                 @if($element->has_injuries)
+                                    <h5 class="card-title font-weight-bold ">{{ trans('general.has_injuries')}}
+                                        : {{ $element->has_injuries ? trans('general.yes') : trans('general.no') }}</h5>
                                     <h5 class="card-title font-weight-bold ">{{ trans('general.injuries_no') }}
                                         : {{ $element->injuries_no }}</h5>
                                 @endif
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.weather')}}
-                                    : {{ $element->weather }}</h5>
+                                @if($element->weather)
+                                    {{--                                    <h5 class="card-title font-weight-bold ">{{ trans('general.weather')}}--}}
+                                    {{--                                        : {{ $element->weather }}</h5>--}}
+                                @endif
                                 <h5 class="card-title font-weight-bold ">{{ trans('general.primary_contributory')}}
                                     : {{ $element->primary_contributory }}</h5>
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.traffic_offences')}}
-                                    : {{ $element->traffic_offences }}</h5>
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.hit_and_run')}}
-                                    : {{ $element->hit_and_run ? trans('general.yes') : trans('general.no') }}</h5>
+                                {{--                                <h5 class="card-title font-weight-bold ">{{ trans('general.traffic_offences')}}--}}
+                                {{--                                    : {{ $element->traffic_offences }}</h5>--}}
+                                {{--                                <h5 class="card-title font-weight-bold ">{{ trans('general.hit_and_run')}}--}}
+                                {{--                                    : {{ $element->hit_and_run ? trans('general.yes') : trans('general.no') }}</h5>--}}
                                 <h5 class="card-title font-weight-bold ">{{ trans('general.speed_limit')}}
                                     : {{ $element->speed_limit }}</h5>
+
+                                <h5 class="card-title font-weight-bold ">{{ trans('general.status')}}: <span
+                                        class="badge badge-{{ $element->is_closed ? 'danger' : 'info' }} text-lg">
+                                        {{ !$element->is_closed ? trans('general.report_open') : trans('general.closed') }}
+                                    </span></h5>
                                 @if($element->vehicles->isNotEmpty())
 
                                     <h5>@lang('general.vehicles') / @lang('general.injuries') : </h5>
@@ -98,20 +106,28 @@
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">@lang('general.plate_no')</th>
-                                            <th scope="col">@lang('general.model')</th>
-                                            <th scope="col">@lang('general.model_year')</th>
-                                            <th scope="col">@lang('general.owner')</th>
-                                            <th scope="col">@lang('general.injured')</th>
+                                            <th scope="col">@lang('general.vehicle_information')</th>
+                                            {{--                                            <th scope="col">@lang('general.model')</th>--}}
+                                            {{--                                            <th scope="col">@lang('general.model_year')</th>--}}
+                                            <th scope="col">@lang('general.driver_information')</th>
+                                            {{--                                            <th scope="col">@lang('general.injured')</th>--}}
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($element->vehicles as $v)
                                             <tr>
                                                 <th scope="row">@lang('general.vehicle') .{{ ($loop->index+1) }}</th>
-                                                <td>{{ $v->plate_no }}</td>
-                                                <td>{{ $v->model }}</td>
-                                                <td>{{ $v->model_year }}</td>
+                                                <td>
+                                                    <ul>
+                                                        <li>@lang('general.vehicle_plate_no')
+                                                            : {{ $v->plate_no }}</li>
+                                                        <li>@lang('general.model') : {{ $v->model }}</li>
+                                                        <li>@lang('general.model_year') : {{ $v->model_year }}</li>
+                                                    </ul>
+                                                </td>
+                                                {{--                                                <td>{{ $v->plate_no }}</td>--}}
+                                                {{--                                                <td>{{ $v->model }}</td>--}}
+                                                {{--                                                <td>{{ $v->model_year }}</td>--}}
                                                 <td>
                                                     {{ $v->user->first_name }} {{ $v->user->father_name }}
                                                     <ul>
@@ -134,10 +150,15 @@
                                                             : {{ $v->pivot->injury_civil_id }}</li>
                                                     </ul>
                                                 </td>
-                                                <td><label
-                                                        class="label {{ $v->pivot->injured ? 'label-danger' : 'label-default' }}">{{ $v->pivot->injured  ? 'Yes' : 'No'}}</label>
-                                                </td>
+                                                {{--                                                <td><label--}}
+                                                {{--                                                        class="label {{ $v->pivot->injured ? 'label-danger' : 'label-default' }}">{{ $v->pivot->injured  ? 'Yes' : 'No'}}</label>--}}
+                                                {{--                                                </td>--}}
+
+                                                <div class="col-12">
+                                                    <img src="{{ $v->getImageThumbLinkAttribute('image') }}" alt="">
+                                                </div>
                                             </tr>
+
                                         @endforeach
                                         </tbody>
                                     </table>

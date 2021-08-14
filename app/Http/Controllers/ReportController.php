@@ -80,7 +80,7 @@ class ReportController extends Controller
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('path') ? $this->savePath($request, $element) : null;
-            if ($request->number_of_vehicles > 1) {
+            if ($element->report_type_id == 1) {
                 return redirect()->route('add.vehicle', ['id' => $element->id])->with(['success' => trans('general.process_success')]);
             }
             return redirect()->home()->with(['success' => trans('general.process_success')]);
@@ -176,14 +176,9 @@ class ReportController extends Controller
         }
         $report = Report::whereId($request->report_id)->with('owner.vehicles')->first();
         $vehicle = Vehicle::where(['plate_no' => $request->plate_no])->first();
-        $element = DB::table('report_vehicle')->insert([
-            'vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id,
-            'report_id' => $report->id,
-            'injured' => request()->injured,
-            "driver_license" => request()->driver_license,
-            "injury_name" => request()->injury_name,
-            "injury_civil_id" => request()->injury_civil_id
-        ]);
+        $request->request->add(['vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id]);
+        $element = DB::table('report_vehicle')->insert($request->except('_token','image','images','path','plate_no'));
+//        dd($el)
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
         $request->hasFile('path') ? $this->savePath($request, $element) : null;
         return redirect()->back()->with('success', trans('general.process_success'));

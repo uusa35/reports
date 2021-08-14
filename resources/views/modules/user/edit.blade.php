@@ -5,7 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header"><h4 class="display-6 text-center">{{ __('general.edit') }} @lang('general.profile') </h4></div>
+                    <div class="card-header"><h4
+                            class="display-6 text-center">{{ __('general.edit') }} @lang('general.profile') </h4></div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('user.update', $element->id) }}"
@@ -130,7 +131,8 @@
                                            class="col-md-4 col-form-label text-md-right">
                                         {{ trans("general.department") }}</label>
                                     <div class="col-md-6">
-                                        <select class="form-control" id="exampleFormControlSelect1" name="department_id">
+                                        <select class="form-control" id="exampleFormControlSelect1"
+                                                name="department_id">
                                             @foreach($departments as $department)
                                                 <option
                                                     value="{{ $department->id }}" {{ $element->department_id === $department->id ? 'selected' : null }}>{{ $department->name }}</option>
@@ -152,7 +154,8 @@
 
                                     <div class="col-md-6 ml-5">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="1" name="has_driving_license" id="flexCheckDefault"
+                                            <input class="form-check-input" type="checkbox" value="1"
+                                                   name="has_driving_license" id="flexCheckDefault"
                                                 {{ $element->has_driving_license ? 'checked' : '' }}
                                             >
                                             <label class="form-check-label" for="flexCheckDefault">
@@ -160,8 +163,9 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="0" name="has_driving_license" id="flexCheckChecked"
-                                                   {{ !$element->has_driving_license ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="checkbox" value="0"
+                                                   name="has_driving_license" id="flexCheckChecked"
+                                                {{ !$element->has_driving_license ? 'checked' : '' }}>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 @lang('general.no')
                                             </label>
@@ -182,7 +186,8 @@
                                         <input id="driving_license_issuance" type="date"
                                                class="form-control @error('driving_license_issuance') is-invalid @enderror"
                                                name="driving_license_issuance"
-                                               value="{{ $element->driving_license_issuance }}" required autocomplete="driving_license_issuance"
+                                               value="{{ $element->driving_license_issuance }}" required
+                                               autocomplete="driving_license_issuance"
                                                autofocus>
                                         @error('driving_license_issuance')
                                         <span class="invalid-feedback" role="alert">
@@ -200,7 +205,8 @@
                                         <input id="driving_license_expiry" type="date"
                                                class="form-control @error('driving_license_expiry') is-invalid @enderror"
                                                name="driving_license_expiry"
-                                               value="{{ $element->driving_license_expiry }}" required autocomplete="driving_license_expiry"
+                                               value="{{ $element->driving_license_expiry }}" required
+                                               autocomplete="driving_license_expiry"
                                                autofocus>
                                         @error('driving_license_expiry')
                                         <span class="invalid-feedback" role="alert">
@@ -412,7 +418,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+
+                            <div class="form-group row d-none">
                                 <label for="civil_id_image"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id_image') }}</label>
 
