@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Governate;
 use App\Models\Report;
 use App\Models\ReportType;
+use App\Models\ReportVehcile;
 use App\Models\User;
 use App\Models\Vehicle;
 use Illuminate\Database\Eloquent\Builder;
@@ -167,18 +168,17 @@ class ReportController extends Controller
     public function postAddVehicle(Request $request)
     {
         $validate = validator($request->all(), [
-            'plate_no' => 'required',
-            'driver_license' => 'required',
+//            'plate_no' => 'required',
+//            'driver_license' => 'required',
             'report_id' => 'required'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->with('error', $validate->errors()->first());
         }
-        $report = Report::whereId($request->report_id)->with('owner.vehicles')->first();
+        $report = Report::whereId($request->report_id)->with('owner.vehicles','vehicles')->first();
         $vehicle = Vehicle::where(['plate_no' => $request->plate_no])->first();
         $request->request->add(['vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id]);
-        $element = DB::table('report_vehicle')->insert($request->except('_token','image','images','path','plate_no'));
-//        dd($el)
+        $element = ReportVehcile::create($request->except('_token','image','images','path','plate_no'));
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
         $request->hasFile('path') ? $this->savePath($request, $element) : null;
         return redirect()->back()->with('success', trans('general.process_success'));

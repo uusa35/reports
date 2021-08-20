@@ -110,6 +110,8 @@
                                             {{--                                            <th scope="col">@lang('general.model')</th>--}}
                                             {{--                                            <th scope="col">@lang('general.model_year')</th>--}}
                                             <th scope="col">@lang('general.driver_information')</th>
+                                            <th scope="col">@lang('general.images')</th>
+                                            <th scope="col">@lang('general.videos')</th>
                                             {{--                                            <th scope="col">@lang('general.injured')</th>--}}
                                         </tr>
                                         </thead>
@@ -150,13 +152,25 @@
                                                             : {{ $v->pivot->injury_civil_id }}</li>
                                                     </ul>
                                                 </td>
+                                                <td>
+                                                    @if($v->pivot->image)
+                                                    <img class="img-thumbnail" src="{{ asset(env('THUMBNAIL').$v->pivot->image) }}" alt="">
+                                                        @else
+                                                        <label class="label label-warning">N/A</label>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($v->pivot->path)
+                                                        <video width="100%" controls autoplay>
+                                                            <source src="/{{ env('FILE').$v->pivot->path }}" type="video/mp4">
+                                                        </video>
+                                                    @else
+                                                        N/A
+                                                    @endif
+                                                </td>
                                                 {{--                                                <td><label--}}
                                                 {{--                                                        class="label {{ $v->pivot->injured ? 'label-danger' : 'label-default' }}">{{ $v->pivot->injured  ? 'Yes' : 'No'}}</label>--}}
                                                 {{--                                                </td>--}}
-
-                                                <div class="col-12">
-                                                    <img src="{{ $v->getImageThumbLinkAttribute('image') }}" alt="">
-                                                </div>
                                             </tr>
 
                                         @endforeach

@@ -18,6 +18,7 @@ class CreateReportVehicleTable extends Migration
             $table->foreignId('vehicle_id')->constrained();
             $table->foreignId('report_id')->constrained();
             $table->string('injury_name')->nullable();
+            $table->string('traffic_offenses')->nullable();
             $table->string('injury_civil_id')->nullable();
             $table->string('image')->nullable()->default('default.svg');
             $table->string('path')->nullable();
