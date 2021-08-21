@@ -24,11 +24,14 @@ class VehicleFactory extends Factory
     public function definition()
     {
         return [
-            'plate_no' => $this->faker->numberBetween(1111,9999),
-            'model' => $this->faker->randomElement(['Nissan','Toyota','BMW','Volvo','GMC']),
+            'plate_no' => $this->faker->numberBetween(1111, 9999),
+            'model' => $this->faker->randomElement(['Nissan', 'Toyota', 'BMW', 'Volvo', 'GMC']),
             'color' => $this->faker->colorName,
             'model_year' => $this->faker->year,
-            'scrapped' => $this->faker->boolean,
+            'insurance_no' => $this->faker->numberBetween(11111, 99999999),
+            'insurance_company' => $this->faker->company,
+            'insurance_start_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'insurance_expiry_date' => $this->faker->dateTimeBetween('now', '3 years'),
             'user_id' => User::all()->random(),
         ];
     }

@@ -82,7 +82,7 @@ class DatabaseSeeder extends Seeder
                 'is_damage' => false,
             ],
             [
-                'name' => 'Minor Accident with Injury',
+                'name' => 'Accident with Injury',
                 'is_traffic' => true,
                 'is_ambulance' => true,
                 'is_fire' => false,

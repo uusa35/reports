@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     use HasFactory, ModelHelper;
-
     public $guarded = [''];
 
     public function owner()
@@ -29,7 +28,16 @@ class Report extends Model
 
     public function vehicles()
     {
-        return $this->belongsToMany(Vehicle::class,'report_vehicle')->withPivot('image','path','injured','driver_license','notes');
+        return $this->belongsToMany(Vehicle::class,'report_vehicle')->withPivot('image','path',
+            'driver_license',
+            'notes',
+            'injury_name_1',
+'injured_1',
+'injury_name_2',
+'injured_2',
+'injury_name_3',
+'injured_3',
+        );
     }
 
     public function governate()

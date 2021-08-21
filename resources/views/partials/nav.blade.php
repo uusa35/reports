@@ -55,7 +55,7 @@
                             </a>
                             <a class="dropdown-item" href="{{ route('user.edit', auth()->id()) }}">
                                 <i class="fa fa-fw fa-1x fa-edit ml-1"></i>
-                                {{ trans("general.account_type") }} : {{ auth()->user()->userType }}
+                                {{ trans("general.account_type") }} : {{ auth()->user()->userType }} - {{ auth()->id() }}
                             </a>
                             @can('isAdmin')
                                 <a class="dropdown-item" href="{{ route('type.index') }}">

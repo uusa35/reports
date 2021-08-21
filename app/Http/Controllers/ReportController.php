@@ -48,6 +48,9 @@ class ReportController extends Controller
         $types = ReportType::active()->get();
         $currentType = ReportType::whereId(request()->report_type_id)->first();
         $governates = Governate::active()->get();
+        if ($currentType->id === 2) {
+            return view('modules.report.create_accident_with_injury', compact('types', 'governates', 'currentType'));
+        }
         return view('modules.report.create', compact('types', 'governates', 'currentType'));
     }
 
@@ -59,6 +62,7 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         $validate = validator(request()->all(), [
 //            'description' => 'required|max:1000',
 //            'mobile' => 'required|numeric',
@@ -73,15 +77,14 @@ class ReportController extends Controller
         }
         $request->request->add([
             'reference_id' => rand(9999, 99999999),
-            'user_id' => auth()->user()->id,
-            'officer_id' => User::where('is_admin', true)->first()->id
+            'officer_id' => !request()->has('officer_id') ?  User::where('is_officer', true)->first()->id : request()->officer_id,
         ]);
         $element = Report::create($request->except(['_token', 'image']));
         if ($element) {
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('path') ? $this->savePath($request, $element) : null;
-            if ($element->report_type_id == 1) {
+            if ($element->report_type_id == 1 || $element->report_type_id == 2) {
                 return redirect()->route('add.vehicle', ['id' => $element->id])->with(['success' => trans('general.process_success')]);
             }
             return redirect()->home()->with(['success' => trans('general.process_success')]);
@@ -98,7 +101,10 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        $element = Report::whereId($id)->with('type','vehicles.user')->first();
+        $element = Report::whereId($id)->with('type', 'vehicles.user')->first();
+        if($element->report_type_id == 2) {
+            return view('modules.report.show_with_injury', compact('element'));
+        }
         return view('modules.report.show', compact('element'));
     }
 
@@ -156,12 +162,20 @@ class ReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $report = Report::whereId($id)->first();
+        $report->vehicles()->sync([]);
+        if ($report->delete()) {
+            return redirect()->home()->with('success', 'report delete');
+        }
+        return redirect()->home()->with('error', 'report not delete');
     }
 
     public function getAddVehicle(Request $request)
     {
         $element = Report::whereId($request->id)->with('owner.vehicles')->first();
+        if ($element->report_type_id == 2) {
+            return view('modules.report.create_accident_with_injury_add_vehicle', compact('element'));
+        }
         return view('modules.report.add_vehicle', compact('element'));
     }
 
@@ -175,10 +189,10 @@ class ReportController extends Controller
         if ($validate->fails()) {
             return redirect()->back()->with('error', $validate->errors()->first());
         }
-        $report = Report::whereId($request->report_id)->with('owner.vehicles','vehicles')->first();
+        $report = Report::whereId($request->report_id)->with('owner.vehicles', 'vehicles')->first();
         $vehicle = Vehicle::where(['plate_no' => $request->plate_no])->first();
         $request->request->add(['vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id]);
-        $element = ReportVehcile::create($request->except('_token','image','images','path','plate_no'));
+        $element = ReportVehcile::create($request->except('_token', 'image', 'images', 'path', 'plate_no'));
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
         $request->hasFile('path') ? $this->savePath($request, $element) : null;
         return redirect()->back()->with('success', trans('general.process_success'));

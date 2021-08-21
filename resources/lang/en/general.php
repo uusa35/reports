@@ -216,6 +216,7 @@ return array(
     "finish" => "Finish",
     "back" => "Back",
     "vehicle_information" => "Vehicle Information",
-    "driver" => "Driver Information"
+    "driver" => "Driver Information",
+    "injuries_number" => "injuries_number"
 
 );

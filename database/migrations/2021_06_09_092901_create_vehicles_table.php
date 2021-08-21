@@ -19,7 +19,10 @@ class CreateVehiclesTable extends Migration
             $table->string('model')->nullable();
             $table->string('color')->nullable();
             $table->string('model_year')->nullable();
-            $table->boolean('scrapped')->default(0);
+            $table->string('insurance_no')->nullable();
+            $table->string('insurance_company')->nullable();
+            $table->dateTime('insurance_start_date')->nullable();
+            $table->dateTime('insurance_expiry_date')->nullable();
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

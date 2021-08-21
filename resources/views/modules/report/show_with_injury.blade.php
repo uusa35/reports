@@ -153,10 +153,25 @@
                                                             : {{ $v->user->driving_license_expiry }}</li>
                                                         <li>@lang('general.driver_license_no')
                                                             : {{ $v->pivot->driver_license }}</li>
-{{--                                                        <li>@lang('general.injury_name')--}}
-{{--                                                            : {{ $v->pivot->injury_name }}</li>--}}
-{{--                                                        <li>@lang('general.injury_civil_id')--}}
-{{--                                                            : {{ $v->pivot->injury_civil_id }}</li>--}}
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                {{ trans('injuries') }}
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <li>@lang('general.injury_civil_id')
+                                                                    : {{ $v->pivot->injury_name_1 }}</li>
+                                                                <li>@lang('general.type_of_injury')
+                                                                    : {{ $v->pivot->injured_1 }}</li>
+                                                                <li>@lang('general.injury_civil_id')
+                                                                    : {{ $v->pivot->injury_name_2 }}</li>
+                                                                <li>@lang('general.type_of_injury')
+                                                                    : {{ $v->pivot->injured_2 }}</li>
+                                                                <li>@lang('general.injury_civil_id')
+                                                                    : {{ $v->pivot->injury_name_3 }}</li>
+                                                                <li>@lang('general.type_of_injury')
+                                                                    : {{ $v->pivot->injured_3 }}</li>
+                                                            </div>
+                                                        </div>
                                                     </ul>
                                                 </td>
                                                 <td>
