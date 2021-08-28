@@ -419,6 +419,25 @@
                             </div>
 
 
+                            <div class="form-group row">
+                                <label for="health_issues"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.health_issues') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="health_issues" type="text"
+                                           class="form-control @error('health_issues') is-invalid @enderror"
+                                           name="health_issues"
+                                           value="{{ $element->health_issues }}" required autocomplete="health_issues"
+                                           autofocus>
+                                    @error('health_issues')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
                             <div class="form-group row d-none">
                                 <label for="civil_id_image"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id_image') }}</label>

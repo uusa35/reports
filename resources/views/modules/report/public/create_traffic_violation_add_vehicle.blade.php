@@ -6,11 +6,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><h4
-                            class="display-6 text-center">{{ trans('general.fire_add_incident') }}</h4>
-                        <h4>@lang('general.no') : {{ $element->vehicles->count() + 1 }}</h4>
+                            class="display-6 text-center">{{ trans('general.add_vehicles') }} {{ $element->type->is_ambulance ? '/ '.trans('general.injuries')  : null }}</h4>
+                        <h4>@lang('general.vehicle_no') : {{ $element->vehicles->count() + 1 }}</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('add.vehicle') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('public.add.vehicle') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="report_id" value="{{ request()->id }}">
                             {{--                             pole no --}}
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             {{-- traffic offenses --}}
-                            <div class="form-group row d-none">
+                            <div class="form-group row">
                                 <label for="exampleFormControlSelect1"
                                        class="col-md-4 col-form-label text-md-right">
                                     {{ trans("general.traffic_offences") }} </label>
@@ -61,7 +61,7 @@
                             </div>
 
                             {{--                             driving license --}}
-                            <div class="form-group row d-none">
+                            <div class="form-group row">
                                 <label for="driver_license_no"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.driver_license_no') }}</label>
 
@@ -83,16 +83,16 @@
 
 
                             {{-- injury civil id --}}
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="vehicle"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }} @lang('general.if_exist')</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.suspended') }} @lang('general.if_exist')</label>
 
                                 <div class="col-md-6">
                                     <input id="injury_civil_id" type="string"
                                            class="form-control @error('vehicle') is-invalid @enderror"
                                            name="injury_name_1"
                                            value=""
-                                           placeholder="@lang('general.civil_id')"
+                                           placeholder="@lang('general.injury_civil_id')"
                                            autocomplete="vehicle"
                                     >
                                     @error('injury_civil_id')
@@ -102,164 +102,32 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            {{-- iinjuired --}}
                             <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.building_no') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="building_no" type="building_no"
-                                           class="form-control @error('building_no') is-invalid @enderror" name="building_no"
-                                           value="{{ auth()->user()->building_no }}" autocomplete="building_no">
-
-                                    @error('building_no')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- iinjuired --}}
-                            <div class="form-group row d-none">
 
                                 <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_sever') }}
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.suspended') }}
                                     -
                                 </label>
                                 <div class="col-6 ">
                                     <div class="col pt-2">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="injured_1"
-                                                   id="inlineRadio1" value="minor" checked>
+                                            <input class="form-check-input" type="checkbox" name="injured_1"
+                                                   id="inlineRadio1" value="driving_license" checked>
                                             <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.minor') }}</label>
+                                                   for="inlineRadio1">{{ trans('general.driving_license') }}</label>
                                         </div>
                                         <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_1"
-                                                   id="inlineRadio1" value="severe">
+                                            <input class="form-check-input" type="checkbox" name="injured_2"
+                                                   id="inlineRadio1" value="vehicle">
                                             <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.severe') }}</label>
+                                                   for="inlineRadio1">{{ trans('general.vehicle') }}</label>
                                         </div>
                                         <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_1"
-                                                   id="inlineRadio1" value="death">
+                                            <input class="form-check-input" type="checkbox" name="injured_3"
+                                                   id="inlineRadio1" value="vehicle_registration_permit">
                                             <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.death') }}</label>
-                                        </div>
-                                    </div>
-                                    @error('has_injuries')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            {{-- injury civil id  2--}}
-                            <div class="form-group row d-none">
-                                <label for="vehicle"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_civil_id') }} @lang('general.if_exist')</label>
-
-                                <div class="col-md-6">
-                                    <input id="injury_civil_id" type="string"
-                                           class="form-control @error('vehicle') is-invalid @enderror"
-                                           name="injury_name_2"
-                                           value=""
-                                           placeholder="@lang('general.injury_civil_id')"
-                                           autocomplete="vehicle"
-                                    >
-                                    @error('injury_name_2')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- iinjuired --}}
-                            <div class="form-group row d-none">
-
-                                <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_sever') }}
-                                    -
-                                </label>
-                                <div class="col-6 ">
-                                    <div class="col pt-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="injured_2"
-                                                   id="inlineRadio1" value="minor" checked>
-                                            <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.minor') }}</label>
-                                        </div>
-                                        <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_2"
-                                                   id="inlineRadio1" value="severe">
-                                            <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.severe') }}</label>
-                                        </div>
-                                        <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_2"
-                                                   id="inlineRadio1" value="death">
-                                            <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.death') }}</label>
-                                        </div>
-                                    </div>
-                                    @error('has_injuries')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-
-                            {{--                             3 --}}
-                            {{-- injury civil id --}}
-                            <div class="form-group row d-none">
-                                <label for="vehicle"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_civil_id') }} @lang('general.if_exist')</label>
-
-                                <div class="col-md-6">
-                                    <input id="injury_civil_id" type="string"
-                                           class="form-control @error('vehicle') is-invalid @enderror"
-                                           name="injury_name_3"
-                                           value=""
-                                           placeholder="@lang('general.injury_civil_id')"
-                                           autocomplete="vehicle"
-                                    >
-                                    @error('injury_civil_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            {{-- iinjuired --}}
-                            <div class="form-group row d-none">
-
-                                <label for="name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_sever') }}
-                                    -
-                                </label>
-                                <div class="col-6 ">
-                                    <div class="col pt-2">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="injured_3"
-                                                   id="inlineRadio1" value="minor" checked>
-                                            <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.minor') }}</label>
-                                        </div>
-                                        <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_3"
-                                                   id="inlineRadio1" value="severe">
-                                            <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.severe') }}</label>
-                                        </div>
-                                        <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_3"
-                                                   id="inlineRadio1" value="death">
-                                            <label class="form-check-label"
-                                                   for="inlineRadio1">{{ trans('general.death') }}</label>
+                                                   for="inlineRadio1">{{ trans('general.vehicle_registration_permit') }}</label>
                                         </div>
                                     </div>
                                     @error('has_injuries')
@@ -296,18 +164,19 @@
                                 </div>
                             </div>
 
+                            {{--                             descirption --}}
                             <div class="form-group row">
                                 <label for="description"
-                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.notes') }}</label>
+                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.description') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="notes" type="text"
-                                              class="form-control @error('notes') is-invalid @enderror"
-                                              name="notes"
-                                              autocomplete="notes"
+                                    <textarea id="description" type="text"
+                                              class="form-control @error('description') is-invalid @enderror"
+                                              name="description"
+                                              autocomplete="description"
                                               autofocus
                                               rows="5"
-                                    >{{ old('notes') }}</textarea>
+                                    >{{ old('description') }}</textarea>
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
@@ -321,20 +190,25 @@
                                 <div class="row text-center">
                                     <div class="col-lg-12 offset-3 text-center">
                                         <div class="row">
-                                            <div class="col-sm-12 col-md-3 my-5">
+                                            <div class="col-sm-12 col-md-3">
                                                 <button type="submit" class="btn btn-success">
-                                                    @lang('general.save')
+                                                    + {{ trans('general.save') }}
                                                     {{--                                            {{ __('general.save') }} --}}
                                                 </button>
                                             </div>
-                                            <div class="col-sm-12 col-md-4 my-2">
-                                                <a href="{{ route('report.edit', $element->id) }}"
-                                                   class=" btn btn-warning">
-                                                    {{ __('general.back') }}
-                                                </a>
-                                                <a href="{{ route('home') }}" class="btn btn-secondary my-5 d-none">
-                                                    {{ __('general.finish') }}
-                                                </a>
+                                            <div class="row">
+
+                                                <div class="col-6">
+                                                    <a href="{{ route('report.edit', $element->id) }}"
+                                                       class=" btn btn-warning">
+                                                        {{ __('general.back') }}
+                                                    </a>
+                                                </div>
+                                                <div class="col-6 d-none">
+                                                    <a href="{{ route('home') }}" class="btn btn-secondary">
+                                                        {{ __('general.finish') }}
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

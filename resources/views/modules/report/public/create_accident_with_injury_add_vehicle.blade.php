@@ -6,11 +6,11 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><h4
-                            class="display-6 text-center">{{ trans('general.fire_add_incident') }}</h4>
-                        <h4>@lang('general.no') : {{ $element->vehicles->count() + 1 }}</h4>
+                            class="display-6 text-center">{{ trans('general.add_vehicles') }} {{ $element->type->is_ambulance ? '/ '.trans('general.injuries')  : null }}</h4>
+                        <h4>@lang('general.vehicle_no') : {{ $element->vehicles->count() + 1 }}</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('add.vehicle') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('public.add.vehicle') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="report_id" value="{{ request()->id }}">
                             {{--                             pole no --}}
@@ -83,36 +83,19 @@
 
 
                             {{-- injury civil id --}}
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="vehicle"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }} @lang('general.if_exist')</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_civil_id') }} @lang('general.if_exist')</label>
 
                                 <div class="col-md-6">
                                     <input id="injury_civil_id" type="string"
                                            class="form-control @error('vehicle') is-invalid @enderror"
                                            name="injury_name_1"
                                            value=""
-                                           placeholder="@lang('general.civil_id')"
+                                           placeholder="@lang('general.injury_civil_id')"
                                            autocomplete="vehicle"
                                     >
                                     @error('injury_civil_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.building_no') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="building_no" type="building_no"
-                                           class="form-control @error('building_no') is-invalid @enderror" name="building_no"
-                                           value="{{ auth()->user()->building_no }}" autocomplete="building_no">
-
-                                    @error('building_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -296,34 +279,13 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="description"
-                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.notes') }}</label>
-
-                                <div class="col-md-6">
-                                    <textarea id="notes" type="text"
-                                              class="form-control @error('notes') is-invalid @enderror"
-                                              name="notes"
-                                              autocomplete="notes"
-                                              autofocus
-                                              rows="5"
-                                    >{{ old('notes') }}</textarea>
-
-                                    @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
                             <div class="container">
                                 <div class="row text-center">
                                     <div class="col-lg-12 offset-3 text-center">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-3 my-5">
                                                 <button type="submit" class="btn btn-success">
-                                                    @lang('general.save')
+                                                    + {{ trans('general.add_another_vehicle') }}
                                                     {{--                                            {{ __('general.save') }} --}}
                                                 </button>
                                             </div>
@@ -332,7 +294,7 @@
                                                    class=" btn btn-warning">
                                                     {{ __('general.back') }}
                                                 </a>
-                                                <a href="{{ route('home') }}" class="btn btn-secondary my-5 d-none">
+                                                <a href="{{ route('home') }}" class="btn btn-secondary my-5">
                                                     {{ __('general.finish') }}
                                                 </a>
                                             </div>

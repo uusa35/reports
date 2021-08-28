@@ -10,7 +10,7 @@
                         <h4>@lang('general.no') : {{ $element->vehicles->count() + 1 }}</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('add.vehicle') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('public.add.vehicle') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="report_id" value="{{ request()->id }}">
                             {{--                             pole no --}}
@@ -83,16 +83,16 @@
 
 
                             {{-- injury civil id --}}
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="vehicle"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }} @lang('general.if_exist')</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_civil_id') }} @lang('general.if_exist')</label>
 
                                 <div class="col-md-6">
                                     <input id="injury_civil_id" type="string"
                                            class="form-control @error('vehicle') is-invalid @enderror"
                                            name="injury_name_1"
                                            value=""
-                                           placeholder="@lang('general.civil_id')"
+                                           placeholder="@lang('general.injury_civil_id')"
                                            autocomplete="vehicle"
                                     >
                                     @error('injury_civil_id')

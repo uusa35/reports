@@ -150,7 +150,8 @@ return array(
     "mobile" => "mobile",
     "nationality" => "nationality",
     "accident_reporting" => "accident reports",
-    "welcome_message" => "Welcome to the website for reporting and managing accidents and traffic violations reports",
+    "welcome_message" => "Welcome to the website for reporting and managing accidents, traffic violations reports",
+    "officer_welcome_message" => "Welcome to the website for reporting and managing accidents and traffic violations reports",
     "officer_login" => "Login officers Ministry of Interior",
     "civil_user" => "civilian entry",
     "video" => "video",
@@ -217,6 +218,8 @@ return array(
     "back" => "Back",
     "vehicle_information" => "Vehicle Information",
     "driver" => "Driver Information",
-    "injuries_number" => "injuries_number"
+    "injuries_number" => "injuries_number",
+    "health_issues" => "Health Issues",
+    "age" => "Age"
 
 );

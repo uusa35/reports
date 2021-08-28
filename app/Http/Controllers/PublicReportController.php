@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ReportController extends Controller
+class PublicReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -49,22 +49,22 @@ class ReportController extends Controller
         $currentType = ReportType::whereId(request()->report_type_id)->first();
         $governates = Governate::active()->get();
         if ($currentType->id === 2) { // accident with injury
-            return view('modules.report.create_accident_with_injury', compact('types', 'governates', 'currentType'));
+            return view('modules.report.public.create_accident_with_injury', compact('types', 'governates', 'currentType'));
         }
         if ($currentType->id === 3) { // calling ambulance
-            return view('modules.report.create_calling_ambullance', compact('types', 'governates', 'currentType'));
+            return view('modules.report.public.create_calling_ambullance', compact('types', 'governates', 'currentType'));
         }
         if ($currentType->id === 4) { // report fire accident
-            return view('modules.report.create_fire_with_accident', compact('types', 'governates', 'currentType'));
+            return view('modules.report.public.create_fire_with_accident', compact('types', 'governates', 'currentType'));
         }
         if ($currentType->id === 5) { // report damage
-            return view('modules.report.create_property_damage', compact('types', 'governates', 'currentType'));
+            return view('modules.report.public.create_property_damage', compact('types', 'governates', 'currentType'));
         }
         if ($currentType->id === 6) { // report violation
-            return view('modules.report.create_traffic_violation', compact('types', 'governates', 'currentType'));
+            return view('modules.report.public.create_traffic_violation', compact('types', 'governates', 'currentType'));
         }
         // minor accident
-        return view('modules.report.create', compact('types', 'governates', 'currentType'));
+        return view('modules.report.public.create', compact('types', 'governates', 'currentType'));
     }
 
     /**
@@ -97,8 +97,8 @@ class ReportController extends Controller
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('path') ? $this->savePath($request, $element) : null;
-            if ($element->report_type_id == 1 || $element->report_type_id == 2 || $element->report_type_id == 3 || $element->report_type_id == 4 || $element->report_type_id == 6) {
-                return redirect()->route('add.vehicle', ['id' => $element->id])->with(['success' => trans('general.process_success')]);
+            if ($element->report_type_id == 1 || $element->report_type_id == 2 ||  $element->report_type_id == 4 || $element->report_type_id == 6) {
+                return redirect()->route('public.add.vehicle', ['id' => $element->id])->with(['success' => trans('general.process_success')]);
             }
             return redirect()->home()->with(['success' => trans('general.process_success')]);
         }
@@ -114,20 +114,21 @@ class ReportController extends Controller
      */
     public function show($id)
     {
+
         $element = Report::whereId($id)->with('type', 'vehicles.user')->first();
         if ($element->report_type_id == 2) {
-            return view('modules.report.show_with_injury', compact('element'));
+            return view('modules.report.public.show_with_injury', compact('element'));
         }
         if ($element->report_type_id == 3) {
-            return view('modules.report.show_calling_ambulance', compact('element'));
+            return view('modules.report.public.show_calling_ambulance', compact('element'));
         }
         if ($element->report_type_id == 4) {
-            return view('modules.report.show_fire_with_accident', compact('element'));
+            return view('modules.report.public.show_fire_with_accident', compact('element'));
         }
         if ($element->report_type_id == 6) {
-            return view('modules.report.show_traffic_violation', compact('element'));
+            return view('modules.report.public.show_traffic_violation', compact('element'));
         }
-        return view('modules.report.show', compact('element'));
+        return view('modules.report.public.show', compact('element'));
     }
 
     /**
@@ -196,18 +197,18 @@ class ReportController extends Controller
     {
         $element = Report::whereId($request->id)->with('owner.vehicles')->first();
         if ($element->report_type_id == 2) {
-            return view('modules.report.create_accident_with_injury_add_vehicle', compact('element'));
+            return view('modules.report.public.create_accident_with_injury_add_vehicle', compact('element'));
         }
         if ($element->report_type_id === 3) {
-            return view('modules.report.create_calling_ambullance_add_injuiry', compact('element'));
+            return view('modules.report.public.create_calling_ambullance_add_injuiry', compact('element'));
         }
         if ($element->report_type_id === 4) {
-            return view('modules.report.create_fire_add_vehicle_or_injury', compact('element'));
+            return view('modules.report.public.create_fire_add_vehicle_or_injury', compact('element'));
         }
         if ($element->report_type_id === 6) {
-            return view('modules.report.create_traffic_violation_add_vehicle', compact('element'));
+            return view('modules.report.public.create_traffic_violation_add_vehicle', compact('element'));
         }
-        return view('modules.report.add_vehicle', compact('element'));
+        return view('modules.report.public.add_vehicle', compact('element'));
     }
 
     public function postAddVehicle(Request $request)

@@ -10,15 +10,20 @@
                     </h5>
                 </div>
 
-                <div class="card-body">
-                    <div class="row justify-content-center align-items-center my-5">
-
-                        <h1 class="text-center">@lang('general.welcome_message')</h1>
-                    </div>
+                <div class="card-body mx-5">
+                    @can('isUser')
+                        <div class="row justify-content-center align-items-center my-5">
+                            <h1 class="text-center">@lang('general.welcome_message')</h1>
+                        </div>
+                    @else
+                        <div class="row justify-content-center align-items-center my-5">
+                            <h1 class="text-center">@lang('general.officer_welcome_message')</h1>
+                        </div>
+                    @endcan
                     <div class="row">
                         @auth
                             @foreach($elements as $element)
-                                <div class="col-lg-4 mb-3">
+                                <div class="col-lg-4 mb-3 {!! !auth()->user()->is_officer && $element->name === 'Traffic Violation'  ? 'd-none' : '' !!}">
                                     <div class="card" style="max-width: 18rem;">
                                         <img class="card-img-top img-fluid"
                                              src="{{ $element->getImageThumbLinkAttribute() }}"
@@ -27,15 +32,22 @@
                                             <h5 class="card-title text-center">
                                                 {{ $element->name }}
                                             </h5>
-                                            <h6 class="card-title text-sm">
+                                            <h6 class="card-title text-sm d-none">
                                                 {{ trans('general.hot_line') }} : {{ $element->hot_line }}
                                             </h6>
-                                            <p class="card-text"
+                                            <p class="card-text d-none"
                                                style="height: 8em;">{{ Str::limit($element->description,60) }}</p>
-                                            <div class="text-md-right">
-                                                <a href="{{ route('report.create', ['report_type_id' => $element->id]) }}"
-                                                   class="btn btn-danger text-md-right">{{ trans('general.process_report') }}</a>
-                                            </div>
+                                            @can('isUser')
+                                                <div class="text-md-right">
+                                                    <a href="{{ route('public.create', ['report_type_id' => $element->id]) }}"
+                                                       class="btn btn-danger text-md-right">{{ trans('general.process_report') }}</a>
+                                                </div>
+                                            @else
+                                                <div class="text-md-right">
+                                                    <a href="{{ route('report.create', ['report_type_id' => $element->id]) }}"
+                                                       class="btn btn-danger text-md-right">{{ trans('general.process_report') }}</a>
+                                                </div>
+                                            @endcan
                                         </div>
                                     </div>
                                 </div>

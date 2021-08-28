@@ -57,8 +57,13 @@
                                                 {{ __('general.actions') }}
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                @can('isUser')
                                                 <a class="dropdown-item"
-                                                   href="{{ route('report.show', $element->id) }}">{{ trans('general.view') .' '. trans('general.report')}}</a>
+                                                   href="{{ route('public.show', $element->id) }}">{{ trans('general.view') .' '. trans('general.report')}}</a>
+                                                @else
+                                                    <a class="dropdown-item"
+                                                       href="{{ route('report.show', $element->id) }}">{{ trans('general.view') .' '. trans('general.report')}}</a>
+                                                @endcan
                                                 @can('isAdminOrOfficer')
                                                     <a class="dropdown-item"
                                                        href="{{ route('report.edit', $element->id) }}">@lang('general.edit')</a>

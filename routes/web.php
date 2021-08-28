@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublicReportController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportTypeController;
 use App\Http\Controllers\UserController;
@@ -21,9 +22,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', UserController::class);
+    // officer
     Route::resource('report', ReportController::class);
     Route::get('add/vehicle', [ReportController::class,'getAddVehicle'])->name('add.vehicle');
     Route::post('add/vehicle', [ReportController::class,'postAddVehicle'])->name('add.vehicle');
+    // public
+    Route::resource('report/public', PublicReportController::class);
+    Route::get('public/add/vehicle', [PublicReportController::class,'getAddVehicle'])->name('public.add.vehicle');
+    Route::post('public/add/vehicle', [ReportController::class,'postAddVehicle'])->name('public.add.vehicle');
     Route::resource('type', ReportTypeController::class);
     Route::resource('vehicle', VehicleController::class);
 });

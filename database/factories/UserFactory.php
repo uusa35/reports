@@ -58,7 +58,8 @@ class UserFactory extends Factory
             'has_driving_license' => $this->faker->boolean,
             'driving_license_issuance' => Carbon::now()->subMonths($this->faker->numberBetween(3, 10)),
             'driving_license_expiry' => Carbon::now()->addMonths($this->faker->numberBetween(1, 5)),
-            'driving_license_no' => $this->faker->numberBetween(11111,99999)
+            'driving_license_no' => $this->faker->numberBetween(11111, 99999),
+            'health_issues' => $this->faker->paragraph
         ];
     }
 

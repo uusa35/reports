@@ -6,16 +6,16 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header"><h4
-                            class="display-6 text-center">{{ trans('general.fire_add_incident') }}</h4>
-                        <h4>@lang('general.no') : {{ $element->vehicles->count() + 1 }}</h4>
+                            class="display-6 text-center">{{ trans('general.add_injuries') }}</h4>
+                        <h4>@lang('general.injury') : {{ $element->vehicles->count() + 1 }}</h4>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ route('add.vehicle') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('public.add.vehicle') }}" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="report_id" value="{{ request()->id }}">
                             {{--                             pole no --}}
 
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="plate_no"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.vehicle_plate_no') }} @lang('general.if_exist')</label>
 
@@ -83,36 +83,19 @@
 
 
                             {{-- injury civil id --}}
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="vehicle"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.civil_id') }} @lang('general.if_exist')</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('general.injury_civil_id') }} @lang('general.if_exist')</label>
 
                                 <div class="col-md-6">
                                     <input id="injury_civil_id" type="string"
                                            class="form-control @error('vehicle') is-invalid @enderror"
                                            name="injury_name_1"
                                            value=""
-                                           placeholder="@lang('general.civil_id')"
+                                           placeholder="@lang('general.injury_civil_id')"
                                            autocomplete="vehicle"
                                     >
                                     @error('injury_civil_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="email"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('general.building_no') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="building_no" type="building_no"
-                                           class="form-control @error('building_no') is-invalid @enderror" name="building_no"
-                                           value="{{ auth()->user()->building_no }}" autocomplete="building_no">
-
-                                    @error('building_no')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -157,14 +140,14 @@
 
 
                             {{-- injury civil id  2--}}
-                            <div class="form-group row d-none">
+                            <div class="form-group row">
                                 <label for="vehicle"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.injury_civil_id') }} @lang('general.if_exist')</label>
 
                                 <div class="col-md-6">
                                     <input id="injury_civil_id" type="string"
                                            class="form-control @error('vehicle') is-invalid @enderror"
-                                           name="injury_name_2"
+                                           name="injury_civil_id_1"
                                            value=""
                                            placeholder="@lang('general.injury_civil_id')"
                                            autocomplete="vehicle"
@@ -192,7 +175,7 @@
                                                    for="inlineRadio1">{{ trans('general.minor') }}</label>
                                         </div>
                                         <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_2"
+                                            <input class="form-check-input" type="radio" name="injured_1"
                                                    id="inlineRadio1" value="severe">
                                             <label class="form-check-label"
                                                    for="inlineRadio1">{{ trans('general.severe') }}</label>
@@ -222,7 +205,7 @@
                                 <div class="col-md-6">
                                     <input id="injury_civil_id" type="string"
                                            class="form-control @error('vehicle') is-invalid @enderror"
-                                           name="injury_name_3"
+                                           name="injury_name_1"
                                            value=""
                                            placeholder="@lang('general.injury_civil_id')"
                                            autocomplete="vehicle"
@@ -244,19 +227,19 @@
                                 <div class="col-6 ">
                                     <div class="col pt-2">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="injured_3"
+                                            <input class="form-check-input" type="radio" name="injured_2"
                                                    id="inlineRadio1" value="minor" checked>
                                             <label class="form-check-label"
                                                    for="inlineRadio1">{{ trans('general.minor') }}</label>
                                         </div>
                                         <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_3"
+                                            <input class="form-check-input" type="radio" name="injured_2"
                                                    id="inlineRadio1" value="severe">
                                             <label class="form-check-label"
                                                    for="inlineRadio1">{{ trans('general.severe') }}</label>
                                         </div>
                                         <div class="form-check form-check-inline ml-5">
-                                            <input class="form-check-input" type="radio" name="injured_3"
+                                            <input class="form-check-input" type="radio" name="injured_2"
                                                    id="inlineRadio1" value="death">
                                             <label class="form-check-label"
                                                    for="inlineRadio1">{{ trans('general.death') }}</label>
@@ -282,7 +265,6 @@
                                     />
                                 </div>
                             </div>
-
                             {{--                             video  --}}
 
                             <div class="form-group row">
@@ -296,7 +278,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="description"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.notes') }}</label>
 
@@ -317,22 +299,43 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="description"
+                                       class="col-md-4 col-form-label text-md-right ">{{ __('general.description') }}</label>
+
+                                <div class="col-md-6">
+                                    <textarea id="description" type="text"
+                                              class="form-control @error('description') is-invalid @enderror"
+                                              name="description"
+                                              autocomplete="description"
+                                              autofocus
+                                              rows="5"
+                                    >{{ old('description') }}</textarea>
+
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="container">
                                 <div class="row text-center">
                                     <div class="col-lg-12 offset-3 text-center">
                                         <div class="row">
                                             <div class="col-sm-12 col-md-3 my-5">
                                                 <button type="submit" class="btn btn-success">
-                                                    @lang('general.save')
+                                                    + {{ trans('general.add_another_injury') }}
                                                     {{--                                            {{ __('general.save') }} --}}
                                                 </button>
                                             </div>
                                             <div class="col-sm-12 col-md-4 my-2">
-                                                <a href="{{ route('report.edit', $element->id) }}"
+                                                <a href="{{ route('report.index') }}"
                                                    class=" btn btn-warning">
                                                     {{ __('general.back') }}
                                                 </a>
-                                                <a href="{{ route('home') }}" class="btn btn-secondary my-5 d-none">
+                                                <a href="{{ route('home') }}" class="btn btn-secondary my-5">
                                                     {{ __('general.finish') }}
                                                 </a>
                                             </div>

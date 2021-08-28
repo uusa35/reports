@@ -44,6 +44,7 @@ class CreateUsersTable extends Migration
             $table->foreignId('governate_id')->nullable()->constrained();
             $table->foreignId('department_id')->nullable()->constrained();
             $table->mediumText('description')->nullable();
+            $table->mediumText('health_issues')->nullable();
 
             $table->boolean('has_driving_license')->default(1);
             $table->string('driving_license_no')->nullable();
