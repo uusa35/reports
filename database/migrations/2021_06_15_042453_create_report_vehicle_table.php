@@ -22,14 +22,19 @@ class CreateReportVehicleTable extends Migration
             $table->string('image')->nullable()->default('default.svg');
             $table->string('path')->nullable();
             $table->string('traffic_offences')->nullable();
+            $table->string('injury_civil_id_1')->nullable();
             $table->string('injury_name_1')->nullable();
             $table->string('injured_1')->nullable();
+            $table->string('injury_civil_id_2')->nullable();
             $table->string('injury_name_2')->nullable();
             $table->string('injured_2')->nullable();
+            $table->string('injury_civil_id_3')->nullable();
             $table->string('injury_name_3')->nullable();
             $table->string('injured_3')->nullable();
             $table->string('driver_license')->nullable();
+            $table->string('description')->nullable();
             $table->string('notes')->nullable();
+            $table->string('building_no')->nullable();
             $table->timestamps();
         });
     }

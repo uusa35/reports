@@ -14,6 +14,7 @@
                             @can('isOfficer')
                                 <input type="hidden" name="officer_id" value="{{ auth()->id() }}"/>
                             @endcan
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                             <input type="hidden" name="report_type_id" value="{{ request()->report_type_id }}">
                             {{-- date and time --}}
                             <div class="form-group row">
@@ -211,7 +212,7 @@
                             {{--                            @endif--}}
                             @if($currentType->is_traffic)
                                 {{--                             speed limit --}}
-                                <div class="form-group row">
+                                <div class="form-group row d-none">
                                     <label for="speed_limit"
                                            class="col-md-4 col-form-label text-md-right">{{ __('general.speed_limit') }}</label>
 
@@ -277,7 +278,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row d-none">
                                     <label for="exampleFormControlSelect1"
                                            class="col-md-4 col-form-label text-md-right">
                                         {{ trans("general.primary_contributory") }} </label>
@@ -323,7 +324,7 @@
 
                             @endif
                             {{--                             descirption --}}
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="description"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.description') }}</label>
 

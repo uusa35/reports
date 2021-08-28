@@ -161,7 +161,7 @@
                                                 </td>
                                                 <td>
                                                     @if($v->pivot->image)
-                                                        <img class="img-thumbnail"
+                                                        <img class="img-thumbnail img-xs"
                                                              src="{{ asset(env('THUMBNAIL').$v->pivot->image) }}"
                                                              alt="">
                                                     @else

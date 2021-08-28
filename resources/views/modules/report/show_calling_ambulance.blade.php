@@ -93,25 +93,22 @@
                                 {{--                                    : {{ $element->traffic_offences }}</h5>--}}
                                 {{--                                <h5 class="card-title font-weight-bold ">{{ trans('general.hit_and_run')}}--}}
                                 {{--                                    : {{ $element->hit_and_run ? trans('general.yes') : trans('general.no') }}</h5>--}}
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.speed_limit')}}
-                                    : {{ $element->speed_limit }}</h5>
-
                                 <h5 class="card-title font-weight-bold ">{{ trans('general.status')}}: <span
                                         class="badge badge-{{ $element->is_closed ? 'danger' : 'info' }} text-lg">
                                         {{ !$element->is_closed ? trans('general.report_open') : trans('general.closed') }}
                                     </span></h5>
                                 @if($element->vehicles->isNotEmpty())
 
-                                    <h5>@lang('general.vehicles') / @lang('general.injuries') : </h5>
+                                    <h5> @lang('general.injuries') : </h5>
 
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
-                                            <th scope="col">@lang('general.vehicle_information')</th>
+                                            <th scope="col">@lang('general.injury')</th>
                                             {{--                                            <th scope="col">@lang('general.model')</th>--}}
                                             {{--                                            <th scope="col">@lang('general.model_year')</th>--}}
-                                            <th scope="col">@lang('general.driver_information')</th>
+                                            <th scope="col">@lang('general.injury_information')</th>
                                             <th scope="col">@lang('general.images')</th>
                                             <th scope="col">@lang('general.videos')</th>
                                             {{--                                            <th scope="col">@lang('general.injured')</th>--}}
@@ -120,18 +117,10 @@
                                         <tbody>
                                         @foreach($element->vehicles as $v)
                                             <tr>
-                                                <th scope="row">@lang('general.vehicle') .{{ ($loop->index+1) }}</th>
+                                                <th scope="row">@lang('general.injury') .{{ ($loop->index+1) }}</th>
                                                 <td>
                                                     <ul>
                                                         <li>@lang('general.owner') : {{ $v->user->name }}</li>
-                                                        <li>@lang('general.driving_license_no') : {{ $v->user->driving_license_no }}</li>
-                                                        <li>@lang('general.vehicle_plate_no')
-                                                            : {{ $v->plate_no }}</li>
-                                                        <li>@lang('general.model') : {{ $v->model }}</li>
-                                                        <li>@lang('general.model_year') : {{ $v->model_year }}</li>
-                                                        <li>@lang('general.insurance_no') : {{ $v->insurance_no }}</li>
-                                                        <li>@lang('general.insurance_company') : {{ $v->insurance_company }}</li>
-                                                        <li>@lang('general.insurance_expiry_date') : {{ $v->insurance_expiry_date }}</li>
                                                     </ul>
                                                 </td>
                                                 {{--                                                <td>{{ $v->plate_no }}</td>--}}
@@ -145,42 +134,10 @@
                                                         <li>@lang('general.age') : {{ $v->user->age }}</li>
                                                         <li>@lang('general.nationality')
                                                             : {{ $v->user->nationality }}</li>
-                                                        <li>@lang('general.driving_license_no')
-                                                            : {{ $v->user->driving_license_no }}</li>
-                                                        <li>@lang('general.driving_license_issuance')
-                                                            : {{ $v->user->driving_license_issuance }}</li>
-                                                        <li>@lang('general.driving_license_expiry')
-                                                            : {{ $v->user->driving_license_expiry }}</li>
-                                                        <li>@lang('general.driver_license_no')
-                                                            : {{ $v->pivot->driver_license }}</li>
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                {{ trans('injuries') }}
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <li>@lang('general.injury_civil_id')
-                                                                    : {{ $v->pivot->injury_civil_id }}</li>
-                                                                <li>@lang('general.injury_name')
-                                                                    : {{ $v->pivot->injury_name_1 }}</li>
-                                                                <li>@lang('general.type_of_injury')
-                                                                    : {{ $v->pivot->injured_1 }}</li>
-                                                                <hr>
-                                                                <li>@lang('general.injury_civil_id')
-                                                                    : {{ $v->pivot->injury_civil_id }}</li>
-                                                                <li>@lang('general.injury_name')
-                                                                    : {{ $v->pivot->injury_name_2 }}</li>
-                                                                <li>@lang('general.type_of_injury')
-                                                                    : {{ $v->pivot->injured_2 }}</li>
-                                                                <hr>
-                                                                <li>@lang('general.injury_civil_id')
-                                                                    : {{ $v->pivot->injury_civil_id }}</li>
-                                                                <li>@lang('general.injury_name')
-                                                                    : {{ $v->pivot->injury_name_3 }}</li>
-                                                                <li>@lang('general.type_of_injury')
-                                                                    : {{ $v->pivot->injured_3 }}</li>
-                                                                <hr>
-                                                            </div>
-                                                        </div>
+                                                        <li>@lang('general.notes')
+                                                            : {{ $v->pivot->notes }}</li>
+                                                        <li>@lang('general.description')
+                                                            : {{ $v->pivot->description }}</li>
                                                     </ul>
                                                 </td>
                                                 <td>

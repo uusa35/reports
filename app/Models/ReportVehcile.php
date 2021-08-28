@@ -11,5 +11,13 @@ class ReportVehcile extends Model
     use HasFactory, ImageHelpers, ModelHelper;
     public $table = 'report_vehicle';
     public $guarded = [''];
+
+    public function report() {
+        return $this->belongsTo(Report::class);
+    }
+
+    public function vehicle() {
+        return $this->belongsTo(Vehicle::class);
+    }
 }
 

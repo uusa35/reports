@@ -14,6 +14,7 @@
                             @can('isOfficer')
                                 <input type="hidden" name="officer_id" value="{{ auth()->id() }}"/>
                             @endcan
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                             <input type="hidden" name="report_type_id" value="{{ request()->report_type_id }}">
                             {{-- date and time --}}
                             <div class="form-group row">
@@ -161,7 +162,7 @@
 
                             @if(!$currentType->is_traffic)
                                 {{--                            @if($currentType->is_ambulance)--}}
-                                <div class="form-group row">
+                                <div class="form-group row d-none">
                                     <label for="name"
                                            class="col-md-4 col-form-label text-md-right">{{ __('general.has_injuries') }}</label>
                                     <div class="col-6 ">
@@ -277,7 +278,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row d-none">
                                     <label for="exampleFormControlSelect1"
                                            class="col-md-4 col-form-label text-md-right">
                                         {{ trans("general.primary_contributory") }} </label>
@@ -323,7 +324,7 @@
 
                             @endif
                             {{--                             descirption --}}
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="description"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.description') }}</label>
 
@@ -399,7 +400,7 @@
 
                                 {{--                             video  --}}
 
-                                <div class="form-group row">
+                                <div class="form-group row d-none">
                                     <label for="file"
                                            class="col-md-4 col-form-label text-md-right ">{{ trans('general.video') }}</label>
                                     <div class="col-md-6">
@@ -413,7 +414,7 @@
                                     </div>
                                 </div>
                                 {{--                             images --}}
-                                <div class="form-group row">
+                                <div class="form-group row d-none">
                                     <label for="file"
                                            class="col-md-4 col-form-label text-md-right ">{{ trans('general.images') }}</label>
                                     <div class="col-md-6">
@@ -438,7 +439,7 @@
                                 <div class="row text-center">
                                     <div class="col offset-2">
                                         <button type="submit" class="btn btn-danger">
-                                            {{ $currentType->is_traffic ? trans('general.next') : trans('general.save')}}
+                                            @lang('general.next')
                                         </button>
                                     </div>
                                     <div class="col">
