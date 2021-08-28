@@ -39,8 +39,8 @@
                                         : {{ str_limit($element->owner->email, 80) }}</p>
                                     <p class="card-text">{{ trans('general.civil_id') }}
                                         : {{ str_limit($element->owner->civil_id_no, 80) }}</p>
-                                    <p class="card-text">{{ str_limit($element->owner->description, 80) }}</p>
-                                    </p>
+                                    {{--                                    <p class="card-text">{{ str_limit($element->owner->description, 80) }}</p>--}}
+                                    {{--                                    </p>--}}
                                 </div>
                             </div>
                         @endif
@@ -57,8 +57,6 @@
                                     : {{ $element->type->name}}</h5>
                                 {{--                                <h5 class="card-title font-weight-bold ">{{ trans('general.reference_id')}}--}}
                                 {{--                                    : {{ $element->reference_id}}</h5>--}}
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.description')}} :
-                                    <p>{{ $element->description}}</p></h5>
                                 {{--                                @if($element->notes)--}}
                                 {{--                                    <h5 class="card-title font-weight-bold ">{{ trans('general.notes')}} :--}}
                                 {{--                                        <p>{{ $element->notes}}</p>--}}
@@ -148,10 +146,30 @@
                                                             : {{ $v->user->driving_license_expiry }}</li>
                                                         <li>@lang('general.driver_license_no')
                                                             : {{ $v->pivot->driver_license }}</li>
-                                                        {{--                                                        <li>@lang('general.injury_name')--}}
-                                                        {{--                                                            : {{ $v->pivot->injury_name }}</li>--}}
-                                                        {{--                                                        <li>@lang('general.injury_civil_id')--}}
-                                                        {{--                                                            : {{ $v->pivot->injury_civil_id }}</li>--}}
+                                                        <div class="card my-5">
+                                                            @lang('general.description')
+                                                            : {{ $v->pivot->description }}
+                                                        </div>
+                                                        <div class="card my-5">
+                                                            <div class="card-body">
+                                                                <h6>@lang('general.traffic_offences')
+                                                                    : {{ $v->pivot->traffic_offences }}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card my-5">
+                                                            <ul class="mt-3">
+                                                                <h4>@lang('general.suspended') :</h4>
+                                                                <li>
+                                                                    {{ $v->pivot->injured_1 }}
+                                                                </li>
+                                                                <li>
+                                                                    {{ $v->pivot->injured_2 }}
+                                                                </li>
+                                                                <li>
+                                                                    {{ $v->pivot->injured_3 }}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </ul>
                                                 </td>
                                                 <td>

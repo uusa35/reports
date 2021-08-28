@@ -54,8 +54,14 @@ class ReportController extends Controller
         if ($currentType->id === 3) {
             return view('modules.report.create_calling_ambullance', compact('types', 'governates', 'currentType'));
         }
-        if ($currentType->id === 4) {
+        if ($currentType->id === 4) { // report fire accident
             return view('modules.report.create_fire_with_accident', compact('types', 'governates', 'currentType'));
+        }
+        if ($currentType->id === 5) { // report damage
+            return view('modules.report.create_property_damage', compact('types', 'governates', 'currentType'));
+        }
+        if ($currentType->id === 6) { // report damage
+            return view('modules.report.create_traffic_violation', compact('types', 'governates', 'currentType'));
         }
         return view('modules.report.create', compact('types', 'governates', 'currentType'));
     }
@@ -90,7 +96,7 @@ class ReportController extends Controller
             $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
             $request->has('images') ? $this->saveGallery($element, $request, 'images', ['1080', '1440'], false) : null;
             $request->hasFile('path') ? $this->savePath($request, $element) : null;
-            if ($element->report_type_id == 1 || $element->report_type_id == 2 || $element->report_type_id == 3 || $element->report_type_id == 4) {
+            if ($element->report_type_id == 1 || $element->report_type_id == 2 || $element->report_type_id == 3 || $element->report_type_id == 4 || $element->report_type_id == 6) {
                 return redirect()->route('add.vehicle', ['id' => $element->id])->with(['success' => trans('general.process_success')]);
             }
             return redirect()->home()->with(['success' => trans('general.process_success')]);
@@ -116,6 +122,9 @@ class ReportController extends Controller
         }
         if ($element->report_type_id == 4) {
             return view('modules.report.show_fire_with_accident', compact('element'));
+        }
+        if ($element->report_type_id == 6) {
+            return view('modules.report.show_traffic_violation', compact('element'));
         }
         return view('modules.report.show', compact('element'));
     }
@@ -194,6 +203,9 @@ class ReportController extends Controller
         if ($element->report_type_id === 4) {
             return view('modules.report.create_fire_add_vehicle_or_injury', compact('element'));
         }
+        if ($element->report_type_id === 6) {
+            return view('modules.report.create_traffic_violation_add_vehicle', compact('element'));
+        }
         return view('modules.report.add_vehicle', compact('element'));
     }
 
@@ -214,6 +226,9 @@ class ReportController extends Controller
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
         $request->hasFile('path') ? $this->savePath($request, $element) : null;
         if ($element->report->type->id === 4) {
+            return redirect()->route('home')->with('success', trans('general.process_success'));
+        }
+        if ($element->report->type->id === 6) {
             return redirect()->route('home')->with('success', trans('general.process_success'));
         }
         return redirect()->back()->with('success', trans('general.process_success'));

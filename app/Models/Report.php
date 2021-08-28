@@ -43,7 +43,8 @@ class Report extends Model
             'injured_3',
             'building_no',
             'notes',
-            'description'
+            'description',
+            'traffic_offences'
         );
     }
 

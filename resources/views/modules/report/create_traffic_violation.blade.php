@@ -211,25 +211,6 @@
                             @endif
                             {{--                            @endif--}}
                             @if($currentType->is_traffic)
-                                {{--                             speed limit --}}
-                                <div class="form-group row">
-                                    <label for="speed_limit"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.speed_limit') }}</label>
-
-                                    <div class="col-md-6">
-                                        <input id="speed_limit" type="string"
-                                               class="form-control @error('speed_limit') is-invalid @enderror"
-                                               name="speed_limit"
-                                               value="{{ old('speed_limit') }}"
-                                               value="" autocomplete="speed_limit"
-                                        >
-                                        @error('speed_limit')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
 
                                 {{--                             weither --}}
                                 {{--                                <div class="form-group row">--}}
@@ -278,7 +259,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row d-none">
                                     <label for="exampleFormControlSelect1"
                                            class="col-md-4 col-form-label text-md-right">
                                         {{ trans("general.primary_contributory") }} </label>
@@ -324,7 +305,7 @@
 
                             @endif
                             {{--                             descirption --}}
-                            <div class="form-group row">
+                            <div class="form-group row d-none">
                                 <label for="description"
                                        class="col-md-4 col-form-label text-md-right ">{{ __('general.description') }}</label>
 
