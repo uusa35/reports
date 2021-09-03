@@ -23,7 +23,7 @@
                     <div class="row">
                         @auth
                             @foreach($elements as $element)
-                                <div class="col-lg-4 mb-3 {!! !auth()->user()->is_officer && $element->name === 'Traffic Violation'  ? 'd-none' : '' !!}">
+                                <div class="col-lg-4 mb-3 {!! !auth()->user()->can('isAdminOrOfficer') && $element->name === 'Traffic Violation'  ? 'd-none' : '' !!}">
                                     <div class="card" style="max-width: 18rem;">
                                         <img class="card-img-top img-fluid"
                                              src="{{ $element->getImageThumbLinkAttribute() }}"
@@ -53,7 +53,6 @@
                                 </div>
                             @endforeach
                         @else
-
 
                             <div class="card m-auto">
                                 <div class="card-header">

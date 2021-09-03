@@ -23,7 +23,8 @@ class ReportController extends Controller
     {
         $auth = auth()->user();
         if ($auth->is_admin) {
-            $elements = Report::active()->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->with(['owner', 'officer.speciality','officer.department'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
+            return view('modules.report.admin_index', compact('elements'));
         } elseif ($auth->is_officer) {
             $elements = Report::active()->where(['officer_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
         } else {
@@ -88,9 +89,22 @@ class ReportController extends Controller
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
         }
+// assign officer to a report autoamtically
+        if (rquest()->has("report_type")) {
+            $reportType = ReportType::whereId(request()->report_type)->first();
+            if ($reportType->is_traffic) { // Accedient Insepection
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_traffic' => true])->first()])->first();
+            } elseif ($reportType->is_ambulance) { // Medical Emergency
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_medical' => true])->first()])->first();
+            } elseif ($reportType->is_fire) {
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_fire' => true])->first()])->first();
+            } elseif ($reportType->is_damage) { // damage
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_engineering' => true])->first()])->first();
+            }
+        }
         $request->request->add([
             'reference_id' => rand(9999, 99999999),
-            'officer_id' => !request()->has('officer_id') ? User::where('is_officer', true)->first()->id : request()->officer_id,
+            'officer_id' => !request()->has('officer_id') ? $responsibleOfficer->id : request()->officer_id,
         ]);
         $element = Report::create($request->except(['_token', 'image']));
         if ($element) {

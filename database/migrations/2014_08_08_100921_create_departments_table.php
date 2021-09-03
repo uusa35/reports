@@ -17,6 +17,10 @@ class CreateDepartmentsTable extends Migration
             $table->id();
             $table->string('name_ar');
             $table->string('name_en');
+            $table->boolean('is_traffic')->default(0);
+            $table->boolean('is_medical')->default(0);
+            $table->boolean('is_fire')->default(0);
+            $table->boolean('is_engineering')->default(0);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });

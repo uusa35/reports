@@ -51,26 +51,52 @@ class DatabaseSeeder extends Seeder
             [
                 "name_ar" => 'مرور العاصمة',
                 "name_en" => 'Al-Asima Traffic Department',
+                'is_traffic' => true
             ],
             [
                 "name_ar" => 'مرور الأحمدي',
                 "name_en" => 'Al Ahmadi Traffic Department',
+                'is_traffic' => true
             ],
             [
                 "name_ar" => 'مرور الفروانية',
                 "name_en" => 'Al Farwaniya Traffic Department',
+                'is_traffic' => true
             ],
             [
                 "name_ar" => 'مرور حولي',
                 "name_en" => 'Al Hawali Traffic Department',
+                'is_traffic' => true
             ],
             [
                 "name_ar" => 'مرور الجهراء',
                 "name_en" => 'Al Jahra Traffic Department',
+                'is_traffic' => true
             ],
             [
                 "name_ar" => 'مرور مبارك الكبير',
                 "name_en" => 'Al Mubarak Al kabeer Traffic Department',
+                'is_traffic' => true
+            ],
+            [
+                "name_ar" => 'تحقيق الحوادث',
+                "name_en" => 'Accident Inspection Department.',
+                'is_engineering' => true
+            ],
+            [
+                "name_ar" => 'الطوارئ الطبية',
+                "name_en" => 'Medical Emergency Department.',
+                'is_medical' => true
+            ],
+            [
+                "name_ar" => 'هندسة المرور',
+                "name_en" => 'Traffic Engineering Department',
+                'is_engineering' => true
+            ],
+            [
+                "name_ar" => 'الإطفاء',
+                "name_en" => 'Fire Department',
+                'is_fire' => true
             ],
         ];
         $reportTypes = [
@@ -126,7 +152,11 @@ class DatabaseSeeder extends Seeder
         foreach ($departments as $element) {
             Department::create([
                 'name_ar' => $element['name_ar'],
-                'name_en' => $element['name_en']
+                'name_en' => $element['name_en'],
+                "is_traffic" => array_key_exists('is_traffic', $element),
+                "is_fire" => array_key_exists('is_fire', $element),
+                "is_engineering" => array_key_exists('is_engineering', $element),
+                "is_medical" => array_key_exists('is_medical', $element),
             ]);
         }
         foreach ($reportTypes as $element) {

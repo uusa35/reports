@@ -50,7 +50,7 @@ class UserFactory extends Factory
             'department_id' => Department::all()->random()->id,
             'city' => $this->faker->city,
             'nationality' => $this->faker->country,
-            'department' => $this->faker->jobTitle,
+//            'department' => $this->faker->jobTitle,
             'section' => $this->faker->country,
             'age' => $this->faker->numberBetween(30, 40),
             'block' => $this->faker->numberBetween(1, 10),

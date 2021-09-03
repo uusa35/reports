@@ -32,7 +32,7 @@
                                      alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold  text-center">{{ trans('general.report_owner') }}</h5>
-                                    <h5 class="card-title font-weight-bold ">{{ $element->owner->name }}</h5>
+                                    <h5 class="card-title font-weight-bold ">{{ $element->owner->name }} - {{ $element->owner->id }}</h5>
                                     <p class="card-text">{{ trans('general.mobile') }}
                                         : {{ str_limit($element->owner->mobile, 80) }}</p>
                                     <p class="card-text">{{ trans('general.email') }}
@@ -75,6 +75,8 @@
                                     <h5 class="card-title font-weight-bold ">{{ trans('general.report_owner')}}
                                         : {{ $element->owner->name}}</h5>
                                 @endif
+                                <h5>@lang('notes')</h5>
+                                <p>{{ $element->notes }}</p>
                                 {{--                                <h5 class="card-title font-weight-bold ">{{ trans('general.created_at')}}--}}
                                 {{--                                    : {{ $element->created_at->format('d/m/Y')}}</h5>--}}
                                 {{--                                @if($element->has_injuries)--}}
