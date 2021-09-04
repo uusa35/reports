@@ -105,8 +105,8 @@ class ReportController extends Controller
             return redirect()->back()->withErrors($validate->errors())->withInput();
         }
 // assign officer to a report autoamtically
-        if (request()->has("report_type")) {
-            $reportType = ReportType::whereId(request()->report_type)->first();
+        if (request()->has("report_type_id")) {
+            $reportType = ReportType::whereId(request()->report_type_id)->first();
             if ($reportType->is_traffic) { // Accedient Insepection
                 $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_traffic' => true])->first()->id])->first();
             } elseif ($reportType->is_ambulance) { // Medical Emergency
