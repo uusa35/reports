@@ -220,6 +220,8 @@ return array(
     "driver" => "Driver Information",
     "injuries_number" => "injuries_number",
     "health_issues" => "Health Issues",
-    "age" => "Age"
+    "age" => "Age",
+    "all_reports" => 'All Reports',
+    "open" => 'Open'
 
 );

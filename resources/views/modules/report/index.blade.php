@@ -18,7 +18,7 @@
                             <th scope="col">@lang('general.id') </th>
                             <th scope="col"><small>@lang('general.reference_id') </small></th>
                             <th scope="col">@lang('general.has_injuries') </th>
-                            <th scope="col">@lang('general.is_closed') </th>
+                            <th scope="col">@lang('general.status') </th>
                             <th scope="col">@lang('general.image') </th>
                             <th scope="col">@lang('general.area') </th>
                             <th scope="col">@lang('general.address') </th>

@@ -36,6 +36,7 @@ class CreateReportsTable extends Migration
             $table->string('traffic_offences')->nullable();
             $table->boolean('hit_and_run')->default(0);
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('department_id')->constrained();
             $table->foreignId('officer_id')->references('id')->on('users');
             $table->foreignId('report_type_id')->references('id')->on('report_types');
             $table->foreignId('governate_id')->references('id')->on('governates');

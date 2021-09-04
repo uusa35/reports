@@ -63,7 +63,7 @@ return array(
     "process_success" => "تمت العملية بنجاح",
     "process_failure" => "فشت العملية",
     'report' => 'بلاغ',
-    "is_closed" => "مغلق",
+    "is_closed" => "تم الانتهاء منه",
     "choose_report_type" => "أختر نوع البلاغ",
     "report_owner" => "مقدم البلاغ",
     "responsible" => "المسئول",
@@ -192,7 +192,8 @@ return array(
     "injured" => "مصاب",
     "vehicle" => "مركبة",
     "driver_license_no" => "رخصة قيادة السائق",
-    "age" => "العمر"
-
+    "age" => "العمر",
+    "all_reports" => 'جميع التقارير',
+    "open" => 'جاري العمل به'
 
 );

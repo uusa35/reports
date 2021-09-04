@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Governate;
 use App\Models\Report;
 use App\Models\ReportType;
@@ -22,6 +23,7 @@ class ReportController extends Controller
     public function index()
     {
         $auth = auth()->user();
+        $departments = Department::all();
         if ($auth->is_admin) {
             $elements = Report::active()->with(['owner', 'officer.speciality','officer.department'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
             return view('modules.report.admin_index', compact('elements'));
@@ -30,7 +32,20 @@ class ReportController extends Controller
         } else {
             $elements = Report::active()->where(['user_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
         }
-        return view('modules.report.index', compact('elements'));
+        return view('modules.report.index', compact('elements','departments'));
+    }
+
+    public function getReports (Request $request) {
+        $this->authorize('isAdmin');
+        $validate = validator($request->all() , [
+            'type' => 'required',
+            'value' => 'required'
+        ]);
+        if ($validate->fails()) {
+            return redirect()->home()->withErrors($validate->errors())->withInput();
+        }
+        $elements = Report::where([request()->type => $request->value])->paginate(SeLF::TAKE_MIN);
+        return view('modules.report.admin_index', compact('elements'));
     }
 
     /**
@@ -90,7 +105,7 @@ class ReportController extends Controller
             return redirect()->back()->withErrors($validate->errors())->withInput();
         }
 // assign officer to a report autoamtically
-        if (rquest()->has("report_type")) {
+        if (request()->has("report_type")) {
             $reportType = ReportType::whereId(request()->report_type)->first();
             if ($reportType->is_traffic) { // Accedient Insepection
                 $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_traffic' => true])->first()])->first();
@@ -105,6 +120,7 @@ class ReportController extends Controller
         $request->request->add([
             'reference_id' => rand(9999, 99999999),
             'officer_id' => !request()->has('officer_id') ? $responsibleOfficer->id : request()->officer_id,
+            'department_id' => $responsibleOfficer->department_id
         ]);
         $element = Report::create($request->except(['_token', 'image']));
         if ($element) {
@@ -154,7 +170,9 @@ class ReportController extends Controller
     {
         $element = Report::whereId($id)->with(['officer.speciality', 'owner'])->first();
         $types = ReportType::active()->get();
-        return view('modules.report.edit', compact('element', 'types'));
+        $departments = Department::all();
+        $officers = User::where('is_officer', true)->get();
+        return view('modules.report.edit', compact('element', 'types','departments','officers'));
     }
 
     /**
@@ -235,8 +253,8 @@ class ReportController extends Controller
             return redirect()->back()->with('error', $validate->errors()->first());
         }
         $report = Report::whereId($request->report_id)->with('owner.vehicles', 'vehicles')->first();
-        $vehicle = Vehicle::where(['plate_no' => $request->plate_no])->first();
-        $request->request->add(['vehicle_id' => $vehicle ? $vehicle->id : Vehicle::all()->random()->id]);
+        $vehicle = Vehicle::firstOrCreate(['plate_no' => $request->plate_no, 'user_id' => User::where('is_officer',false)->get()->random()->first()->id]);
+        $request->request->add(['vehicle_id' => $vehicle->id]);
         $element = ReportVehcile::create($request->except('_token', 'image', 'images', 'path', 'plate_no'));
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;
         $request->hasFile('path') ? $this->savePath($request, $element) : null;

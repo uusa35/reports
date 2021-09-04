@@ -34,7 +34,76 @@
                                 </div>
                             </div>
 
-                            {{--                             location --}}
+                            @can('isAdmin')
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1"
+                                           class="col-md-4 col-form-label text-md-right">
+                                        {{ trans("general.departments") }} </label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="department_id">
+                                            @foreach($departments as $department)
+                                                <option
+                                                    value="{{ $department->id }}" {{ $element->department_id === $department->id ? 'selected' : '' }}>{{ $department->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('department_id')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="exampleFormControlSelect1"
+                                           class="col-md-4 col-form-label text-md-right">
+                                        {{ trans("general.officer") }} </label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" id="exampleFormControlSelect1" name="officer_id">
+                                            @foreach($officers as $officer)
+                                                <option
+                                                    value="{{ $officer->id }}" {{ $element->officer_id === $officer->id ? 'selected' : '' }}>{{ $officer->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('officer_id')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="is_closed"
+                                           class="col-md-4 col-form-label text-md-right">{{ __('general.is_closed') }}</label>
+
+                                    <div class="col-md-6 ml-5">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="1"
+                                                   name="is_closed" id="flexCheckDefault"
+                                                {{ $element->is_closed ? 'checked' : '' }}
+                                            >
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                @lang('general.yes')
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" value="0"
+                                                   name="is_closed" id="flexCheckChecked"
+                                                {{ !$element->is_closed ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                @lang('general.no')
+                                            </label>
+                                        </div>
+                                        @error('is_closed')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            @endcan
+
                             <div class="form-group row ">
                                 <label for="created_at"
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.location') }}</label>
@@ -431,38 +500,6 @@
                                            multiple/>
                                 </div>
                             </div>
-
-                            @if(auth()->user()->is_admin)
-                                <div class="form-group row">
-                                    <label for="is_closed"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('general.is_closed') }}</label>
-
-                                    <div class="col-md-6 ml-5">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="1"
-                                                   name="is_closed" id="flexCheckDefault"
-                                                {{ $element->is_closed ? 'checked' : '' }}
-                                            >
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                @lang('general.yes')
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="0"
-                                                   name="is_closed" id="flexCheckChecked"
-                                                {{ !$element->is_closed ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="flexCheckChecked">
-                                                @lang('general.no')
-                                            </label>
-                                        </div>
-                                        @error('is_closed')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            @endif
 
                             <div class="container">
                                 <div class="row text-center">

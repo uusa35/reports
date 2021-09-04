@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Department;
 use App\Models\Governate;
 use App\Models\Report;
 use App\Models\ReportType;
@@ -34,8 +35,8 @@ class ReportFactory extends Factory
             'building_no' => $this->faker->buildingNumber,
             'block' => $this->faker->randomDigit,
             'area' => $this->faker->randomElement(['farwaniya', 'hawali', 'salmya', 'salwa', 'sharq', 'qairwan']),
-            'electricity_pole_no' => $this->faker->numberBetween(99,999),
-            'speed_limit' => $this->faker->randomElement([60,80,120]),
+            'electricity_pole_no' => $this->faker->numberBetween(99, 999),
+            'speed_limit' => $this->faker->randomElement([60, 80, 120]),
             'image' => 'default.svg',
             'path' => '1.mov',
             'notes' => $this->faker->paragraph,
@@ -49,6 +50,9 @@ class ReportFactory extends Factory
             'user_id' => User::where(['is_officer' => false])->get()->random()->id,
             'report_type_id' => ReportType::all()->random()->id,
             'officer_id' => User::officers()->get()->random()->id,
+            'department_id' => function ($array) {
+                return User::whereId($array['officer_id'])->first()->department_id;
+            },
             'governate_id' => Governate::all()->random()->id
         ];
     }

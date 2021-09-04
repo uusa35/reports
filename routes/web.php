@@ -24,12 +24,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', UserController::class);
     // officer
     Route::resource('report', ReportController::class);
+    Route::get('search/report', [ReportController::class, 'getReports'])->name('report.search');
     Route::get('add/vehicle', [ReportController::class,'getAddVehicle'])->name('add.vehicle');
     Route::post('add/vehicle', [ReportController::class,'postAddVehicle'])->name('add.vehicle');
     // public
     Route::resource('report/public', PublicReportController::class);
     Route::get('public/add/vehicle', [PublicReportController::class,'getAddVehicle'])->name('public.add.vehicle');
-    Route::post('public/add/vehicle', [ReportController::class,'postAddVehicle'])->name('public.add.vehicle');
+    Route::post('public/add/vehicle', [PublicReportController::class,'postAddVehicle'])->name('public.add.vehicle');
     Route::resource('type', ReportTypeController::class);
     Route::resource('vehicle', VehicleController::class);
 });

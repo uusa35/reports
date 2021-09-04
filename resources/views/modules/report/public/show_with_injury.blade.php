@@ -80,10 +80,9 @@
 {{--                                    </h5>--}}
 {{--                                @endif--}}
                                 <hr>
-                                <h5 class="card-title font-weight-bold ">{{ trans('general.address')}}:</h5>
-                                <h5 class="card-title font-weight-bold ">@lang('general.city') : {{ $element->city }}
-                                    - @lang('general.area') : {{ $element->area }} - @lang('general.street')
-                                    : {{ $element->street }}</h5>
+                                <h5 class="card-title font-weight-bold ">@lang('general.area') : {{ $element->city }}
+                                    -  {{ $element->area }} - @lang('general.street')
+                                    : {{ $element->street }} - B : {{ $element->block }}</h5>
                                 @can('isAdmin')
                                     <h5 class="card-title font-weight-bold ">{{ trans('general.mobile') .' '. trans('general.report_owner') }}
                                         : {{ $element->owner->mobile}}</h5>
@@ -112,7 +111,7 @@
 
                                 <h5 class="card-title font-weight-bold ">{{ trans('general.status')}}: <span
                                         class="badge badge-{{ $element->is_closed ? 'danger' : 'info' }} text-lg">
-                                        {{ !$element->is_closed ? trans('general.report_open') : trans('general.closed') }}
+                                        {{ !$element->is_closed ? trans('general.open') : trans('general.closed') }}
                                     </span></h5>
                                 @if($element->vehicles->isNotEmpty())
 
@@ -159,8 +158,8 @@
 {{--                                                        <li>@lang('general.age') : {{ $v->user->age }}</li>--}}
 {{--                                                        <li>@lang('general.nationality')--}}
 {{--                                                            : {{ $v->user->nationality }}</li>--}}
-                                                        <li>@lang('general.driving_license_no')
-                                                            : {{ $v->user->driving_license_no }}</li>
+{{--                                                        <li>@lang('general.driving_license_no')--}}
+{{--                                                            : {{ $v->user->driving_license_no }}</li>--}}
 {{--                                                        <li>@lang('general.driving_license_issuance')--}}
 {{--                                                            : {{ $v->user->driving_license_issuance }}</li>--}}
 {{--                                                        <li>@lang('general.driving_license_expiry')--}}
@@ -208,7 +207,7 @@
                                                 </td>
                                                 <td>
                                                     @if($v->pivot->path)
-                                                        <video width="100%" controls autoplay>
+                                                        <video width="100%" height="300" controls autoplay>
                                                             <source src="/{{ env('FILE').$v->pivot->path }}"
                                                                     type="video/mp4">
                                                         </video>
