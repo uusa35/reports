@@ -117,6 +117,7 @@ class ReportController extends Controller
                 $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_engineering' => true])->first()])->first();
             }
         }
+        $responsibleOfficer = $responsibleOfficer ? $responsibleOfficer : User::where(['is_officer' => true])->first();
         $request->request->add([
             'reference_id' => rand(9999, 99999999),
             'officer_id' => !request()->has('officer_id') ? $responsibleOfficer->id : request()->officer_id,
