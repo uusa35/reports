@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function () {
     // officer
     Route::resource('report', ReportController::class);
     Route::get('search/report', [ReportController::class, 'getReports'])->name('report.search');
+    Route::resource('vehicle', VehicleController::class);
     Route::get('add/vehicle', [ReportController::class,'getAddVehicle'])->name('add.vehicle');
     Route::post('add/vehicle', [ReportController::class,'postAddVehicle'])->name('add.vehicle');
     // public

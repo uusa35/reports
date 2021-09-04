@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 
 class VehicleController extends Controller
@@ -13,7 +14,9 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('isAdmin');
+        $elements = Vehicle::paginate(SELF::TAKE_MIN);
+        return view('modules.vehicle.index', compact('elements'));
     }
 
     /**

@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        {{ __('general.users') }}
+                        {{ __('general.vehicle') }}
                     </h4>
                 </div>
 
@@ -16,11 +16,11 @@
                         <thead>
                         <tr>
                             <th scope="col">{{ __('general.id') }}</th>
-                            <th scope="col"><small>{{ __('general.name') }}</small></th>
-                            <th scope="col">{{ __('general.civil_id_no') }}</th>
-                            <th scope="col">{{ __('general.passport_no') }}</th>
-                            <th scope="col">{{ __('general.file_no') }}</th>
-                            <th scope="col">{{ __('general.mobile') }}</th>
+                            <th scope="col"><small>{{ __('general.plate_no') }}</small></th>
+                            <th scope="col">{{ __('general.model') }}</th>
+                            <th scope="col">{{ __('general.color') }}</th>
+                            <th scope="col">{{ __('general.model_year') }}</th>
+                            <th scope="col">{{ __('general.insurance_no') }}</th>
                             <th scope="col">{{ __('general.personal_image') }}</th>
                             <th scope="col">{{ __('general.address') }}</th>
                             <th scope="col">{{ __('general.role') }}</th>

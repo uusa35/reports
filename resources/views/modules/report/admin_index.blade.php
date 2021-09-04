@@ -29,12 +29,9 @@
                         <tr>
                             <th scope="col">@lang('general.id') </th>
                             <th scope="col"><small>@lang('general.reference_id') </small></th>
-{{--                            <th scope="col">@lang('general.has_injuries') </th>--}}
                             <th scope="col">@lang('general.status') </th>
-{{--                            <th scope="col">@lang('general.image') </th>--}}
                             <th scope="col">@lang('general.created_at') </th>
                             <th scope="col">@lang('general.area') </th>
-{{--                            <th scope="col">@lang('general.address') </th>--}}
                             <th scope="col">@lang('general.report_owner') </th>
                             <th scope="col">@lang('general.officer') </th>
                             <th scope="col">@lang('general.report_type') </th>
@@ -47,17 +44,11 @@
                                 <tr>
                                     <th scope="row">{{ $element->id }}</th>
                                     <td>{{ $element->reference_id }}</td>
-{{--                                    <td><span--}}
-{{--                                            class="alert alert-{{ $element->has_injuries ? 'danger' : 'info' }}"><small>{{ $element->has_injuries ? __('general.has_injuries') : __('general.n_a') }}</small></span>--}}
-{{--                                    </td>--}}
                                     <td><span
                                             class="alert alert-{{ $element->is_closed ? 'danger' : 'info' }}"><small>{{ $element->is_closed ? __('general.is_closed') : __('general.open') }}</small></span>
                                     </td>
-{{--                                    <td><img class="img-xxs" src="{{ $element->getImageThumbLinkAttribute() }}"--}}
-{{--                                             alt="{{ str_limit($element->notes,5) }}"></td>--}}
                                     <td>{{ $element->created_at->format('Y/m/d') }}</td>
                                     <td>{{ $element->area ? $element->area : trans('general.n_a') }}</td>
-{{--                                    <td>{{ str_limit($element->address,10) }}</td>--}}
                                     <td>{{ $element->owner->name }}</td>
                                     <td>{{ $element->officer ? str_limit($element->officer->name,5)  : 'N/A' }}</td>
                                     <td>{{ $element->type->name }}</td>
