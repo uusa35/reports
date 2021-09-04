@@ -10,6 +10,7 @@ class Vehicle extends Model
     use HasFactory, ModelHelper;
 
     protected $guarded = [''];
+    protected $dates = ['insurance_start_date','insurance_expiry_date','created_at'];
 
     public function user()
     {

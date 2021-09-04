@@ -21,10 +21,10 @@
                             <th scope="col">{{ __('general.color') }}</th>
                             <th scope="col">{{ __('general.model_year') }}</th>
                             <th scope="col">{{ __('general.insurance_no') }}</th>
-                            <th scope="col">{{ __('general.personal_image') }}</th>
-                            <th scope="col">{{ __('general.address') }}</th>
-                            <th scope="col">{{ __('general.role') }}</th>
-                            <th scope="col">{{ __('general.governate') }}</th>
+                            <th scope="col">{{ __('general.insurance_company') }}</th>
+                            <th scope="col">{{ __('general.insurance_start_date') }}</th>
+                            <th scope="col">{{ __('general.insurance_expiry_date') }}</th>
+                            <th scope="col">{{ __('general.user') }}</th>
                             <th scope="col">{{ __('general.action') }}</th>
                         </tr>
                         </thead>
@@ -33,18 +33,15 @@
                             @foreach($elements as $element)
                                 <tr>
                                     <th scope="row">{{ $element->id }}</th>
-                                    <td>{{ $element->name }}</td>
-                                    <td>{{ $element->civil_id_no }}</td>
-                                    <td>{{ $element->passport_no }}</td>
-                                    <td>{{ $element->file_no }}</td>
-                                    <td>{{ $element->mobile }}</td>
-                                    <td><img class="img-xxs" src="{{ $element->getImageThumbLinkAttribute('personal_image') }}"
-                                             alt="{{ str_limit($element->description,5) }}"></td>
-                                    <td>{{ str_limit($element->address,10) }}</td>
-                                    <td><span
-                                            class="alert alert-info"><small>{{ $element->is_officer ? __('general.officer') : __('general.user') }}</small></span>
-                                    </td>
-                                    <td><smal>{{ str_limit($element->governate->name,10) }}</smal></td>
+                                    <td>{{ $element->plate_no }}</td>
+                                    <td>{{ $element->model }}</td>
+                                    <td>{{ $element->color }}</td>
+                                    <td>{{ $element->model_year }}</td>
+                                    <td>{{ $element->insurance_no }}</td>
+                                    <td>{{ $element->insurance_company }}</td>
+                                    <td>{{ $element->insurance_start_date->format('Y/m/d') }}</td>
+                                    <td>{{ $element->insurance_expiry_date->format('Y/m/d') }}</td>
+                                    <td>{{ $element->user->name }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-default btn-outline-dark btn-sm dropdown-toggle"
@@ -57,7 +54,7 @@
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 @can('isAdmin')
                                                     <a class="dropdown-item"
-                                                       href="{{ route('user.edit', $element->id) }}">{{ trans('general.edit') .' '. trans('general.user')}}</a>
+                                                       href="{{ route('vehicle.edit', $element->id) }}">{{ trans('general.edit') .' '. trans('general.vehicle')}}</a>
                                                 @endcan
                                             </div>
                                         </div>

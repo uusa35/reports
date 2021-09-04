@@ -70,6 +70,10 @@
                                     <i class="fa fa-fw fa-users ml-1"></i>
                                     {{ trans('general.officers') }}
                                 </a>
+                                <a class="dropdown-item" href="{{ route('vehicle.index') }}">
+                                    <i class="fa fa-fw fa-users ml-1"></i>
+                                    {{ trans('general.vehicles') }}
+                                </a>
                             @endcan
                             <a class="dropdown-item" href="{{ route('password.request') }}">
                                 <i class="fa fa-fw fa-1x fa-passport ml-1"></i>

@@ -11,6 +11,7 @@ class Report extends Model
     use HasFactory, ModelHelper;
 
     public $guarded = [''];
+    protected $dates = ['created_at'];
 
     public function owner()
     {

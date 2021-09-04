@@ -15,7 +15,7 @@ class VehicleController extends Controller
     public function index()
     {
         $this->authorize('isAdmin');
-        $elements = Vehicle::paginate(SELF::TAKE_MIN);
+        $elements = Vehicle::with('user')->paginate(SELF::TAKE_MIN);
         return view('modules.vehicle.index', compact('elements'));
     }
 
@@ -59,7 +59,9 @@ class VehicleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->authorize('isAdmin');
+        $element = Vehicle::whereId($id)->with('user')->first();
+        return view('modules.vehicle.edit', compact('element'));
     }
 
     /**
@@ -71,7 +73,9 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $element = Vehicle::whereId($id)->first();
+        $element->update($request->all());
+        return redirect()->back()->with('success', 'saved');
     }
 
     /**
