@@ -124,7 +124,7 @@
                                             <th scope="col">@lang('general.vehicle_information')</th>
                                             {{--                                            <th scope="col">@lang('general.model')</th>--}}
                                             {{--                                            <th scope="col">@lang('general.model_year')</th>--}}
-                                            <th scope="col">@lang('general.driver_information')</th>
+{{--                                            <th scope="col">@lang('general.driver_information')</th>--}}
                                             <th scope="col">@lang('general.images')</th>
                                             <th scope="col">@lang('general.videos')</th>
                                             {{--                                            <th scope="col">@lang('general.injured')</th>--}}
@@ -150,7 +150,7 @@
                                                 {{--                                                <td>{{ $v->plate_no }}</td>--}}
                                                 {{--                                                <td>{{ $v->model }}</td>--}}
                                                 {{--                                                <td>{{ $v->model_year }}</td>--}}
-                                                <td>
+                                                <td class="d-none">
 {{--                                                    {{ $v->user->first_name }} {{ $v->user->father_name }}--}}
                                                     <ul>
 {{--                                                        <li>@lang('general.civil_id_no')--}}

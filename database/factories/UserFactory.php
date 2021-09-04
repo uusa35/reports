@@ -37,7 +37,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'mobile' => $this->faker->phoneNumber,
             'phone' => $this->faker->phoneNumber,
-            'civil_id_no' => $this->faker->numberBetween(1111111111, 9999999999),
+            'civil_id_no' => $this->faker->numberBetween(111111111111, 111111111119),
             'reference_no' => $this->faker->numberBetween(1111111111, 9999999999),
             'file_no' => $this->faker->numberBetween(1111111111, 9999999999),
             'passport_no' => $this->faker->numberBetween(1111111111, 9999999999),

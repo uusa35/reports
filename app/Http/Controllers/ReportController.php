@@ -254,7 +254,7 @@ class ReportController extends Controller
             return redirect()->back()->with('error', $validate->errors()->first());
         }
         $report = Report::whereId($request->report_id)->with('owner.vehicles', 'vehicles')->first();
-        $vehicle = Vehicle::firstOrCreate(['plate_no' => $request->plate_no, 'user_id' => User::where('is_officer',false)->get()->random()->first()->id]);
+        $vehicle = Vehicle::firstOrCreate(['plate_no' => $request->plate_no ? $request->plate_no : rand(1111,1119), 'user_id' => User::where('is_officer',false)->get()->random()->first()->id]);
         $request->request->add(['vehicle_id' => $vehicle->id]);
         $element = ReportVehcile::create($request->except('_token', 'image', 'images', 'path', 'plate_no'));
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;

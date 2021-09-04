@@ -210,7 +210,6 @@ class PublicReportController extends Controller
 
     public function getAddVehicle(Request $request)
     {
-//        dd($request->all());
         $element = Report::whereId($request->id)->with('owner.vehicles')->first();
         if ($element->report_type_id == 2) {
             return view('modules.report.public.create_accident_with_injury_add_vehicle', compact('element'));
