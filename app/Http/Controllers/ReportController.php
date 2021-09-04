@@ -108,13 +108,13 @@ class ReportController extends Controller
         if (request()->has("report_type")) {
             $reportType = ReportType::whereId(request()->report_type)->first();
             if ($reportType->is_traffic) { // Accedient Insepection
-                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_traffic' => true])->first()])->first();
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_traffic' => true])->first()->id])->first();
             } elseif ($reportType->is_ambulance) { // Medical Emergency
-                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_medical' => true])->first()])->first();
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_medical' => true])->first()->id])->first();
             } elseif ($reportType->is_fire) {
-                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_fire' => true])->first()])->first();
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_fire' => true])->first()->id])->first();
             } elseif ($reportType->is_damage) { // damage
-                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_engineering' => true])->first()])->first();
+                $responsibleOfficer = User::where(['is_officer' => true, 'department_id' => Department::where(['is_engineering' => true])->first()->id])->first();
             }
         }
         $responsibleOfficer = $responsibleOfficer ? $responsibleOfficer : User::where(['is_officer' => true])->first();
