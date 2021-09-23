@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // Report Types ( Accident + Accident With Injury ... )
         $elements = ReportType::active()->get();
         return view('home', compact('elements'));
     }
@@ -63,5 +64,10 @@ class HomeController extends Controller
         app()->setLocale(request('locale'));
         session()->put('locale', request('locale'));
         return redirect()->back();
+    }
+
+    public function getContactus()
+    {
+        return view('contactus');
     }
 }

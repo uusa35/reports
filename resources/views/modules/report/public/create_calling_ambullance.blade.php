@@ -55,7 +55,7 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('general.electricity_pole_no') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="electricity_pole_no" type="string"
+                                    <input id="electricity_pole_no" type="text"
                                            class="form-control @error('electricity_pole_no') is-invalid @enderror"
                                            name="electricity_pole_no"
                                            value="{{ old('electricity_pole_no') }}"

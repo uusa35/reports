@@ -53,7 +53,6 @@
                                 </div>
                             @endforeach
                         @else
-
                             <div class="card m-auto">
                                 <div class="card-header">
                                     @lang('general.login')
