@@ -7,9 +7,8 @@
 
                 <div class="row-fluid">
                     <div class="span8">
-                        <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0"
-                                marginwidth="0"
-                                src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&q=15+Springfield+Way,+Hythe,+CT21+5SH&aq=t&sll=52.8382,-2.327815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3478.8968391908716!2d47.89863101509818!3d29.31470158215367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3fcf90228bae07d1%3A0x25cf4f1c7a576007!2z2YXYsdmD2LIg2KfZhNiq2K_YsdmK2Kgg2KfZhNiq2K7Ytdi12Yog2YTZgti32KfYuSDYp9mE2YXYsdmI2LE!5e0!3m2!1sen!2skw!4v1632467718056!5m2!1sen!2skw"
+                                width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
 
                     <div class="span4">
