@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="text-center">{{ trans('general.report_no') }} : {{ $element->reference_id }}</h4>
-                    <p class="card-text text-right">{{ trans('general.created_at') }} {{ $element->created_at->format('l jS F Y h:i A') }}</p>
+                    <p class="card-text text-right">{{ trans('general.created_at') }} {{ $element->created_at ? $element->created_at->format('l jS F Y h:i A')  : '' }}</p>
                 </div>
                 <div class="card-body">
                     <div class="card-group">
@@ -100,6 +100,10 @@
                                         class="badge badge-{{ $element->is_closed ? 'danger' : 'info' }} text-lg">
                                         {{ !$element->is_closed ? trans('general.report_open') : trans('general.closed') }}
                                     </span></h5>
+                                <div class="col-12">
+                                    @include('modules.report._map_view', ['longitude' => $element->longitude, 'latitude' => $element->latitude])
+                                </div>
+                                <br>
                                 @if($element->vehicles->isNotEmpty())
 
                                     <h5>@lang('general.vehicles') / @lang('general.injuries') : </h5>

@@ -47,7 +47,7 @@
                                     <td><span
                                             class="alert alert-{{ $element->is_closed ? 'danger' : 'info' }}"><small>{{ $element->is_closed ? __('general.is_closed') : __('general.open') }}</small></span>
                                     </td>
-                                    <td>{{ $element->created_at->format('Y/m/d') }}</td>
+                                    <td>{{ $element->created_at ? $element->created_at->format('Y/m/d')  : ''}}</td>
                                     <td>{{ $element->area ? $element->area : trans('general.n_a') }}</td>
                                     <td>{{ $element->owner->name }}</td>
                                     <td>{{ $element->officer ? str_limit($element->officer->name,5)  : 'N/A' }}</td>

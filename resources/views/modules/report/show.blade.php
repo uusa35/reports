@@ -95,6 +95,10 @@
                                         class="badge badge-{{ $element->is_closed ? 'danger' : 'info' }} text-lg">
                                         {{ !$element->is_closed ? trans('general.report_open') : trans('general.closed') }}
                                     </span></h5>
+                                <div class="col-12">
+                                    @include('modules.report._map_view', ['longitude' => $element->longitude, 'latitude' => $element->latitude])
+                                </div>
+                                <br>
                                 @if($element->vehicles->isNotEmpty())
 
                                     <h5>@lang('general.vehicles') / @lang('general.injuries') : </h5>
