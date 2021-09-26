@@ -7,7 +7,6 @@ use App\Http\Controllers\ReportTypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', UserController::class);
     // officer

@@ -7,6 +7,9 @@
                 <div class="card-header">
                     <h4 class="text-center">{{ trans('general.report_no') }} : {{ $element->reference_id }}</h4>
                     <p class="card-text text-right">{{ trans('general.created_at') }} {{ $element->created_at->format('l jS F Y h:i A') }}</p>
+                    <div class="col-lg-12">
+                        <button onClick="window.print()" class="btn btn-primary">@lang('general.print')</button>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="card-group">
