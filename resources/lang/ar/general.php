@@ -172,8 +172,8 @@ return array(
     "cancel" => "الغاء",
     "date_and_time" => "الوقت والتاريخ",
     "electricity_pole_no" => "رقم عمود الإنارة",
-    "speed_limit" => "السرعة القصوى",
-    "number_of_vehicles_in_accident" => "number of vehicles in accident",
+    "speed_limit" => "تخطي الحد الاعلى للسرعة",
+    "number_of_vehicles_in_accident" => "عدد المركبات في الحادث",
     "submit" => "دخول",
     "yes" => "نعم",
     "no" => "لا",
@@ -193,6 +193,12 @@ return array(
     "vehicle" => "مركبة",
     "driver_license_no" => "رخصة قيادة السائق",
     "age" => "العمر",
+    "minor" => "بسيط",
+    "severe" => "خطير",
+    "death" => "وفاة",
+    "injury_sever" => "مستوى الاصابة",
+    "injury_civil_id" => "رقم رخصة المصاب",
+    "vehicle_no" => "رقم لوحة المركبة",
     "all_reports" => 'جميع التقارير',
     "open" => 'جاري العمل به'
 
