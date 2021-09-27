@@ -25,19 +25,20 @@ class ReportController extends Controller
         $auth = auth()->user();
         $departments = Department::all();
         if ($auth->is_admin) {
-            $elements = Report::active()->with(['owner', 'officer.speciality','officer.department'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
+            $elements = Report::active()->with(['owner', 'officer.speciality', 'officer.department'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
             return view('modules.report.admin_index', compact('elements'));
         } elseif ($auth->is_officer) {
             $elements = Report::active()->where(['officer_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
         } else {
             $elements = Report::active()->where(['user_id' => $auth->id])->with(['owner', 'officer.speciality'])->orderBy('id', 'desc')->paginate(SELF::TAKE_MIN);
         }
-        return view('modules.report.index', compact('elements','departments'));
+        return view('modules.report.index', compact('elements', 'departments'));
     }
 
-    public function getReports (Request $request) {
+    public function getReports(Request $request)
+    {
         $this->authorize('isAdmin');
-        $validate = validator($request->all() , [
+        $validate = validator($request->all(), [
             'type' => 'required',
             'value' => 'required'
         ]);
@@ -91,20 +92,13 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
         $validate = validator(request()->all(), [
-//            'description' => 'required|max:1000',
-//            'mobile' => 'required|numeric',
-//            'address' => 'required|min:3',
             'image' => 'image',
-//            'injuries_no' => 'required_if:has_injuries,1|numeric',
-//            'report_type_id' => 'required|exists:report_types,id',
-//            'vehicles' => 'array|required_if:is_traffic,1'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
         }
-// assign officer to a report autoamtically
+        // assign officer to a report autoamtically
         if (request()->has("report_type_id")) {
             $reportType = ReportType::whereId(request()->report_type_id)->first();
             if ($reportType->is_traffic) { // Accedient Insepection
@@ -173,7 +167,7 @@ class ReportController extends Controller
         $types = ReportType::active()->get();
         $departments = Department::all();
         $officers = User::where('is_officer', true)->get();
-        return view('modules.report.edit', compact('element', 'types','departments','officers'));
+        return view('modules.report.edit', compact('element', 'types', 'departments', 'officers'));
     }
 
     /**
@@ -186,12 +180,7 @@ class ReportController extends Controller
     public function update(Request $request, $id)
     {
         $validate = validator(request()->all(), [
-//            'description' => 'required|max:1000',
-//            'mobile' => 'required|numeric',
-//            'address' => 'required|min:3',
             'image' => 'image',
-//            'injuries_no' => 'required_if:has_injuries,1|numeric',
-//            'report_type_id' => 'required|exists:report_types,id'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->withErrors($validate->errors())->withInput();
@@ -246,15 +235,13 @@ class ReportController extends Controller
     public function postAddVehicle(Request $request)
     {
         $validate = validator($request->all(), [
-//            'plate_no' => 'required',
-//            'driver_license' => 'required',
             'report_id' => 'required'
         ]);
         if ($validate->fails()) {
             return redirect()->back()->with('error', $validate->errors()->first());
         }
         $report = Report::whereId($request->report_id)->with('owner.vehicles', 'vehicles')->first();
-        $vehicle = Vehicle::firstOrCreate(['plate_no' => $request->plate_no ? $request->plate_no : rand(1111,1119), 'user_id' => User::where('is_officer',false)->get()->random()->first()->id]);
+        $vehicle = Vehicle::firstOrCreate(['plate_no' => $request->plate_no ? $request->plate_no : rand(1111, 1119), 'user_id' => User::where('is_officer', false)->get()->random()->first()->id]);
         $request->request->add(['vehicle_id' => $vehicle->id]);
         $element = ReportVehcile::create($request->except('_token', 'image', 'images', 'path', 'plate_no'));
         $request->hasFile('image') ? $this->saveMimes($element, $request, ['image'], ['1080', '1440'], false) : null;

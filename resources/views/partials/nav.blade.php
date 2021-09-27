@@ -93,6 +93,9 @@
                     </li>
                 @endguest
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contactus') }}">@lang('general.contactus')</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link"
                        href="{{ route('language.change', getOtherLang()) }}">{{ trans('general.'.getOtherLang()) }}</a>
                 </li>
